@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-#ifndef __CC7_SAFESTRING_H__
-#define __CC7_SAFESTRING_H__
+#pragma once
 
 namespace cc7
 {
 	
 }
-
-#endif // __CC7_SAFESTRING_H__

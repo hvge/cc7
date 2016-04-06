@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-#ifndef __CC7_RANGE_H__
-#define __CC7_RANGE_H__
+#pragma once
 
 namespace cc7
 {
 	
 }
-
-#endif // __CC7_RANGE_H__
