@@ -6,6 +6,10 @@
 	objectVersion = 47;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BF4B4A881CB93B8B00BF2C9D /* Range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4B4A861CB93B8B00BF2C9D /* Range.cpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		BFB1A6B21CB5937800B2D172 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -19,6 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF4B4A861CB93B8B00BF2C9D /* Range.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Range.cpp; sourceTree = "<group>"; };
 		BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB1A6C31CB594BF00B2D172 /* Assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
 		BFB1A6C41CB594BF00B2D172 /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
@@ -53,6 +58,7 @@
 		BF4B4A841CB5977200BF2C9D /* cc7 */ = {
 			isa = PBXGroup;
 			children = (
+				BF4B4A861CB93B8B00BF2C9D /* Range.cpp */,
 			);
 			path = cc7;
 			sourceTree = "<group>";
@@ -169,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF4B4A881CB93B8B00BF2C9D /* Range.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +219,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../include";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -250,6 +258,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../include";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
