@@ -17,6 +17,7 @@
 #pragma once
 
 #include <cc7/Assert.h>
+#include <cc7/Utilities.h>
 #include <iterator>
 #include <algorithm>
 
@@ -33,8 +34,13 @@ namespace cc7
 		typedef const cc7::byte&	const_reference;
 		typedef size_t				size_type;
 		typedef ptrdiff_t			difference_type;
+		
 		typedef cc7::byte*			iterator;
 		typedef const cc7::byte*	const_iterator;
+		
+		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
+		typedef std::reverse_iterator<iterator>			reverse_iterator;
+
 		
 		static const size_type	npos = static_cast<size_type>(-1);
 		
@@ -80,6 +86,74 @@ namespace cc7
 			_size = 0;
 		}
 		
+		//
+		// MARK: STL : Iterators -
+		//
+		
+		// begin, cbegin
+		iterator begin() noexcept
+		{
+			return _bytes;
+		}
+		
+		const_iterator begin() const noexcept
+		{
+			return _bytes;
+		}
+		
+		const_iterator cbegin() const noexcept
+		{
+			return _bytes;
+		}
+		
+		// end, cend
+		iterator end() noexcept
+		{
+			return _bytes != nullptr ? _bytes + _size : nullptr;
+		}
+			
+		const_iterator end() const noexcept
+		{
+			return _bytes != nullptr ? _bytes + _size : nullptr;
+		}
+			
+		const_iterator cend() const noexcept
+		{
+			return _bytes != nullptr ? _bytes + _size : nullptr;
+		}
+		
+		// rbegin, crbegin
+		reverse_iterator rbegin() noexcept
+		{
+			return reverse_iterator(end());
+		}
+		
+		const_reverse_iterator rbegin() const noexcept
+		{
+			return const_reverse_iterator(cend());
+		}
+		
+		const_reverse_iterator crbegin() const noexcept
+		{
+			return const_reverse_iterator(cend());
+		}
+		
+		// rend, crend
+		reverse_iterator rend() noexcept
+		{
+			return reverse_iterator(begin());
+		}
+		
+		const_reverse_iterator rend() const noexcept
+		{
+			return const_reverse_iterator(cbegin());
+		}
+		
+		const_reverse_iterator crend() const noexcept
+		{
+			return const_reverse_iterator(cbegin());
+		}
+		
 		
 		// buffer assigning
 		
@@ -98,6 +172,29 @@ namespace cc7
 			growForNewCapacity(new_size);
 		}
 		
+		void resize(size_type new_size, const value_type & val)
+		{
+			if (new_size <= _size) {
+				// new size is smaller or equal than current one
+				_size = new_size;
+			} else {
+				growForNewCapacity(new_size);
+				for (size_type i = _size; i < new_size; ++i) {
+					_bytes[i] = val;
+				}
+				_size = new_size;
+			}
+		}
+
+		void resizeNoInit(size_type new_size)
+		{
+			if (new_size > _size) {
+				growForNewCapacity(new_size);
+				// keep the rest of memory not initialized
+			}
+			_size = new_size;
+		}
+
 		// Byte access
 		
 		reference operator[](size_type index) noexcept
@@ -135,16 +232,23 @@ namespace cc7
 		}
 
 		
+		void swap(BasicBuffer & other)
+		{
+			std::swap(_bytes,	 other._bytes);
+			std::swap(_size,	 other._size);
+			std::swap(_capacity, other._capacity);
+		}
+
 		
 		// Non-STL methods
 		
-		void safeClear() noexcept
+		void secureClear() noexcept
 		{
 			_deallocBuffer(_bytes, _capacity);
 			
-			_bytes = nullptr;
-			_size = 0;
-			_capacity = 0;
+			_bytes		= nullptr;
+			_size		= 0;
+			_capacity	= 0;
 		}
 		
 		int compare(const BasicBuffer & other) const noexcept
@@ -192,13 +296,6 @@ namespace cc7
 			return _bytes;
 		}
 		
-		void swap(BasicBuffer & other)
-		{
-			std::swap(_bytes,	 other._bytes);
-			std::swap(_size,	 other._size);
-			std::swap(_capacity, other._capacity);
-		}
-		
 	private:
 		
 		static pointer _allocBuffer(size_type size)
@@ -214,9 +311,14 @@ namespace cc7
 			}
 		}
 		
-		static size_type _adjustNewCapacity(size_type old_cap, size_type new_cap)
+		static size_type _adjustNewCapacity(size_type old_cap, size_type new_cap) noexcept
 		{
-			return new_cap;
+			if (old_cap > 0) {
+				// new = 1.5 * old
+				new_cap = std::max(old_cap + (old_cap >> 1), new_cap);
+			}
+			// align to 16
+			return utilities::AlignSizeValue(new_cap, 16);
 		}
 		
 		pointer		_bytes;

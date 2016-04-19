@@ -32,6 +32,7 @@
 		BF388B841CC68E6500DEC1AE /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		BF388B851CC68FAA00DEC1AE /* Endian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Endian.h; sourceTree = "<group>"; };
 		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
+		BF4B4AB41CC6BF6100BF2C9D /* CC7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC7.h; sourceTree = "<group>"; };
 		BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB1A6C31CB594BF00B2D172 /* Assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
 		BFB1A6C41CB594BF00B2D172 /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		BFB1A6C21CB594BF00B2D172 /* cc7 */ = {
 			isa = PBXGroup;
 			children = (
+				BF4B4AB41CC6BF6100BF2C9D /* CC7.h */,
 				BFB1A6C51CB594BF00B2D172 /* Platform.h */,
 				BFB1A6C31CB594BF00B2D172 /* Assert.h */,
 				BFB1A6C41CB594BF00B2D172 /* Logger.h */,
@@ -233,7 +235,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../include",
-					"$(PROJECT_DIR)/../openssl/include",
+					"$(PROJECT_DIR)/../openssl/ios/include",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -275,7 +277,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../include",
-					"$(PROJECT_DIR)/../openssl/include",
+					"$(PROJECT_DIR)/../openssl/ios/include",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;

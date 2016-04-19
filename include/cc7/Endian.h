@@ -62,9 +62,9 @@ namespace cc7
 	
 #elif defined(CC7_BIG_ENDIAN)
 	
-	template <typename T> T toBigEndian(T n)		{ return val; }
+	template <typename T> T toBigEndian(T n)		{ return n; }
 	template <typename T> T toLittleEndian(T n)		{ return swapEndian(n); }
-	template <typename T> T fromBigEndian(T n)		{ return val; }
+	template <typename T> T fromBigEndian(T n)		{ return n; }
 	template <typename T> T fromLittleEndian(T n)	{ return swapEndian(n); }
 
 #else

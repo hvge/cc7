@@ -17,20 +17,9 @@
 #pragma once
 
 #include <cc7/Platform.h>
-
-namespace cc7
-{
-namespace utilities
-{
-	inline size_t AlignSizeValue(size_t value, size_t align)
-	{
-		CC7_ASSERT(align > 0, "align must be greater than 0");
-		if (value == 0) {
-			return align;
-		}
-		return (value + align - 1) % align;
-	}
-
-} // cc7::utilities
-} // cc7
+#include <cc7/Endian.h>
+#include <cc7/Assert.h>
+#include <cc7/Logger.h>
+#include <cc7/ByteArray.h>
+#include <cc7/Utilities.h>
 

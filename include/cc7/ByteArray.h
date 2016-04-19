@@ -40,8 +40,8 @@ namespace cc7
 		typedef BasicBuffer::const_iterator		const_iterator;
 		typedef BasicBuffer::iterator			iterator;
 		
-		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
-		typedef std::reverse_iterator<iterator>			reverse_iterator;
+		typedef BasicBuffer::const_reverse_iterator		const_reverse_iterator;
+		typedef BasicBuffer::reverse_iterator			reverse_iterator;
 		
 		static const size_type	npos = static_cast<size_type>(-1);
 
@@ -61,15 +61,70 @@ namespace cc7
 		// MARK: STL : Iterators -
 		//
 
-		// TODO: begin
-		// TODO: end
-		// TODO: rbegin
-		// TODO: rend
-		// TODO: cbegin
-		// TODO: cend
-		// TODO: crbegin
-		// TODO: crend
+		// begin, cbegin
+		iterator begin() noexcept
+		{
+			return _bb.begin();
+		}
 		
+		const_iterator begin() const noexcept
+		{
+			return _bb.cbegin();
+		}
+		
+		const_iterator cbegin() const noexcept
+		{
+			return _bb.cbegin();
+		}
+		
+		// end, cend
+		iterator end() noexcept
+		{
+			return _bb.end();
+		}
+		
+		const_iterator end() const noexcept
+		{
+			return _bb.cend();
+		}
+
+		const_iterator cend() const noexcept
+		{
+			return _bb.cend();
+		}
+		
+		// rbegin, crbegin
+		reverse_iterator rbegin() noexcept
+		{
+			return _bb.rbegin();
+		}
+		
+		const_reverse_iterator rbegin() const noexcept
+		{
+			return _bb.crbegin();
+		}
+		
+		const_reverse_iterator crbegin() const noexcept
+		{
+			return _bb.crbegin();
+		}
+
+		// rend, crend
+		reverse_iterator rend() noexcept
+		{
+			return _bb.rend();
+		}
+		
+		const_reverse_iterator rend() const noexcept
+		{
+			return _bb.crend();
+		}
+		
+		const_reverse_iterator crend() const noexcept
+		{
+			return _bb.crend();
+		}
+
 		//
 		// MARK: STL : Capacity -
 		//
@@ -81,17 +136,17 @@ namespace cc7
 		
 		size_type max_size() const noexcept
 		{
-			return SIZE_T_MAX / 2;		// TODO: this is stupid impl...
+			return SIZE_T_MAX / 2;
 		}
 		
-		void resize (size_type n)
+		void resize(size_type n)
 		{
-			// TODO...
+			_bb.resize(n, 0);
 		}
 		
-		void resize (size_type n, const value_type& val)
+		void resize(size_type n, const value_type& val)
 		{
-			// TODO...
+			_bb.resize(n, val);
 		}
 		
 		size_type capacity() const noexcept
@@ -106,7 +161,7 @@ namespace cc7
 		
 		void reserve (size_type n)
 		{
-			_bb.growForNewCapacity(n);
+			_bb.reserve(n);
 		}
 		
 		void shrink_to_fit()
@@ -205,6 +260,11 @@ namespace cc7
 		int compare(const ByteArray & other) const noexcept
 		{
 			return _bb.compare(other._bb);
+		}
+		
+		void secureClear() noexcept
+		{
+			_bb.secureClear();
 		}
 		
 	};

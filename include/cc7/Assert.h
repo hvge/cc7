@@ -62,6 +62,12 @@ namespace error
 			return _foo;
 		}
 		
+		static T & not_implemented()
+		{
+			__CC7_THROW_EXCEPTION(std::logic_error, "not implemented yet");
+			return _foo;
+		}
+		
 		static T & forbidden_value()
 		{
 			CC7_ASSERT(false, "Returning forbidden value.");
