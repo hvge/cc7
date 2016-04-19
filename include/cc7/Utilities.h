@@ -16,7 +16,19 @@
 
 #pragma once
 
+#include <cc7/Platform.h>
+
 namespace cc7
 {
+	template <typename T = size_t> T AlignValue(T value, size_t align)
+	{
+		CC7_ASSERT(align > 0, "align parameter must be greater than 0");
+		if (!value) {
+			return static_cast<T>(align);
+		}
+		return ((value + (align-1)) & ~(static_cast<T>(align)-1));
+	}
 	
 } // cc7
+
+#endif /* Utilities_h */

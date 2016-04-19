@@ -16,7 +16,61 @@
 
 #pragma once
 
+#include <cc7/Platform.h>
+
+#if !defined(CC7_NO_EXCEPTIONS)
+#include <stdexcept>
+#include <new>
+#endif
+
 namespace cc7
 {
+namespace error
+{
+#if defined(CC7_NO_EXCEPTIONS)
+	#define __CC7_THROW_EXCEPTION(exception, text)		CC7_ASSERT(false, text)
+	#define __CC7_THROW_EXCEPTION_NOP(exception, text)	CC7_ASSERT(false, text)
+#else
+	#define __CC7_THROW_EXCEPTION(exception, text)		throw exception(text)
+	#define __CC7_THROW_EXCEPTION_NOP(exception, text)	throw exception()
+#endif
 
-}
+	template <class T> class Exceptions {
+	public:
+		
+		static T & out_of_range()
+		{
+			__CC7_THROW_EXCEPTION(std::out_of_range, "out of range");
+			return _foo;
+		}
+		
+		static T & invalid_argument()
+		{
+			__CC7_THROW_EXCEPTION(std::invalid_argument, "invalid argument");
+			return _foo;
+		}
+		
+		static T & length_error()
+		{
+			__CC7_THROW_EXCEPTION(std::length_error, "length error");
+			return _foo;
+		}
+		
+		static T & allocation_error()
+		{
+			__CC7_THROW_EXCEPTION_NOP(std::bad_alloc, "not enough memory");
+			return _foo;
+		}
+		
+		static T & forbidden_value()
+		{
+			CC7_ASSERT(false, "Returning forbidden value.");
+			return _foo;
+		}
+		
+	private:
+		static T _foo;
+	};
+
+} // cc7::error
+} // cc7

@@ -21,8 +21,9 @@
 //
 #ifdef __APPLE__
     //
-    // Apple build (e.g. iOS)
+    // Apple build (e.g. iOS, OSX)
     //
+	#define __STDC_WANT_LIB_EXT1__ 1
     #ifdef __OBJC__
         // Objective-C specific
         #import <Foundation/Foundation.h>
@@ -49,7 +50,7 @@
     //
     #include <stdlib.h>
     #include <string.h>
-    #include <openssl/crypto.h> // for OPENSSL_cleanse
+    #include <openssl/crypto.h> // for OPENSSL_cleanse, fix this...
     //
     #define CC7_ANDROID
     // TODO: handle possible BE on Androids
@@ -205,4 +206,5 @@ namespace cc7
 	typedef uint16_t	U16;
 	typedef uint32_t	U32;
 	typedef uint64_t	U64;
-}
+	
+} // cc7

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#pragma once
+#include <cc7/ByteRange.h>
+#include <cc7/ByteArray.h>
 
 namespace cc7
 {
-	
 }

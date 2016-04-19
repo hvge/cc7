@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF4B4A881CB93B8B00BF2C9D /* Range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4B4A861CB93B8B00BF2C9D /* Range.cpp */; };
+		BF388B631CC62CF700DEC1AE /* ByteArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF388B621CC62CF700DEC1AE /* ByteArray.cpp */; };
+		BF388B661CC64EE500DEC1AE /* BasicBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF388B651CC64EE500DEC1AE /* BasicBuffer.cpp */; };
+		BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,14 +25,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BF4B4A861CB93B8B00BF2C9D /* Range.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Range.cpp; sourceTree = "<group>"; };
+		BF388B611CC62C0F00DEC1AE /* ByteArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ByteArray.h; sourceTree = "<group>"; };
+		BF388B621CC62CF700DEC1AE /* ByteArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteArray.cpp; sourceTree = "<group>"; };
+		BF388B641CC64BAB00DEC1AE /* BasicBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicBuffer.h; sourceTree = "<group>"; };
+		BF388B651CC64EE500DEC1AE /* BasicBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicBuffer.cpp; sourceTree = "<group>"; };
+		BF388B841CC68E6500DEC1AE /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		BF388B851CC68FAA00DEC1AE /* Endian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Endian.h; sourceTree = "<group>"; };
+		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
 		BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB1A6C31CB594BF00B2D172 /* Assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
 		BFB1A6C41CB594BF00B2D172 /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		BFB1A6C51CB594BF00B2D172 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
-		BFB1A6C61CB594BF00B2D172 /* Range.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
-		BFB1A6C71CB594BF00B2D172 /* SafeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SafeData.h; sourceTree = "<group>"; };
-		BFB1A6C81CB594BF00B2D172 /* SafeString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SafeString.h; sourceTree = "<group>"; };
+		BFB1A6C61CB594BF00B2D172 /* ByteRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ByteRange.h; sourceTree = "<group>"; };
 		BFB1A6CA1CB594BF00B2D172 /* EMPTY */ = {isa = PBXFileReference; lastKnownFileType = text; path = EMPTY; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,7 +64,9 @@
 		BF4B4A841CB5977200BF2C9D /* cc7 */ = {
 			isa = PBXGroup;
 			children = (
-				BF4B4A861CB93B8B00BF2C9D /* Range.cpp */,
+				BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */,
+				BF388B621CC62CF700DEC1AE /* ByteArray.cpp */,
+				BF388B651CC64EE500DEC1AE /* BasicBuffer.cpp */,
 			);
 			path = cc7;
 			sourceTree = "<group>";
@@ -101,12 +109,14 @@
 		BFB1A6C21CB594BF00B2D172 /* cc7 */ = {
 			isa = PBXGroup;
 			children = (
+				BFB1A6C51CB594BF00B2D172 /* Platform.h */,
 				BFB1A6C31CB594BF00B2D172 /* Assert.h */,
 				BFB1A6C41CB594BF00B2D172 /* Logger.h */,
-				BFB1A6C51CB594BF00B2D172 /* Platform.h */,
-				BFB1A6C61CB594BF00B2D172 /* Range.h */,
-				BFB1A6C71CB594BF00B2D172 /* SafeData.h */,
-				BFB1A6C81CB594BF00B2D172 /* SafeString.h */,
+				BFB1A6C61CB594BF00B2D172 /* ByteRange.h */,
+				BF388B611CC62C0F00DEC1AE /* ByteArray.h */,
+				BF388B641CC64BAB00DEC1AE /* BasicBuffer.h */,
+				BF388B841CC68E6500DEC1AE /* Utilities.h */,
+				BF388B851CC68FAA00DEC1AE /* Endian.h */,
 			);
 			path = cc7;
 			sourceTree = "<group>";
@@ -175,7 +185,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF4B4A881CB93B8B00BF2C9D /* Range.cpp in Sources */,
+				BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */,
+				BF388B661CC64EE500DEC1AE /* BasicBuffer.cpp in Sources */,
+				BF388B631CC62CF700DEC1AE /* ByteArray.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +231,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../include",
+					"$(PROJECT_DIR)/../openssl/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -258,7 +273,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../include",
+					"$(PROJECT_DIR)/../openssl/include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;

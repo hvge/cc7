@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <cc7/Range.h>
+#include <cc7/ByteArray.h>
 
 namespace cc7
 {
