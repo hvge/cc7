@@ -30,7 +30,7 @@ namespace cc7
 		typedef cc7::byte			value_type;
 		typedef cc7::byte*			pointer;
 		typedef const cc7::byte*	const_pointer;
-		typedef const cc7::byte&	reference;
+		typedef cc7::byte&			reference;
 		typedef const cc7::byte&	const_reference;
 		typedef size_t				size_type;
 		typedef ptrdiff_t			difference_type;
@@ -47,19 +47,72 @@ namespace cc7
 		typedef error::Exceptions<value_type> _ValueTypeExceptions;
 		
 		
-		// Constructors & destructor
+		//
+		// Constructors & destructor & move & copy
+		//
 		
 		BasicBuffer() noexcept :
-			_bytes(nullptr), _size(0), _capacity(0)
+			_bytes(nullptr),
+			_size(0),
+			_capacity(0)
 		{
 		}
 		
+		// Move construct
+		BasicBuffer(BasicBuffer&& x) noexcept :
+			_bytes(x._bytes),
+			_size(x._size),
+			_capacity(x._capacity)
+		{
+			x._bytes = nullptr;
+			x._size = 0;
+			x._capacity = 0;
+		}
+		
+		// Copy construct
+		BasicBuffer(const BasicBuffer & x) :
+			_bytes(nullptr),
+			_size(0),
+			_capacity(0)
+		{
+			assign(x.data(), x.size());
+		}
+
+		// Move assign
+		BasicBuffer& operator=(BasicBuffer&& x)
+		{
+			if (this != &x) {
+				// cleanup possible previously allocated resources
+				secureClear();
+				// move members
+				_bytes = x._bytes;
+				_size  = x._size;
+				_capacity = x._capacity;
+				// cleanup x
+				x._bytes = nullptr;
+				x._size  = 0;
+				x._capacity = 0;
+			}
+			return *this;
+		}
+		
+		// Copy assign
+		BasicBuffer& operator=(const BasicBuffer& x)
+		{
+			assign(x.data(), x.size());
+			return *this;
+		}
+		
+		// Destruct
 		~BasicBuffer() noexcept
 		{
 			_deallocBuffer(_bytes, _capacity);
 		}
 		
+		
+		//
 		// Size, length, capacity...
+		//
 		
 		pointer data() noexcept
 		{
@@ -90,13 +143,10 @@ namespace cc7
 		// MARK: STL : Iterators -
 		//
 		
+		// BasicBuffer supports only (c)begin() & (c)end() iterators
+		
 		// begin, cbegin
 		iterator begin() noexcept
-		{
-			return _bytes;
-		}
-		
-		const_iterator begin() const noexcept
 		{
 			return _bytes;
 		}
@@ -111,47 +161,10 @@ namespace cc7
 		{
 			return _bytes != nullptr ? _bytes + _size : nullptr;
 		}
-			
-		const_iterator end() const noexcept
-		{
-			return _bytes != nullptr ? _bytes + _size : nullptr;
-		}
-			
+		
 		const_iterator cend() const noexcept
 		{
 			return _bytes != nullptr ? _bytes + _size : nullptr;
-		}
-		
-		// rbegin, crbegin
-		reverse_iterator rbegin() noexcept
-		{
-			return reverse_iterator(end());
-		}
-		
-		const_reverse_iterator rbegin() const noexcept
-		{
-			return const_reverse_iterator(cend());
-		}
-		
-		const_reverse_iterator crbegin() const noexcept
-		{
-			return const_reverse_iterator(cend());
-		}
-		
-		// rend, crend
-		reverse_iterator rend() noexcept
-		{
-			return reverse_iterator(begin());
-		}
-		
-		const_reverse_iterator rend() const noexcept
-		{
-			return const_reverse_iterator(cbegin());
-		}
-		
-		const_reverse_iterator crend() const noexcept
-		{
-			return const_reverse_iterator(cbegin());
 		}
 		
 		
@@ -159,7 +172,7 @@ namespace cc7
 		
 		void assign(const_pointer ptr, size_type size)
 		{
-			if (!ptr && size) {
+			if ((ptr == nullptr) && (size > 0)) {
 				_ValueTypeExceptions::invalid_argument();
 			} else {
 				growForNewCapacity(size);
@@ -197,7 +210,7 @@ namespace cc7
 
 		// Byte access
 		
-		reference operator[](size_type index) noexcept
+		reference atNoExc(size_type index) noexcept
 		{
 			if (index < size()) {
 				return _bytes[index];
@@ -206,7 +219,7 @@ namespace cc7
 			return _ValueTypeExceptions::forbidden_value();
 		}
 		
-		const_reference operator[](size_type index) const noexcept
+		const_reference atNoExc(size_type index) const noexcept
 		{
 			if (index < size()) {
 				return _bytes[index];
@@ -214,7 +227,7 @@ namespace cc7
 			// Undefined in STL. We're returning reference to static buffer.
 			return _ValueTypeExceptions::forbidden_value();
 		}
-		
+				
 		reference at(size_type index)
 		{
 			if (index < size()) {
