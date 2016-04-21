@@ -17,6 +17,5 @@
 #include <cc7/ByteArray.h>
 
 namespace cc7
-{
-	
+{	
 }

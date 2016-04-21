@@ -43,8 +43,16 @@ namespace cc7
 		
 		static const size_type	npos = static_cast<size_type>(-1);
 		
-		typedef error::Exceptions<value_type> _ValueTypeExceptions;
-		typedef error::Exceptions<ByteRange>  _ByteRangeExceptions;
+		typedef cc7::detail::ExceptionsWrapper<value_type> _ValueTypeExceptions;
+		typedef cc7::detail::ExceptionsWrapper<ByteRange>  _ByteRangeExceptions;
+		
+	private:
+		
+		// Private members
+		const_pointer _begin;
+		const_pointer _end;
+		
+	public:
 		
 		// Constructors
 		
@@ -308,12 +316,7 @@ namespace cc7
 				_ValueTypeExceptions::invalid_argument();
 			}
 		}
-		
-	private:
-		
-		// Private members
-		const_pointer _begin;
-		const_pointer _end;
+			
 	};
 		
 	// ByteRange comparation operators

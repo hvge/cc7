@@ -20,6 +20,20 @@
                ReferencedContainer = "container:cc7.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BF30682D1CC91B20002FD3BC"
+               BuildableName = "libcc7tests-ios.a"
+               BlueprintName = "cc7tests-ios"
+               ReferencedContainer = "container:cc7.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -29,6 +43,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BFB1A6B31CB5937800B2D172"
+            BuildableName = "libcc7-ios.a"
+            BlueprintName = "cc7-ios"
+            ReferencedContainer = "container:cc7.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

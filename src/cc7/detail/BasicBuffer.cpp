@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-#pragma once
+#include <cc7/detail/BasicBuffer.h>
 
 namespace cc7
 {
+namespace detail
+{
 	
-} // cc7
+}
+}

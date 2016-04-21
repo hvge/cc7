@@ -14,8 +14,25 @@
  * limitations under the License.
  */
 
-#include <cc7/BasicBuffer.h>
+#pragma once
+
+#include <cc7/Platform.h>
 
 namespace cc7
 {
-}
+namespace tests
+{
+	class TestLog
+	{
+	public:
+		
+		TestLog();
+		virtual ~TestLog();
+		
+	private:
+		
+	};
+	
+	
+} // cc7::tests
+} // cc7

@@ -95,8 +95,7 @@
 // Setup for implicit features
 //
 #if defined (DEBUG)
-    // DEBUG builds have CCLog and CC7_ASSERT macros
-    // turned on
+    // DEBUG builds have CC7_LOG and CC7_ASSERT macros turned on
     #define ENABLE_CC7_LOG
     #define ENABLE_CC7_ASSERT
 #endif
@@ -125,12 +124,13 @@
     //
     // CC7Log is enabled
     //
-    CC7_EXTERN_C void CC7Log(const char * fmt, ...);
+    CC7_EXTERN_C void CC7LogImpl(const char * fmt, ...);
+	#define CC7_LOG(...) CC7LogImpl(__VA_ARGS__)
 #else
     //
     // CC7Log is disabled
     //
-    #define CC7Log(...)
+    #define CC7_LOG(...)
 #endif
 
 

@@ -22,13 +22,15 @@ namespace cc7
 {
 namespace utilities
 {
-	inline size_t AlignSizeValue(size_t value, size_t align)
+	template<size_t Align> size_t AlignValue(size_t value)
 	{
-		CC7_ASSERT(align > 0, "align must be greater than 0");
-		if (value == 0) {
-			return align;
+		static_assert(Align > 0, "Align must be greater than 0");
+		static_assert((Align & (~Align + 1)) == Align, "Align must be power of 2");
+					  
+		if (value) {
+			return (value + (Align - 1)) & ~(Align - 1);
 		}
-		return (value + align - 1) % align;
+		return Align;
 	}
 
 } // cc7::utilities

@@ -16,8 +16,8 @@
 
 #pragma once
 
-#include <cc7/BasicBuffer.h>
 #include <cc7/ByteRange.h>
+#include <cc7/detail/BasicBuffer.h>
 
 namespace cc7
 {
@@ -38,30 +38,30 @@ namespace cc7
 	 have a secure byte container, compatible as much as possible with the STL
 	 infrastructure, easily exchangable with a regular std::vector<U8>. So, this 
 	 means that every missing method, or an incompatibility with the STL, is 
-	 considered as a bug and will be fixed as soon as possible.
+	 treated as a bug and will be fixed as soon as possible.
 	 
 	 */
 	class ByteArray
 	{
 	private:
 		
-		BasicBuffer _bb;
+		detail::BasicBuffer _bb;
 
 	public:
 		
 		// STL container compatibility
-		typedef BasicBuffer::value_type			value_type;
-		typedef BasicBuffer::pointer			pointer;
-		typedef BasicBuffer::const_pointer		const_pointer;
-		typedef BasicBuffer::reference			reference;
-		typedef BasicBuffer::const_reference	const_reference;
-		typedef BasicBuffer::size_type			size_type;
-		typedef BasicBuffer::difference_type	difference_type;
-		typedef BasicBuffer::const_iterator		const_iterator;
-		typedef BasicBuffer::iterator			iterator;
+		typedef detail::BasicBuffer::value_type			value_type;
+		typedef detail::BasicBuffer::pointer			pointer;
+		typedef detail::BasicBuffer::const_pointer		const_pointer;
+		typedef detail::BasicBuffer::reference			reference;
+		typedef detail::BasicBuffer::const_reference	const_reference;
+		typedef detail::BasicBuffer::size_type			size_type;
+		typedef detail::BasicBuffer::difference_type	difference_type;
+		typedef detail::BasicBuffer::const_iterator		const_iterator;
+		typedef detail::BasicBuffer::iterator			iterator;
 		
-		typedef BasicBuffer::const_reverse_iterator		const_reverse_iterator;
-		typedef BasicBuffer::reverse_iterator			reverse_iterator;
+		typedef detail::BasicBuffer::const_reverse_iterator		const_reverse_iterator;
+		typedef detail::BasicBuffer::reverse_iterator			reverse_iterator;
 		
 		static const size_type	npos = static_cast<size_type>(-1);
 

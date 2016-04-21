@@ -17,24 +17,23 @@
 #pragma once
 
 #include <cc7/Platform.h>
-#include <cc7/detail/ExceptionsWrapper.h>
 
 namespace cc7
 {
-namespace error
+namespace tests
 {
-
-#if defined(ENABLE_CC7_ASSERT)
 	
-	typedef void (*AssertionHandler)(void * handler_data, const char * file, int line, const char * formatted_string);
+	class UnitTest
+	{
+	public:
+		
+		UnitTest();
+		virtual ~UnitTest();
+		
+	private:
+		
+	};
 	
-	void SetAssertionHandler(AssertionHandler handler, void * handler_data);
-	void GetAssertionHandler(AssertionHandler& handler, void *& handler_data);
 	
-	// Platform code must implement following method.
-	AssertionHandler GetDefaultAssertionHandler();
-	
-#endif // defined(ENABLE_CC7_ASSERT)
-
-} // cc7::error
+} // cc7::tests
 } // cc7

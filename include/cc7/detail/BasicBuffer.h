@@ -23,6 +23,8 @@
 
 namespace cc7
 {
+namespace detail
+{
 	class BasicBuffer
 	{
 	public:
@@ -44,8 +46,15 @@ namespace cc7
 		
 		static const size_type	npos = static_cast<size_type>(-1);
 		
-		typedef error::Exceptions<value_type> _ValueTypeExceptions;
+		typedef cc7::detail::ExceptionsWrapper<value_type> _ValueTypeExceptions;
+	
+	private:
 		
+		pointer		_bytes;
+		size_type	_size;
+		size_type	_capacity;
+
+	public:
 		
 		//
 		// Constructors & destructor & move & copy
@@ -83,7 +92,7 @@ namespace cc7
 		{
 			if (this != &x) {
 				// cleanup possible previously allocated resources
-				secureClear();
+				_deallocBuffer(_bytes, _capacity);
 				// move members
 				_bytes = x._bytes;
 				_size  = x._size;
@@ -331,12 +340,9 @@ namespace cc7
 				new_cap = std::max(old_cap + (old_cap >> 1), new_cap);
 			}
 			// align to 16
-			return utilities::AlignSizeValue(new_cap, 16);
+			return utilities::AlignValue<16>(new_cap);
 		}
-		
-		pointer		_bytes;
-		size_type	_size;
-		size_type	_capacity;
 	};
 	
+} // cc7::detail
 } // cc7
