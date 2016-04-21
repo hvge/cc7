@@ -23,6 +23,7 @@ profile
 
 # xcode5+ mess
 *.xccheckout
+*.xcscmblueprint
 
 #IntelliJ IDEA
 .idea
