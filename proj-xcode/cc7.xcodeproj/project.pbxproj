@@ -69,6 +69,8 @@
 		BF388B851CC68FAA00DEC1AE /* Endian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Endian.h; sourceTree = "<group>"; };
 		BF498A991CDBD4F600D7E904 /* TestUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestUtilities.cpp; sourceTree = "<group>"; };
 		BF498A9B1CDBEE1500D7E904 /* TestAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAssertions.h; sourceTree = "<group>"; };
+		BF498A9C1CDBF60B00D7E904 /* ByteArrayExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteArrayExp.h; sourceTree = "<group>"; };
+		BF498A9D1CDBF60B00D7E904 /* ByteArrayRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteArrayRef.h; sourceTree = "<group>"; };
 		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
 		BF4B4AB41CC6BF6100BF2C9D /* CC7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC7.h; sourceTree = "<group>"; };
 		BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +296,8 @@
 				BFB1A6C51CB594BF00B2D172 /* Platform.h */,
 				BFB1A6C31CB594BF00B2D172 /* Assert.h */,
 				BFB1A6C61CB594BF00B2D172 /* ByteRange.h */,
+				BF498A9C1CDBF60B00D7E904 /* ByteArrayExp.h */,
+				BF498A9D1CDBF60B00D7E904 /* ByteArrayRef.h */,
 				BF388B611CC62C0F00DEC1AE /* ByteArray.h */,
 				BF388B841CC68E6500DEC1AE /* Utilities.h */,
 				BF388B851CC68FAA00DEC1AE /* Endian.h */,

@@ -32,10 +32,18 @@ namespace cc7
 			typedef  ByteArrayAllocator <U> other;
 		};
 		
-		ByteArrayAllocator() = delete;
-		ByteArrayAllocator(const ByteArrayAllocator &) = delete;
-		template <class U> ByteArrayAllocator(const ByteArrayAllocator <U> &)  = delete;
+		ByteArrayAllocator() throw()
+		{
+		}
 		
+		ByteArrayAllocator(const ByteArrayAllocator &) throw()
+		{
+		}
+		
+		template <class U> ByteArrayAllocator(const ByteArrayAllocator <U> &) throw()
+		{
+		}
+
 		void deallocate(T * p,  size_t n)
 		{
 			CC7_SecureClean(p, n * sizeof(T));
@@ -44,10 +52,12 @@ namespace cc7
 	};
 	
 	
-	class ByteArray : public std::vector<uint8_t, ByteArrayAllocator<uint8>>
+	class ByteArray : public std::vector<uint8_t, ByteArrayAllocator<uint8_t>>
 	{
 	public:
-		typedef std::vector<uint8_t, ByteArrayAllocator<uint8>> parent_class;
+		typedef std::vector<uint8_t, ByteArrayAllocator<uint8_t>> parent_class;
+		using parent_class::parent_class;
+		
 	};
 
 	
