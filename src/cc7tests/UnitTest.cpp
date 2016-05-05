@@ -15,19 +15,76 @@
  */
 
 #include <cc7tests/UnitTest.h>
+#include <stdexcept>
 
 namespace cc7
 {
 namespace tests
 {
-	UnitTest::UnitTest()
+	UnitTest::UnitTest() :
+		_log(nullptr)
 	{
-		
 	}
 	
 	UnitTest::~UnitTest()
 	{
+	}
+	
+	TestLog & UnitTest::tl()
+	{
+		if (!_log) {
+			throw std::runtime_error("The TestLog is not set.");
+		}
+		return *_log;
+	}
+	
+	
+	TestLog & UnitTest::tl() const
+	{
+		if (!_log) {
+			throw std::runtime_error("The TestLog is not set.");
+		}
+		return *_log;
+	}
+	
+	void UnitTest::registerTestMethod(std::function<void()> method, const char * description)
+	{
+		if (CC7_CHECK(method != nullptr && description != nullptr, "method & description must be set")) {
+			_methods.push_back(make_tuple(method, std::string(description)));
+		}
+	}
+	
+	bool UnitTest::runTest(TestLog & log)
+	{
+		_log = &log;
 		
+		tl().clearCurrentTestIncidentsCount();
+		
+		instanceSetUp();
+		
+		if (_methods.size() == 0) {
+			tl().logMessage("The test class is empty. Try to register some test methods.");
+		}
+		
+		size_t indent_before = tl().indentationLevel();
+		
+		for (auto desc : _methods) {
+			std::function<void()>	method_ptr;
+			std::string				method_name;
+			tie(method_ptr, method_name) = desc;
+			
+			tl().logFormattedMessage("[ %s ]", method_name.c_str());
+			
+			tl().setIndentationLevel(indent_before + 4);
+			setUp();
+			method_ptr();
+			tearDown();
+			tl().setIndentationLevel(indent_before);
+		}
+		
+		instanceTearDown();
+		
+		return tl().logDataCounters().current_test_incidents_count == 0;
 	}
 }
 }

@@ -13,7 +13,10 @@
 		BF3068551CC91EE4002FD3BC /* UnitTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3068541CC91EE4002FD3BC /* UnitTest.cpp */; };
 		BF3068581CC95503002FD3BC /* TestLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3068571CC95503002FD3BC /* TestLog.cpp */; };
 		BF388B631CC62CF700DEC1AE /* ByteArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF388B621CC62CF700DEC1AE /* ByteArray.cpp */; };
+		BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498A991CDBD4F600D7E904 /* TestUtilities.cpp */; };
 		BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */; };
+		BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */; };
+		BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */; };
 		BFE173FD1CC963DE00039466 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE173FC1CC9639B00039466 /* libcrypto.a */; };
 		BFE174041CC9664500039466 /* PlatformApple.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFE174021CC9664500039466 /* PlatformApple.mm */; };
 		BFE174071CC96D3600039466 /* Assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFE174061CC96D3600039466 /* Assert.cpp */; };
@@ -64,12 +67,26 @@
 		BF388B641CC64BAB00DEC1AE /* BasicBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicBuffer.h; sourceTree = "<group>"; };
 		BF388B841CC68E6500DEC1AE /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		BF388B851CC68FAA00DEC1AE /* Endian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Endian.h; sourceTree = "<group>"; };
+		BF498A991CDBD4F600D7E904 /* TestUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestUtilities.cpp; sourceTree = "<group>"; };
+		BF498A9B1CDBEE1500D7E904 /* TestAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAssertions.h; sourceTree = "<group>"; };
 		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
 		BF4B4AB41CC6BF6100BF2C9D /* CC7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC7.h; sourceTree = "<group>"; };
 		BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB1A6C31CB594BF00B2D172 /* Assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
 		BFB1A6C51CB594BF00B2D172 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		BFB1A6C61CB594BF00B2D172 /* ByteRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ByteRange.h; sourceTree = "<group>"; };
+		BFC3F44F1CD3D15F00883E91 /* invalid-conf-01.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-01.conf"; sourceTree = "<group>"; };
+		BFC3F4501CD3D15F00883E91 /* invalid-conf-02.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-02.conf"; sourceTree = "<group>"; };
+		BFC3F4511CD3D15F00883E91 /* invalid-conf-03.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-03.conf"; sourceTree = "<group>"; };
+		BFC3F4521CD3D15F00883E91 /* invalid-conf-04.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-04.conf"; sourceTree = "<group>"; };
+		BFC3F4531CD3D15F00883E91 /* invalid-conf-05.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-05.conf"; sourceTree = "<group>"; };
+		BFC3F4541CD3D15F00883E91 /* run-tests.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
+		BFC3F4551CD3F01100883E91 /* valid-conf-01.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "valid-conf-01.conf"; sourceTree = "<group>"; };
+		BFC525481CDB9C13002E653C /* TestTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTypes.h; sourceTree = "<group>"; };
+		BFC525491CDBC79F002E653C /* PerformanceTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerformanceTimer.h; sourceTree = "<group>"; };
+		BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceTimer.cpp; sourceTree = "<group>"; };
+		BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceTimerApple.cpp; sourceTree = "<group>"; };
+		BFC5254F1CDBCC48002E653C /* TestUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestUtilities.h; sourceTree = "<group>"; };
 		BFE173B01CC9639B00039466 /* aes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		BFE173B11CC9639B00039466 /* asn1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
 		BFE173B21CC9639B00039466 /* asn1_mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asn1_mac.h; sourceTree = "<group>"; };
@@ -150,6 +167,12 @@
 		BFE174021CC9664500039466 /* PlatformApple.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlatformApple.mm; sourceTree = "<group>"; };
 		BFE174051CC968FF00039466 /* ExceptionsWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionsWrapper.h; sourceTree = "<group>"; };
 		BFE174061CC96D3600039466 /* Assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Assert.cpp; sourceTree = "<group>"; };
+		BFE174091CCCE4C900039466 /* TestFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFile.h; sourceTree = "<group>"; };
+		BFE1740A1CCCE53E00039466 /* TestResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestResource.h; sourceTree = "<group>"; };
+		BFE1740B1CCCE59200039466 /* TestDirectory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestDirectory.h; sourceTree = "<group>"; };
+		BFE1740D1CCCEC1600039466 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		BFE1740F1CCCEC1600039466 /* data-converter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-converter.cpp"; sourceTree = "<group>"; };
+		BFE174101CCCEC1600039466 /* data-converter.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "data-converter.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +212,14 @@
 			path = detail;
 			sourceTree = "<group>";
 		};
+		BF498A981CDBD4E200D7E904 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				BF498A991CDBD4F600D7E904 /* TestUtilities.cpp */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
 		BF4B4A831CB5977200BF2C9D /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,9 +245,13 @@
 		BF4B4A851CB5977200BF2C9D /* cc7tests */ = {
 			isa = PBXGroup;
 			children = (
+				BF498A981CDBD4E200D7E904 /* detail */,
+				BFC5254C1CDBC945002E653C /* platform */,
+				BFE1740C1CCCEC1600039466 /* conv-tool */,
 				BF3068511CC91E56002FD3BC /* TestManager.cpp */,
 				BF3068541CC91EE4002FD3BC /* UnitTest.cpp */,
 				BF3068571CC95503002FD3BC /* TestLog.cpp */,
+				BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */,
 			);
 			path = cc7tests;
 			sourceTree = "<group>";
@@ -269,11 +304,48 @@
 		BFB1A6C91CB594BF00B2D172 /* cc7tests */ = {
 			isa = PBXGroup;
 			children = (
+				BFC525471CDB9C03002E653C /* detail */,
+				BF498A9B1CDBEE1500D7E904 /* TestAssertions.h */,
 				BF3068501CC91DA4002FD3BC /* TestManager.h */,
 				BF3068531CC91EBD002FD3BC /* UnitTest.h */,
 				BF3068561CC954CC002FD3BC /* TestLog.h */,
+				BFE174091CCCE4C900039466 /* TestFile.h */,
+				BFE1740B1CCCE59200039466 /* TestDirectory.h */,
+				BFE1740A1CCCE53E00039466 /* TestResource.h */,
+				BFC525491CDBC79F002E653C /* PerformanceTimer.h */,
 			);
 			path = cc7tests;
+			sourceTree = "<group>";
+		};
+		BFC3F44E1CD3D0ED00883E91 /* unit-tests */ = {
+			isa = PBXGroup;
+			children = (
+				BFC3F4551CD3F01100883E91 /* valid-conf-01.conf */,
+				BFC3F44F1CD3D15F00883E91 /* invalid-conf-01.conf */,
+				BFC3F4501CD3D15F00883E91 /* invalid-conf-02.conf */,
+				BFC3F4511CD3D15F00883E91 /* invalid-conf-03.conf */,
+				BFC3F4521CD3D15F00883E91 /* invalid-conf-04.conf */,
+				BFC3F4531CD3D15F00883E91 /* invalid-conf-05.conf */,
+				BFC3F4541CD3D15F00883E91 /* run-tests.sh */,
+			);
+			path = "unit-tests";
+			sourceTree = "<group>";
+		};
+		BFC525471CDB9C03002E653C /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				BFC525481CDB9C13002E653C /* TestTypes.h */,
+				BFC5254F1CDBCC48002E653C /* TestUtilities.h */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		BFC5254C1CDBC945002E653C /* platform */ = {
+			isa = PBXGroup;
+			children = (
+				BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */,
+			);
+			path = platform;
 			sourceTree = "<group>";
 		};
 		BFE173AD1CC9638900039466 /* openssl */ = {
@@ -410,6 +482,17 @@
 			path = apple;
 			sourceTree = "<group>";
 		};
+		BFE1740C1CCCEC1600039466 /* conv-tool */ = {
+			isa = PBXGroup;
+			children = (
+				BFC3F44E1CD3D0ED00883E91 /* unit-tests */,
+				BFE1740D1CCCEC1600039466 /* .gitignore */,
+				BFE1740F1CCCEC1600039466 /* data-converter.cpp */,
+				BFE174101CCCEC1600039466 /* data-converter.sh */,
+			);
+			path = "conv-tool";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -485,8 +568,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */,
 				BF3068581CC95503002FD3BC /* TestLog.cpp in Sources */,
+				BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */,
 				BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */,
+				BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */,
 				BF3068551CC91EE4002FD3BC /* UnitTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

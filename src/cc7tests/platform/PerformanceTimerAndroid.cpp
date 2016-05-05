@@ -14,33 +14,29 @@
  * limitations under the License.
  */
 
-#pragma once
-
 #include <cc7/Platform.h>
-#include <cc7/detail/ExceptionsWrapper.h>
+#include <time.h>
+
+#if !defined(CC7_ANDROID)
+#error "This file is designed for Android platform only"
+#endif
 
 namespace cc7
 {
-namespace error
+namespace tests
 {
-
-	typedef void (*AssertionHandler)(void * handler_data, const char * file, int line, const char * formatted_string);
-	
-	struct AssertionHandlerSetup
+	cc7::U64 Platform_GetCurrentTime()
 	{
-		AssertionHandler	handler;
-		void *				handler_data;
-	};
+		struct timespec res;
+		clock_gettime(CLOCK_REALTIME, &res);
+		return (cc7::U64)(1000000.0*res.tv_sec + (double)res.tv_nsec * 1.0/1000.0);
+	}
 	
-#if defined(ENABLE_CC7_ASSERT)
+	double Platform_GetTimeDiff(cc7::U64 start, cc7::U64 future)
+	{
+		return (future - start) * 1.0/1000.0;
+	}
 
-	void					SetAssertionHandler(const AssertionHandlerSetup & new_setup);
-	AssertionHandlerSetup	GetAssertionHandler();
-	
-	// Platform code must implement following method.
-	AssertionHandlerSetup	GetDefaultAssertionHandler();
-	
-#endif // defined(ENABLE_CC7_ASSERT)
 
-} // cc7::error
+} // cc7::tests
 } // cc7

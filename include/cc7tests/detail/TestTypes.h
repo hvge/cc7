@@ -17,30 +17,35 @@
 #pragma once
 
 #include <cc7/Platform.h>
-#include <cc7/detail/ExceptionsWrapper.h>
+#include <vector>
 
 namespace cc7
 {
-namespace error
+namespace tests
 {
-
-	typedef void (*AssertionHandler)(void * handler_data, const char * file, int line, const char * formatted_string);
+namespace detail
+{
+	/**
+	 The UnitTestFactoryFunction is a type for factory function, responsible
+	 for creation of instance of one particular test.
+	 
+	 This is an internal type and should not be used outside of the cc7tests
+	 library.
+	 */
+	typedef UnitTest* (*UnitTestFactoryFunction)();
 	
-	struct AssertionHandlerSetup
+	/**
+	 The UnitTestDescriptor structure keeps information about one particular
+	 unit test. The type is internal and should not be used outside of the
+	 cc7tests library.
+	 */
+	struct UnitTestDescriptor
 	{
-		AssertionHandler	handler;
-		void *				handler_data;
+		UnitTestFactoryFunction		factory;
+		const char *				name;
+		const char *				tags;
 	};
 	
-#if defined(ENABLE_CC7_ASSERT)
-
-	void					SetAssertionHandler(const AssertionHandlerSetup & new_setup);
-	AssertionHandlerSetup	GetAssertionHandler();
-	
-	// Platform code must implement following method.
-	AssertionHandlerSetup	GetDefaultAssertionHandler();
-	
-#endif // defined(ENABLE_CC7_ASSERT)
-
-} // cc7::error
+} // cc7::tests::detail
+} // cc7::tests
 } // cc7

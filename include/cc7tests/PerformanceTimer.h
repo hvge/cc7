@@ -17,30 +17,34 @@
 #pragma once
 
 #include <cc7/Platform.h>
-#include <cc7/detail/ExceptionsWrapper.h>
+#include <functional>
 
 namespace cc7
 {
-namespace error
+namespace tests
 {
-
-	typedef void (*AssertionHandler)(void * handler_data, const char * file, int line, const char * formatted_string);
 	
-	struct AssertionHandlerSetup
+	class PerformanceTimer
 	{
-		AssertionHandler	handler;
-		void *				handler_data;
+	public:
+		PerformanceTimer();
+		
+		void	start();
+		double	elapsedTime();
+		double	measureBlock(std::function<void()> block);
+		
+		static std::string humanReadableTime(double time);
+		
+	private:
+		
+		cc7::U64 _base;
 	};
 	
-#if defined(ENABLE_CC7_ASSERT)
-
-	void					SetAssertionHandler(const AssertionHandlerSetup & new_setup);
-	AssertionHandlerSetup	GetAssertionHandler();
 	
-	// Platform code must implement following method.
-	AssertionHandlerSetup	GetDefaultAssertionHandler();
+	// Following two functions must have platform specific implementation.
 	
-#endif // defined(ENABLE_CC7_ASSERT)
-
-} // cc7::error
+	cc7::U64	Platform_GetCurrentTime();
+	double		Platform_GetTimeDiff(cc7::U64 start, cc7::U64 future);
+	
+} // cc7::tests
 } // cc7

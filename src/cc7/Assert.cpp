@@ -26,27 +26,20 @@ namespace error
 	// Assertion handler
 	//
 	
-	static AssertionHandler	s_Handler = nullptr;
-	static void *			s_HandlerData = nullptr;
+	static AssertionHandlerSetup s_setup = { nullptr, nullptr };
 	
-	void SetAssertionHandler(AssertionHandler handler, void * data)
+	void SetAssertionHandler(const AssertionHandlerSetup & new_setup)
 	{
-		AssertionHandler default_handler = GetDefaultAssertionHandler();
-		if (!handler) {
-			handler = default_handler;
+		AssertionHandlerSetup default_setup = GetDefaultAssertionHandler();
+		if (!new_setup.handler) {
+			s_setup = default_setup;
 		}
-		s_Handler = handler;
-		if (handler == default_handler) {
-			s_HandlerData = nullptr;
-		} else {
-			s_HandlerData = data;
-		}
+		s_setup = new_setup;
 	}
 	
-	void GetAssertionHandler(AssertionHandler& handler, void*& handler_data)
+	AssertionHandlerSetup GetAssertionHandler()
 	{
-		handler			= s_Handler;
-		handler_data	= s_HandlerData;
+		return s_setup;
 	}
 	
 } // cc7::error
@@ -80,13 +73,13 @@ int CC7AssertImpl(const char * file, int line, const char * fmt, ...)
 	message[1024 - 1] = 0;
 	
 	// Pass that message to the assert handler
-	if (!cc7::error::s_Handler) {
-		cc7::error::s_Handler = cc7::error::GetDefaultAssertionHandler();
-		if (cc7::error::s_Handler) {
-			cc7::error::s_Handler(cc7::error::s_HandlerData, file_name, line, message);
+	if (!cc7::error::s_setup.handler) {
+		cc7::error::s_setup = cc7::error::GetDefaultAssertionHandler();
+		if (cc7::error::s_setup.handler) {
+			cc7::error::s_setup.handler(cc7::error::s_setup.handler_data, file_name, line, message);
 		}
 	} else {
-		cc7::error::s_Handler(cc7::error::s_HandlerData, file_name, line, message);
+		cc7::error::s_setup.handler(cc7::error::s_setup.handler_data, file_name, line, message);
 	}
 	
 	// Function must return 0 due to fact, that CC7AssertImpl() is also used in CC7_CHECK() macros.

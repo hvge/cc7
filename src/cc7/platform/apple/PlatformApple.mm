@@ -56,9 +56,10 @@ namespace error
 		CC7_BREAKPOINT();
 	}
 
-	AssertionHandler GetDefaultAssertionHandler()
+	AssertionHandlerSetup GetDefaultAssertionHandler()
 	{
-		return private_objcDumpToLog;
+		static AssertionHandlerSetup s_default_setup = { private_objcDumpToLog, nullptr };
+		return s_default_setup;
 	}
 }
 }

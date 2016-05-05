@@ -17,30 +17,32 @@
 #pragma once
 
 #include <cc7/Platform.h>
-#include <cc7/detail/ExceptionsWrapper.h>
+#include <string>
+#include <vector>
 
 namespace cc7
 {
-namespace error
+namespace tests
+{
+namespace detail
 {
 
-	typedef void (*AssertionHandler)(void * handler_data, const char * file, int line, const char * formatted_string);
+	/**
+	 Returns formatted std::string like regular sprintf() does.
+	 */
+	std::string FormattedString(const char * format, ...);
 	
-	struct AssertionHandlerSetup
-	{
-		AssertionHandler	handler;
-		void *				handler_data;
-	};
+	/**
+	 Helper split function.
+	 */
+	std::vector<std::string> & SplitString(const std::string & str, char delim, std::vector<std::string> & elems);
 	
-#if defined(ENABLE_CC7_ASSERT)
+	/**
+	 Returns a vector containing substrings from the input string that have been divided by a given delimiter.
+	 */
+	std::vector<std::string>   SplitString(const std::string & str, char delimiter);
 
-	void					SetAssertionHandler(const AssertionHandlerSetup & new_setup);
-	AssertionHandlerSetup	GetAssertionHandler();
 	
-	// Platform code must implement following method.
-	AssertionHandlerSetup	GetDefaultAssertionHandler();
-	
-#endif // defined(ENABLE_CC7_ASSERT)
-
-} // cc7::error
+} // cc7::tests::detail
+} // cc7::tests
 } // cc7
