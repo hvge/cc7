@@ -53,17 +53,25 @@ namespace tests
 	
 	// MARK: Logging
 	
+	void TestLog::appendMultilineString(const std::string & string)
+	{
+//		if (_dump_to_system_log) {
+//			CC7_LOG("%s", string.c_str());
+//		}
+		_AppendMultilineString(string, _indentation, _log_data.log);
+	}
+	
 	void TestLog::logMessage(const char * message)
 	{
 		GUARD_LOCK();
-		_AppendMultilineString(std::string(message), _indentation, _log_data.log);
+		appendMultilineString(std::string(message));
 	}
 	
 	
 	void TestLog::logMessage(const std::string & message)
 	{
 		GUARD_LOCK();
-		_AppendMultilineString(message, _indentation, _log_data.log);
+		appendMultilineString(message);
 	}
 	
 	
@@ -87,14 +95,13 @@ namespace tests
 		}
 		// Lock now. All previous operations were local.
 		GUARD_LOCK();
-		_AppendMultilineString(message, _indentation, _log_data.log);
+		appendMultilineString(message);
 	}
 	
 	
-	void TestLog::logIncident(const char * file, int line, const char * condition, const char * format, ...)
+	void TestLog::logIncident(const char * full_path, int line, const char * condition, const char * format, ...)
 	{
 #define BUF_COUNT(b) (sizeof(b)/sizeof(b[0]))
-		
 		// At first, we have to process formatted message.
 		char formatted_message[1024];
 		va_list args;
@@ -103,7 +110,7 @@ namespace tests
 		va_end(args);
 		
 		// Crop the file path just to file name. If this is not possible then use a whole path.
-		file = _LookForFileName(file);
+		const char * file_name = _LookForFileName(full_path);
 		
 		// Build final string
 		char message_buffer[1024+256];
@@ -112,21 +119,22 @@ namespace tests
 			// This is incident with condition string (typically some assertion)
 			if (!empty_formatted_message) {
 				// Also contains message, dump  file, line, condition, buffer
-				snprintf(message_buffer, BUF_COUNT(message_buffer), "FAIL: %s, %d: %s  =>  %s", file, line, condition, formatted_message);
+				snprintf(message_buffer, BUF_COUNT(message_buffer), "FAIL: %s, %d: %s  =>  %s", file_name, line, condition, formatted_message);
 			} else {
 				// No message, just dump        file, line, condition
-				snprintf(message_buffer, BUF_COUNT(message_buffer), "FAIL: %s, %d: %s", file, line, condition);
+				snprintf(message_buffer, BUF_COUNT(message_buffer), "FAIL: %s, %d: %s", file_name, line, condition);
 			}
 		} else {
 			// Incident without condition (typically direct failure)
 			if (!empty_formatted_message) {
 				// ...but still have some message
-				snprintf(message_buffer, BUF_COUNT(message_buffer), "FAIL: %s, %d: %s", file, line, formatted_message);
+				snprintf(message_buffer, BUF_COUNT(message_buffer), "FAIL: %s, %d: %s", file_name, line, formatted_message);
 			} else {
 				// no condition, no message
-				snprintf(message_buffer, BUF_COUNT(message_buffer), "FAIL: %s, %d", file, line);
+				snprintf(message_buffer, BUF_COUNT(message_buffer), "FAIL: %s, %d", file_name, line);
 			}
 		}
+#undef BUF_COUNT
 		
 		std::string message(message_buffer);
 		bool dump_to_syslog;
@@ -135,7 +143,7 @@ namespace tests
 		_lock->lock();
 		{
 			// Look for already reported location
-			std::string file_location_key(file);
+			std::string file_location_key(full_path);
 			file_location_key.append(":");
 			file_location_key.append(std::to_string(line));
 			
@@ -244,14 +252,14 @@ namespace tests
 	size_t TestLog::indentationLevel() const
 	{
 		GUARD_LOCK();
-		return _indentation.length() - _indentation_prefix.length() - _indentation_suffix.length();
+		return indentationLevelImpl();
 	}
 	
 
 	void TestLog::setIndentationPrefix(const std::string & prefix)
 	{
 		GUARD_LOCK();
-		size_t current_level = indentationLevel();
+		size_t current_level = indentationLevelImpl();
 		_indentation_prefix = prefix;
 		updateIndentationToLevel(current_level);
 	}
@@ -267,7 +275,7 @@ namespace tests
 	void TestLog::setIndentationSuffix(const std::string & suffix)
 	{
 		GUARD_LOCK();
-		size_t current_level = indentationLevel();
+		size_t current_level = indentationLevelImpl();
 		_indentation_suffix = suffix;
 		updateIndentationToLevel(current_level);
 	}
@@ -288,7 +296,11 @@ namespace tests
 		
 	}
 	
-	
+	size_t TestLog::indentationLevelImpl() const
+	{
+		return _indentation.length() - _indentation_prefix.length() - _indentation_suffix.length();
+	}
+
 	
 	// MARK: Passed / Failed counters
 	
@@ -296,6 +308,7 @@ namespace tests
 	{
 		GUARD_LOCK();
 		_log_data.c.passed_tests++;
+		_log_data.c.executed_tests++;
 	}
 	
 	
@@ -303,6 +316,7 @@ namespace tests
 	{
 		GUARD_LOCK();
 		_log_data.c.failed_tests++;
+		_log_data.c.executed_tests++;
 	}
 	
 	

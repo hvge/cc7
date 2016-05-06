@@ -36,6 +36,7 @@ namespace tests
 			Counters() :
 				incidents_count(0),
 				current_test_incidents_count(0),
+				executed_tests(0),
 				passed_tests(0),
 				failed_tests(0),
 				skipped_tests(0),
@@ -47,6 +48,7 @@ namespace tests
 			{
 				incidents_count = 0;
 				current_test_incidents_count = 0;
+				executed_tests = 0;
 				passed_tests = 0;
 				failed_tests = 0;
 				skipped_tests = 0;
@@ -62,6 +64,10 @@ namespace tests
 			 */
 			int current_test_incidents_count;
 			
+			/**
+			 Number of executed tests;
+			 */
+			int executed_tests;
 			/**
 			 Number of passed tests.
 			 */
@@ -253,6 +259,10 @@ namespace tests
 		 The final string is constructed as |prefix| + |' ' x indentation_level| + |suffix|
 		 */
 		void updateIndentationToLevel(size_t level);
+		
+		void appendMultilineString(const std::string & string);
+		
+		size_t indentationLevelImpl() const;
 		
 		std::mutex *	_lock;
 		

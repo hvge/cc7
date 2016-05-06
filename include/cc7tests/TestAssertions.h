@@ -23,7 +23,9 @@
  UnitTest-like object.
  */
 
-// Triggers failure when condition is not true
+/**
+ Triggers failure when condition is not true
+ */
 #define ccstAssertTrue(condition, ...)																	\
 	try {																								\
 		if ((condition) != true) {																		\
@@ -33,7 +35,9 @@
 		this->tl().logIncident(__FILE__, __LINE__, "Evaluation failed (" #condition ")", "");			\
 	}
 
-// Triggers failure when condition is not false
+/**
+ Triggers failure when condition is not false
+ */
 #define ccstAssertFalse(condition, ...)																	\
 	try {																								\
 		if ((condition) != false) {																		\
@@ -43,19 +47,25 @@
 		this->tl().logIncident(__FILE__, __LINE__, "Evaluation failed (" #condition ")", "");			\
 	}
 
-// Triggers failure when pointer is null
+/**
+ Triggers failure when pointer is not NULL
+ */
 #define ccstAssertNull(object, ...)																		\
 	if (object != nullptr) {																			\
 		this->tl().logIncident(__FILE__, __LINE__, "(" #object ") != NULL", "" __VA_ARGS__);			\
 	}
 
-// Triggers failure when pointer is not null
+/**
+ Triggers failure when pointer is NULL
+ */
 #define ccstAssertNotNull(object, ...)																	\
 	if (object == nullptr) {																			\
 		this->tl().logIncident(__FILE__, __LINE__, "(" #object ") == NULL", "" __VA_ARGS__);			\
 	}
 
-// Triggers failure when both parameters are not equal
+/**
+ Triggers failure when both parameters are not equal
+ */
 #define ccstAssertEqual(aa, bb, ...)																	\
 	try {																								\
 		if (!(aa == bb)) {																				\
@@ -65,7 +75,9 @@
 		this->tl().logIncident(__FILE__, __LINE__, "Evaluation failed (" #aa " == " #bb ")", "");		\
 	}
 
-// Triggers failure when both parameters are equal
+/**
+ Triggers failure when both parameters are equal
+ */
 #define ccstAssertNotEqual(aa, bb, ...)																	\
 	try {																								\
 		if (aa == bb) {																					\
@@ -75,24 +87,35 @@
 		this->tl().logIncident(__FILE__, __LINE__, "Evaluation failed (" #aa " != " #bb ")", "");		\
 	}
 
-// Triggers failure when both memory regions are not equal
+/**
+ Triggers failure when both memory regions are not equal
+ */
 #define ccstAssertEqualMemSize(p1, p2, size, ...)														\
 	if (memcmp(p1, p2, size) != 0) {																	\
 		this->tl().logIncident(__FILE__, __LINE__, "mem(" #p1 ") == mem(" #p2 ")", "" __VA_ARGS__);		\
 	}
 
-// Triggers failure when both memory regions are not equal. The size of memory area is determined by sizeof(expected_array)
+/**
+ Triggers failure when both memory regions are not equal. The size of memory area 
+ is determined by sizeof(expected_array) and therefore the ptr parameter must point
+ to at least the same amount of bytes.
+ */
 #define ccstAssertEqualMemArray(ptr, expected_array, ...)												\
 	if (memcmp(ptr, expected_array, sizeof(expected_array)) != 0) {										\
 		this->tl().logIncident(__FILE__, __LINE__, "mem(" #ptr ") == mem(" #expected_array ")", "" __VA_ARGS__);	\
 	}
 
 
-// Always triggers failure
+/**
+ Always triggers failure
+ */
 #define ccstFailure(...)																				\
 	this->tl().logIncident(__FILE__, __LINE__, NULL, "" __VA_ARGS__);
 
 
-// Adds simple message to the test log
+/**
+ Adds simple message to the test log
+ */
 #define ccstMessage(...)																				\
 	this->tl().logFormattedMessage("" __VA_ARGS__);
+

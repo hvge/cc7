@@ -14,6 +14,10 @@
 		BF3068581CC95503002FD3BC /* TestLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3068571CC95503002FD3BC /* TestLog.cpp */; };
 		BF388B631CC62CF700DEC1AE /* ByteArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF388B621CC62CF700DEC1AE /* ByteArray.cpp */; };
 		BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498A991CDBD4F600D7E904 /* TestUtilities.cpp */; };
+		BF498AA71CDCBE8400D7E904 /* libcc7tests-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3068371CC91B20002FD3BC /* libcc7tests-ios.a */; };
+		BF498AAE1CDCBEC000D7E904 /* CC7TestWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF498AAD1CDCBEC000D7E904 /* CC7TestWrapper.mm */; };
+		BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AB61CDCC24F00D7E904 /* EmbeddedTestsList.cpp */; };
+		BF498ABA1CDD065B00D7E904 /* cc7Testception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AB91CDD065B00D7E904 /* cc7Testception.cpp */; };
 		BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */; };
 		BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */; };
 		BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */; };
@@ -29,6 +33,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = BFB1A6B31CB5937800B2D172;
 			remoteInfo = "cc7-ios";
+		};
+		BF498AA81CDCBE8400D7E904 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFB1A6AC1CB5937800B2D172 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF30682D1CC91B20002FD3BC;
+			remoteInfo = "cc7tests-ios";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -71,6 +82,14 @@
 		BF498A9B1CDBEE1500D7E904 /* TestAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAssertions.h; sourceTree = "<group>"; };
 		BF498A9C1CDBF60B00D7E904 /* ByteArrayExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteArrayExp.h; sourceTree = "<group>"; };
 		BF498A9D1CDBF60B00D7E904 /* ByteArrayRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteArrayRef.h; sourceTree = "<group>"; };
+		BF498AA21CDCBE8300D7E904 /* CC7TestsWrapper.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CC7TestsWrapper.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF498AA61CDCBE8400D7E904 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF498AAD1CDCBEC000D7E904 /* CC7TestWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CC7TestWrapper.mm; sourceTree = "<group>"; };
+		BF498AAF1CDCBF4500D7E904 /* CC7Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC7Tests.h; sourceTree = "<group>"; };
+		BF498AB41CDCC22500D7E904 /* EMPTY */ = {isa = PBXFileReference; lastKnownFileType = text; path = EMPTY; sourceTree = "<group>"; };
+		BF498AB61CDCC24F00D7E904 /* EmbeddedTestsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EmbeddedTestsList.cpp; sourceTree = "<group>"; };
+		BF498AB81CDCC34A00D7E904 /* TestRegistrationMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestRegistrationMacros.h; sourceTree = "<group>"; };
+		BF498AB91CDD065B00D7E904 /* cc7Testception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7Testception.cpp; sourceTree = "<group>"; };
 		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
 		BF4B4AB41CC6BF6100BF2C9D /* CC7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC7.h; sourceTree = "<group>"; };
 		BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +205,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BF498A9F1CDCBE8300D7E904 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF498AA71CDCBE8400D7E904 /* libcc7tests-ios.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFB1A6B11CB5937800B2D172 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,6 +249,49 @@
 			path = detail;
 			sourceTree = "<group>";
 		};
+		BF498AA31CDCBE8400D7E904 /* CC7TestsWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				BF498AAD1CDCBEC000D7E904 /* CC7TestWrapper.mm */,
+				BF498AA61CDCBE8400D7E904 /* Info.plist */,
+			);
+			path = CC7TestsWrapper;
+			sourceTree = "<group>";
+		};
+		BF498AB01CDCC22500D7E904 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				BF498AB11CDCC22500D7E904 /* cc7base */,
+				BF498AB31CDCC22500D7E904 /* cc7crypto */,
+				BF498AB51CDCC22500D7E904 /* openssl */,
+				BF498AB61CDCC24F00D7E904 /* EmbeddedTestsList.cpp */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		BF498AB11CDCC22500D7E904 /* cc7base */ = {
+			isa = PBXGroup;
+			children = (
+				BF498AB91CDD065B00D7E904 /* cc7Testception.cpp */,
+			);
+			path = cc7base;
+			sourceTree = "<group>";
+		};
+		BF498AB31CDCC22500D7E904 /* cc7crypto */ = {
+			isa = PBXGroup;
+			children = (
+				BF498AB41CDCC22500D7E904 /* EMPTY */,
+			);
+			path = cc7crypto;
+			sourceTree = "<group>";
+		};
+		BF498AB51CDCC22500D7E904 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = openssl;
+			sourceTree = "<group>";
+		};
 		BF4B4A831CB5977200BF2C9D /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +317,7 @@
 		BF4B4A851CB5977200BF2C9D /* cc7tests */ = {
 			isa = PBXGroup;
 			children = (
+				BF498AB01CDCC22500D7E904 /* tests */,
 				BF498A981CDBD4E200D7E904 /* detail */,
 				BFC5254C1CDBC945002E653C /* platform */,
 				BFE1740C1CCCEC1600039466 /* conv-tool */,
@@ -264,6 +335,7 @@
 				BFB1A6C11CB594BF00B2D172 /* include */,
 				BF4B4A831CB5977200BF2C9D /* src */,
 				BFE173AD1CC9638900039466 /* openssl */,
+				BF498AA31CDCBE8400D7E904 /* CC7TestsWrapper */,
 				BFB1A6B51CB5937800B2D172 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -274,6 +346,7 @@
 			children = (
 				BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */,
 				BF3068371CC91B20002FD3BC /* libcc7tests-ios.a */,
+				BF498AA21CDCBE8300D7E904 /* CC7TestsWrapper.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,7 +382,9 @@
 			isa = PBXGroup;
 			children = (
 				BFC525471CDB9C03002E653C /* detail */,
+				BF498AAF1CDCBF4500D7E904 /* CC7Tests.h */,
 				BF498A9B1CDBEE1500D7E904 /* TestAssertions.h */,
+				BF498AB81CDCC34A00D7E904 /* TestRegistrationMacros.h */,
 				BF3068501CC91DA4002FD3BC /* TestManager.h */,
 				BF3068531CC91EBD002FD3BC /* UnitTest.h */,
 				BF3068561CC954CC002FD3BC /* TestLog.h */,
@@ -518,6 +593,24 @@
 			productReference = BF3068371CC91B20002FD3BC /* libcc7tests-ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		BF498AA11CDCBE8300D7E904 /* CC7TestsWrapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF498AAC1CDCBE8400D7E904 /* Build configuration list for PBXNativeTarget "CC7TestsWrapper" */;
+			buildPhases = (
+				BF498A9E1CDCBE8300D7E904 /* Sources */,
+				BF498A9F1CDCBE8300D7E904 /* Frameworks */,
+				BF498AA01CDCBE8300D7E904 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF498AA91CDCBE8400D7E904 /* PBXTargetDependency */,
+			);
+			name = CC7TestsWrapper;
+			productName = CC7TestsWrapper;
+			productReference = BF498AA21CDCBE8300D7E904 /* CC7TestsWrapper.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BFB1A6B31CB5937800B2D172 /* cc7-ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFB1A6BD1CB5937800B2D172 /* Build configuration list for PBXNativeTarget "cc7-ios" */;
@@ -541,9 +634,13 @@
 		BFB1A6AC1CB5937800B2D172 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Juraj Ďurech";
 				TargetAttributes = {
+					BF498AA11CDCBE8300D7E904 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					BFB1A6B31CB5937800B2D172 = {
 						CreatedOnToolsVersion = 7.3;
 					};
@@ -563,9 +660,20 @@
 			targets = (
 				BFB1A6B31CB5937800B2D172 /* cc7-ios */,
 				BF30682D1CC91B20002FD3BC /* cc7tests-ios */,
+				BF498AA11CDCBE8300D7E904 /* CC7TestsWrapper */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF498AA01CDCBE8300D7E904 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BF30682E1CC91B20002FD3BC /* Sources */ = {
@@ -574,10 +682,20 @@
 			files = (
 				BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */,
 				BF3068581CC95503002FD3BC /* TestLog.cpp in Sources */,
+				BF498ABA1CDD065B00D7E904 /* cc7Testception.cpp in Sources */,
 				BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */,
+				BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */,
 				BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */,
 				BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */,
 				BF3068551CC91EE4002FD3BC /* UnitTest.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF498A9E1CDCBE8300D7E904 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF498AAE1CDCBEC000D7E904 /* CC7TestWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +719,11 @@
 			target = BFB1A6B31CB5937800B2D172 /* cc7-ios */;
 			targetProxy = BF3068381CC91B9D002FD3BC /* PBXContainerItemProxy */;
 		};
+		BF498AA91CDCBE8400D7E904 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF30682D1CC91B20002FD3BC /* cc7tests-ios */;
+			targetProxy = BF498AA81CDCBE8400D7E904 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -619,6 +742,31 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		BF498AAA1CDCBE8400D7E904 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = CC7TestsWrapper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cc7.lib.CC7TestsWrapper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BF498AAB1CDCBE8400D7E904 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = CC7TestsWrapper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cc7.lib.CC7TestsWrapper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -743,6 +891,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BF498AAC1CDCBE8400D7E904 /* Build configuration list for PBXNativeTarget "CC7TestsWrapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF498AAA1CDCBE8400D7E904 /* Debug */,
+				BF498AAB1CDCBE8400D7E904 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		BFB1A6AF1CB5937800B2D172 /* Build configuration list for PBXProject "cc7" */ = {
 			isa = XCConfigurationList;

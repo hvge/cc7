@@ -26,6 +26,7 @@ namespace cc7
 namespace tests
 {
 	class TestLog;
+	class TestManager;
 	
 	/**
 	 The UnitTest is a base class for all unit tests in cc7tests framework.
@@ -77,6 +78,12 @@ namespace tests
 		TestLog & tl();
 		TestLog & tl() const;
 		
+		/**
+		 Returns associated TestManager
+		 */
+		TestManager & testManager();
+		TestManager & testManager() const;
+		
 	protected:
 		
 		void registerTestMethod(std::function<void()> method, const char * description);
@@ -87,19 +94,13 @@ namespace tests
 		friend class TestManager;
 		
 		// Private methods
-		bool runTest(TestLog & log);
+		bool runTest(TestManager * manager, TestLog * log);
 		
 		// Members
 		TestLog * _log;
+		TestManager * _manager;
 		std::vector<std::tuple<std::function<void()>, std::string>>	_methods;
 	};
-	
-	
-	/**
-	 The CC7_REGISTER_TEST_METHOD macro registers a test method in the context of one particular unit test. 
-	 You should to setup your methods in test's constructor.
-	 */
-	#define CC7_REGISTER_TEST_METHOD(method_name) this->registerTestMethod([this]() { this->method_name(); }, #method_name );
 	
 	
 } // cc7::tests

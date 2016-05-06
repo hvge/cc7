@@ -67,10 +67,33 @@ namespace tests
 		
 		// Breakpoints configuration
 		
+		/**
+		 Sets software breakpoint, triggered on assertion enabled or disabled.
+		 The TestManager changes default behavior of CC7_ASSERT() macro
+		 during the testing and by default ignores all thesese assertions.
+		 
+		 Normally, the CC7's assertions are used as a runtime warnings and doesn't
+		 exits application, like the normal assert() does. This behavior may be
+		 iterfering with a regular testing and therefore all CC7_ASSERT's are
+		 by default turned off.
+		 */
 		void setAssertionBreakpointEnabled(bool enabled);
+		
+		/**
+		 Returns whether the assertion breakpoint is enabled or not.
+		 */
 		bool assertionBreakpointEnabled() const;
 		
+		/**
+		 If turned on, then execution of test will break on software breakpoint,
+		 when the test assertion fails.
+		 By default is turned off.
+		 */
 		void setIncidentBreakpointEnabled(bool enabled);
+		
+		/**
+		 Returns whether the incident breakpoint is turned on or not.
+		 */
 		bool incidentBreakpointEnabled() const;
 
 		
@@ -138,7 +161,7 @@ namespace tests
 		~TestManager();
 		
 		// Test execution
-		bool executeAllTests(const std::vector<std::string> & included_tags, const std::vector<std::string> & excluded_tags);
+		bool executeFilteredTests(const std::vector<std::string> & included_tags, const std::vector<std::string> & excluded_tags);
 		bool executeTest(UnitTestCreationInfo ti, const std::string & full_test_desc);
 		
 		// Assert handler
@@ -149,12 +172,19 @@ namespace tests
 
 		// Private members
 		
+		/**
+		 List of registered tests.
+		 */
 		UnitTestCreationInfoList _registered_tests;
+		/**
+		 Test log
+		 */
 		TestLog _test_log;
-		
+		/**
+		 
+		 */
 		bool _assertion_breakpoint_enabled;
-		
-		cc7::error::AssertionHandlerSetup _old_assertion_setup;
+		error::AssertionHandlerSetup _old_assertion_setup;
 		
 	};
 	

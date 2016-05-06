@@ -22,13 +22,16 @@ namespace cc7
 namespace tests
 {
 	UnitTest::UnitTest() :
-		_log(nullptr)
+		_log(nullptr),
+		_manager(nullptr)
 	{
 	}
+	
 	
 	UnitTest::~UnitTest()
 	{
 	}
+	
 	
 	TestLog & UnitTest::tl()
 	{
@@ -47,6 +50,25 @@ namespace tests
 		return *_log;
 	}
 	
+	
+	TestManager & UnitTest::testManager()
+	{
+		if (!_manager) {
+			throw std::runtime_error("The TestManager is not set.");
+		}
+		return *_manager;
+	}
+
+	
+	TestManager & UnitTest::testManager() const
+	{
+		if (!_manager) {
+			throw std::runtime_error("The TestManager is not set.");
+		}
+		return *_manager;
+	}
+
+	
 	void UnitTest::registerTestMethod(std::function<void()> method, const char * description)
 	{
 		if (CC7_CHECK(method != nullptr && description != nullptr, "method & description must be set")) {
@@ -54,9 +76,11 @@ namespace tests
 		}
 	}
 	
-	bool UnitTest::runTest(TestLog & log)
+	
+	bool UnitTest::runTest(TestManager * manager, TestLog * log)
 	{
-		_log = &log;
+		_log = log;
+		_manager = manager;
 		
 		tl().clearCurrentTestIncidentsCount();
 		
@@ -75,7 +99,7 @@ namespace tests
 			
 			tl().logFormattedMessage("[ %s ]", method_name.c_str());
 			
-			tl().setIndentationLevel(indent_before + 4);
+			tl().setIndentationLevel(indent_before + 2);
 			setUp();
 			method_ptr();
 			tearDown();
@@ -84,7 +108,12 @@ namespace tests
 		
 		instanceTearDown();
 		
-		return tl().logDataCounters().current_test_incidents_count == 0;
+		bool result = tl().logDataCounters().current_test_incidents_count == 0;
+		
+		_log		= nullptr;
+		_manager	= nullptr;
+		
+		return result;
 	}
 }
 }

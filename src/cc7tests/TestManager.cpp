@@ -41,10 +41,10 @@ namespace tests
 	{
 	}
 	
+	extern const UnitTestCreationInfoList _GetDefaultUnitTestCreationInfoList();
 	
 	TestManager * TestManager::createDefaultManager()
 	{
-		extern const UnitTestCreationInfoList _GetDefaultUnitTestCreationInfoList();
 		TestManager * tm = new TestManager();
 		tm->addUnitTestList(_GetDefaultUnitTestCreationInfoList());
 		return tm;
@@ -157,7 +157,7 @@ namespace tests
 		if (_registered_tests.size() > 0) {
 			//
 			PerformanceTimer timer;
-			tests_result = executeAllTests(included_tags, excluded_tags);
+			tests_result = executeFilteredTests(included_tags, excluded_tags);
 			elapsed_time = timer.elapsedTime();
 			//
 		} else {
@@ -186,7 +186,7 @@ namespace tests
 		return detail::FormattedString("Test [ %d / %d ] ::: %s", (int)index + 1, (int)count, ti->name);
 	}
 	
-	bool TestManager::executeAllTests(const std::vector<std::string> & included_tags, const std::vector<std::string> & excluded_tags)
+	bool TestManager::executeFilteredTests(const std::vector<std::string> & included_tags, const std::vector<std::string> & excluded_tags)
 	{
 		bool final_result = true;
 		
@@ -266,12 +266,12 @@ namespace tests
 			logMessage(begin_message);
 			
 			// Set indentation and run test
-			tl().setIndentationLevel(4);
+			tl().setIndentationLevel(2);
 			PerformanceTimer timer;
 			double elapsed_time = 0.0;
 			
 			try {
-				test_result = unit_test->runTest(_test_log);
+				test_result = unit_test->runTest(this, &_test_log);
 				elapsed_time = timer.elapsedTime();
 			} catch (std::exception & exc) {
 				std::string message("FAILED: Exception: ");
