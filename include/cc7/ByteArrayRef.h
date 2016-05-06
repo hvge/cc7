@@ -20,8 +20,9 @@
 
 namespace cc7
 {
-	
+	//
 	// Temporary, reference implementation of ByteArray.
+	//
 	
 	template <class T> class ByteArrayAllocator : public std::allocator<T>
 	{
@@ -52,12 +53,98 @@ namespace cc7
 	};
 	
 	
-	class ByteArray : public std::vector<uint8_t, ByteArrayAllocator<uint8_t>>
+	class ByteArray : public std::vector<cc7::byte, ByteArrayAllocator<cc7::byte>>
 	{
 	public:
-		typedef std::vector<uint8_t, ByteArrayAllocator<uint8_t>> parent_class;
+		typedef std::vector<cc7::byte, ByteArrayAllocator<cc7::byte>> parent_class;
 		using parent_class::parent_class;
 		
+		//
+		// Interaction with ByteRange class
+		//
+		ByteArray(const ByteRange & range) : ByteArray(range.begin(), range.end())
+		{
+		}
+
+		ByteArray& operator=(const ByteRange& range)
+		{
+			parent_class::assign(range.begin(), range.end());
+			return *this;
+		}
+		
+		void assign(const ByteRange & range)
+		{
+			parent_class::assign(range.begin(), range.end());
+		}
+		
+		ByteArray & append(const ByteRange & range)
+		{
+			parent_class::insert(end(), range.begin(), range.end());
+			return *this;
+		}
+		
+		iterator insert(const_iterator position, const ByteRange & range)
+		{
+			return parent_class::insert(position, range.begin(), range.end());
+		}
+		
+		ByteRange byteRange() const
+		{
+			return ByteRange(data(), size());
+		}
+
+		// dirty.. automatic casting to ByteRange
+		operator ByteRange () const
+		{
+			return ByteRange(data(), size());
+		}
+
+		
+		
+		
+		//
+		// Appending
+		//
+		
+		// single element, the same as push_back()
+		ByteArray & append(const value_type& val)
+		{
+			parent_class::push_back(val);
+			return *this;
+		}
+		
+		// fill
+		ByteArray & append(size_type n, const value_type& val)
+		{
+			parent_class::insert(end(), n, val);
+			return *this;
+		}
+
+		// range
+		template <class InputIterator>
+		ByteArray & append(InputIterator first, InputIterator last)
+		{
+			parent_class::insert(end(), first, last);
+			return *this;
+		}
+
+		// initializer list
+		ByteArray & append(std::initializer_list<value_type> il)
+		{
+			parent_class::insert(end(), il);
+			return *this;
+		}
+		
+		//
+		// Other custom methods
+		//
+		
+		void secureClear()
+		{
+			CC7_SecureClean(data(), capacity());
+			parent_class::clear();
+		}
+	
 	};
 
 	

@@ -21,9 +21,7 @@
 #include <vector>
 
 namespace cc7
-{
-	class ByteArray;
-	
+{	
 	class ByteRange
 	{
 	public:
@@ -80,8 +78,6 @@ namespace cc7
 			_end   (r.end())
 		{
 		}
-		
-		ByteRange(const ByteArray & a) noexcept;	// Implemented in CPP
 		
 		ByteRange(const void * ptr, size_type size) noexcept :
 			_begin (reinterpret_cast<const_pointer>(ptr)),
