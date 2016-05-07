@@ -26,8 +26,6 @@ namespace tests
 	 What a magic!
 	 */
 	
-	
-	
 	//
 	// Always success tests
 	//
@@ -185,7 +183,7 @@ namespace tests
 		
 		cc7Testception() : _manager(nullptr)
 		{
-			CC7_REGISTER_TEST_METHOD(internalSplitStringTest);
+			CC7_REGISTER_TEST_METHOD(splitStringTest);
 			CC7_REGISTER_TEST_METHOD(allTests);
 			CC7_REGISTER_TEST_METHOD(positiveTests);
 			CC7_REGISTER_TEST_METHOD(negativeTests);
@@ -221,7 +219,7 @@ namespace tests
 		{
 		}
 		
-		void logLog()
+		void dumpCollectedLog()
 		{
 			ccstMessage("%s", _manager->tl().logData().log.c_str());
 		}
@@ -234,31 +232,34 @@ namespace tests
 		
 		// UNIT TESTS
 		
-		void internalSplitStringTest()
+		void splitStringTest()
 		{
 			auto result = detail::SplitString("", ' ');
-			ccstAssertTrue(result.size() == 0, "null must produce empty vector");
+			ccstAssertTrue(result.size() == 0, "empty string must produce empty vector");
+			
+			result = detail::SplitString("     ", ' ');
+			ccstAssertTrue(result.size() == 0, "blank string must produce empty vector");
 			
 			result = detail::SplitString("tag1", ' ');
-			ccstAssertTrue(result.size() == 1, "wrong result");
-			ccstAssertEqual(result[0], "tag1", "wrong result");
+			ccstAssertTrue(result.size() == 1);
+			ccstAssertEqual(result[0], "tag1");
 			
 			result = detail::SplitString("tag1 tag2", ' ');
-			ccstAssertTrue(result.size() == 2, "wrong result");
-			ccstAssertEqual(result[0], "tag1", "wrong result");
-			ccstAssertEqual(result[1], "tag2", "wrong result");
+			ccstAssertTrue(result.size() == 2);
+			ccstAssertEqual(result[0], "tag1");
+			ccstAssertEqual(result[1], "tag2");
 			
 			result = detail::SplitString("tag1  tag2  tag3", ' ');
-			ccstAssertTrue(result.size() == 3, "wrong result");
-			ccstAssertEqual(result[0], "tag1", "wrong result");
-			ccstAssertEqual(result[1], "tag2", "wrong result");
-			ccstAssertEqual(result[2], "tag3", "wrong result");
+			ccstAssertTrue(result.size() == 3);
+			ccstAssertEqual(result[0], "tag1");
+			ccstAssertEqual(result[1], "tag2");
+			ccstAssertEqual(result[2], "tag3");
 			
 			result = detail::SplitString("  tag1  tag2  tag3  ", ' ');
-			ccstAssertTrue(result.size() == 3, "wrong result");
-			ccstAssertEqual(result[0], "tag1", "wrong result");
-			ccstAssertEqual(result[1], "tag2", "wrong result");
-			ccstAssertEqual(result[2], "tag3", "wrong result");
+			ccstAssertTrue(result.size() == 3);
+			ccstAssertEqual(result[0], "tag1");
+			ccstAssertEqual(result[1], "tag2");
+			ccstAssertEqual(result[2], "tag3");
 		}
 		
 		void allTests()
@@ -273,7 +274,7 @@ namespace tests
 			
 			if (result) {
 				// must fail, something is wrong, dump log
-				logLog();
+				dumpCollectedLog();
 			}
 		}
 		
@@ -289,7 +290,7 @@ namespace tests
 			
 			if (!result) {
 				// failed, something is wrong
-				logLog();
+				dumpCollectedLog();
 			}
 		}
 		
@@ -305,7 +306,7 @@ namespace tests
 			
 			if (result) {
 				// must fail, dump log
-				logLog();
+				dumpCollectedLog();
 			}
 		}
 		
@@ -321,8 +322,8 @@ namespace tests
 			ccstAssertTrue(_manager->tl().logDataCounters().skipped_tests == _negative_count);
 			
 			if (!result) {
-				// should not fail, dump log
-				logLog();
+				// must not fail; dump log
+				dumpCollectedLog();
 			}
 			
 			result = _manager->runTestsWithFilter("group1", "failure");
@@ -334,21 +335,21 @@ namespace tests
 			ccstAssertTrue(_manager->tl().logDataCounters().skipped_tests == _negative_count + _positive_count - 1);
 			
 			if (!result) {
-				// should not fail, dump log
-				logLog();
+				// must not fail; dump log
+				dumpCollectedLog();
 			}
 			
 			result = _manager->runTestsWithFilter("group1", "");
 			ccstAssertFalse(result);
 			
-			ccstAssertTrue(_manager->tl().logDataCounters().passed_tests == 2);
-			ccstAssertTrue(_manager->tl().logDataCounters().failed_tests == 1);
+			ccstAssertTrue(_manager->tl().logDataCounters().executed_tests == 2);
+			ccstAssertTrue(_manager->tl().logDataCounters().passed_tests == 1);
 			ccstAssertTrue(_manager->tl().logDataCounters().failed_tests == 1);
 			ccstAssertTrue(_manager->tl().logDataCounters().skipped_tests == _negative_count + _positive_count - 2);
 			
 			if (result) {
-				// should not fail, dump log
-				logLog();
+				// must not fail; dump log
+				dumpCollectedLog();
 			}
 			
 			result = _manager->runTestsWithFilter("group1 group2", "");
@@ -360,8 +361,8 @@ namespace tests
 			ccstAssertTrue(_manager->tl().logDataCounters().skipped_tests == _negative_count + _positive_count - 4);
 			
 			if (result) {
-				// should not fail, dump log
-				logLog();
+				// must not fail; dump log
+				dumpCollectedLog();
 			}
 		}
 	};
