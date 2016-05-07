@@ -36,6 +36,7 @@ namespace tests
 			CC7_REGISTER_TEST_METHOD(testSquareBracketOperator)
 			CC7_REGISTER_TEST_METHOD(testRelationalOperators)
 			CC7_REGISTER_TEST_METHOD(testOtherMethods)
+			CC7_REGISTER_TEST_METHOD(testIterators)
 		}
 		
 		// Helper methods
@@ -339,7 +340,6 @@ namespace tests
 			ByteArray AAA1 = { 'A', 'A', 'A' };
 			ByteArray AAA2 = { 'A', 'A', 'A' };
 			ByteArray BBB1 = { 'B', 'B', 'B' };
-			ByteArray CCC1 = { 'C', 'C', 'C' };
 			
 			ByteArray BBC1  = { 'B', 'B', 'C' };
 			ByteArray BBBC1 = { 'B', 'B', 'B', 'C' };
@@ -397,6 +397,19 @@ namespace tests
 				ccstAssertTrue(a1.empty());
 				ccstAssertEqual(capacity1, a1.capacity());
 			}
+			{
+				ByteArray a1(ByteRange("Hello world"));
+				ccstAssertEqual(to_string(a1), "Hello world");
+				ByteArray a2;
+				ccstAssertEqual(to_string(a2), "");
+			}
+		}
+		
+		void testIterators()
+		{
+			ByteArray a1 = { 1, 2, 3, 4, 5, 6, 7, 8 };
+			ByteArray a2(a1.rbegin(), a1.rend());
+			ccstAssertEqual(a2, ByteArray({8, 7, 6, 5, 4, 3, 2, 1}));
 		}
 		
 	};

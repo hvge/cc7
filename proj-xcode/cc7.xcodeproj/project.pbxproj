@@ -907,6 +907,7 @@
 				BF498AAB1CDCBE8400D7E904 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BFB1A6AF1CB5937800B2D172 /* Build configuration list for PBXProject "cc7" */ = {
 			isa = XCConfigurationList;
