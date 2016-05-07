@@ -139,7 +139,7 @@ namespace tests
 		
 		_test_log.clearLogData();
 		
-		logHeader("== CC7 Unit Tests");
+		logHeader("== CC7 Unit Tests Log");
 		
 		if (included_tags.size() > 0 || excluded_tags.size() > 0) {
 			if (included_tags.size()) {

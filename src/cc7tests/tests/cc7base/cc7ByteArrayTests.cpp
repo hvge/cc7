@@ -30,8 +30,12 @@ namespace tests
 		{
 			CC7_REGISTER_TEST_METHOD(testCreation)
 			CC7_REGISTER_TEST_METHOD(testAppend)
+			CC7_REGISTER_TEST_METHOD(testAssign)
+			CC7_REGISTER_TEST_METHOD(testInsert)
+			CC7_REGISTER_TEST_METHOD(testErase)
 			CC7_REGISTER_TEST_METHOD(testSquareBracketOperator)
 			CC7_REGISTER_TEST_METHOD(testRelationalOperators)
+			CC7_REGISTER_TEST_METHOD(testOtherMethods)
 		}
 		
 		// Helper methods
@@ -94,19 +98,25 @@ namespace tests
 			ByteArray a10(a5);
 			ccstAssertEqual(a10, a5);
 			
+			// Tests for move or copy construction.
+			
 			ByteArray concat1 = concatTwoArrays({0}, {0, 0, 0});
 			ccstAssertEqual(concat1, ByteArray({0,0,0,0}));
-			
 			ByteArray concat2(concatTwoArrays({1,2,3}, {8,8,8,8,8,8,8}));
 			ccstAssertEqual(concat2, ByteArray({1,2,3,8,8,8,8,8,8,8}));
+
+			// advanced test. The vector of arrays will reallocate its buffer
+			// for several times and therefore must move or copy ByteArray objects.
 			
-			// Tests for move / copy construcion
 			std::vector<ByteArray> vba({a1});
+			size_t vba_capacity1 = vba.capacity();
 			ccstAssertEqual(vba[0], a1);
 			
 			vba.insert(vba.end(), {
 				a2, a3, a4, a5,
 			});
+			size_t vba_capacity2 = vba.capacity();
+			
 			ccstAssertEqual(vba[1], a2);
 			ccstAssertEqual(vba[2], a3);
 			ccstAssertEqual(vba[3], a4);
@@ -115,6 +125,7 @@ namespace tests
 			vba.insert(vba.end(), {
 				a6, a7, a8, a9, a10
 			});
+			size_t vba_capacity3 = vba.capacity();
 			
 			ccstAssertEqual(vba[0], a1);
 			ccstAssertEqual(vba[1], a2);
@@ -129,11 +140,48 @@ namespace tests
 
 			vba.push_back(concat1);
 			vba.push_back(concat2);
+			size_t vba_capacity4 = vba.capacity();
+			
 			ccstAssertEqual(vba[10], concat1);
 			ccstAssertEqual(vba[11], concat2);
 			ccstAssertNotEqual(vba[10].data(), concat1.data());
 			ccstAssertNotEqual(vba[11].data(), concat2.data());
+			
+			// Check capacities. This is just a warning if vector
+			// did not reallocate the buffer. If following assertions
+			// fails then you should change test to achieve the reallocation.
+			ccstAssertTrue(vba_capacity1 < vba_capacity2 || vba_capacity2 < vba_capacity3 || vba_capacity1 < vba_capacity3);
+			ccstAssertTrue(vba_capacity2 < vba_capacity4 || vba_capacity3 < vba_capacity4);
 		}
+
+		void testAssign()
+		{
+			const bvec v123   = {1, 2, 3};
+			const bvec v4zero = {0, 0, 0, 0};
+			const bvec v5one  = {1, 1, 1, 1, 1};
+			
+			ByteArray a1;
+			a1.assign(ByteArray());
+			ccstAssertTrue(a1.empty());
+			ccstAssertTrue(a1.size() == 0);
+			ccstAssertTrue(a1.begin() == a1.end());
+			
+			ByteArray a2;
+			a2.assign({1, 2, 3});
+			ccstAssertTrue(v123.size() == a2.size());
+			ccstAssertTrue(memcmp(a2.data(), v123.data(), a2.size()) == 0);
+			
+			ByteArray a4;
+			a4.assign(v123.begin(), v123.end());
+			ccstAssertTrue(v123.size() == a4.size());
+			ccstAssertTrue(memcmp(v123.data(), a4.data(), std::min(a4.size(), v123.size())) == 0);
+			
+			ByteArray a6;
+			a6.assign(5, 1);
+			ccstAssertTrue(v5one.size() == a6.size());
+			ccstAssertTrue(memcmp(v5one.data(), a6.data(), std::min(a6.size(), v5one.size())) == 0);
+		}
+
 		
 		void testAppend()
 		{
@@ -204,6 +252,71 @@ namespace tests
 				ccstAssertTrue(memcmp(bv.data(), ba.data(), std::min(bv.size(), ba.size())) == 0);
 			}
 		}
+		
+		void testInsert()
+		{
+			{
+				ByteArray a1;
+				a1.insert(a1.begin(), 0xFF);
+				ccstAssertEqual(a1[0], 0xFF);
+			}
+			{
+				ByteArray a1;
+				a1.insert(a1.end(), 0xFF);
+				ccstAssertEqual(a1[0], 0xFF);
+			}
+			{
+				ByteArray a1;
+				a1.insert(a1.begin(), 5, 0xCC);
+				ccstAssertEqual(a1, ByteArray(5, 0xCC));
+			}
+			{
+				ByteArray a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+				a1.insert(a1.begin(), 0x55);
+				ccstAssertEqual(a1, ByteArray({0x55, 1, 2, 3, 4, 5, 6, 7, 8, 9}));
+			}
+			{
+				ByteArray a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+				a1.insert(a1.end(), 0xEE);
+				ccstAssertEqual(a1, ByteArray({1, 2, 3, 4, 5, 6, 7, 8, 9, 0xEE}));
+			}
+			{
+				ByteArray a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+				a1.insert(a1.begin() + 4, 0xCC);
+				ccstAssertEqual(a1, ByteArray({1, 2, 3, 4, 0xCC, 5, 6, 7, 8, 9,}));
+			}
+			{
+				ByteArray a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+				a1.insert(a1.begin() + 5, 4, 0xDD);
+				ccstAssertEqual(a1, ByteArray({1, 2, 3, 4, 5, 0xDD, 0xDD, 0xDD, 0xDD, 6, 7, 8, 9,}));
+			}
+		}
+		
+		void testErase()
+		{
+			{
+				// erase at specific position
+				ByteArray a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+				a1.erase(a1.begin());
+				ccstAssertEqual(a1, ByteArray({2, 3, 4, 5, 6, 7, 8, 9}));
+				a1.erase(a1.end() - 1);
+				ccstAssertEqual(a1, ByteArray({2, 3, 4, 5, 6, 7, 8}));
+				a1.erase(a1.begin() + 1);
+				ccstAssertEqual(a1, ByteArray({2, 4, 5, 6, 7, 8}));
+			}
+			{
+				// erase range
+				ByteArray a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+				a1.erase(a1.begin(), a1.begin() + 2);
+				ccstAssertEqual(a1, ByteArray({3, 4, 5, 6, 7, 8, 9}));
+				a1.erase(a1.end() - 2, a1.end());
+				ccstAssertEqual(a1, ByteArray({3, 4, 5, 6, 7}));
+				a1.erase(a1.begin() + 1, a1.end() - 1);
+				ccstAssertEqual(a1, ByteArray({3, 7}));
+				a1.erase(a1.begin(), a1.end());
+				ccstAssertTrue(a1.empty());
+			}
+		}
 
 		void testSquareBracketOperator()
 		{
@@ -264,7 +377,27 @@ namespace tests
 			ccstAssertTrue(BBBC1 != BBB1);
 		}
 		
-		
+		void testOtherMethods()
+		{
+			{
+				ByteArray a1({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+				a1.reserve(128);
+				ccstAssertTrue(a1.capacity() >= 128);
+				size_t capacity1 = a1.capacity();
+				a1.clear();
+				ccstAssertTrue(a1.empty());
+				ccstAssertEqual(capacity1, a1.capacity());
+			}
+			{
+				ByteArray a1({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+				a1.reserve(128);
+				ccstAssertTrue(a1.capacity() >= 128);
+				size_t capacity1 = a1.capacity();
+				a1.secureClear();
+				ccstAssertTrue(a1.empty());
+				ccstAssertEqual(capacity1, a1.capacity());
+			}
+		}
 		
 	};
 	
