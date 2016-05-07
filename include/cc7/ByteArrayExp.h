@@ -537,27 +537,27 @@ namespace cc7
 	// MARK: STL : ByteArray relational operators
 	//
 	
-	bool operator==(const ByteArray & x, const ByteArray & y)
+	inline bool operator==(const ByteArray & x, const ByteArray & y)
 	{
 		return x.compare(y) == 0;
 	}
-	bool operator!=(const ByteArray & x, const ByteArray & y)
+	inline bool operator!=(const ByteArray & x, const ByteArray & y)
 	{
 		return x.compare(y) != 0;
 	}
-	bool operator< (const ByteArray & x, const ByteArray & y)
+	inline bool operator< (const ByteArray & x, const ByteArray & y)
 	{
 		return x.compare(y) > 0;
 	}
-	bool operator> (const ByteArray & x, const ByteArray & y)
+	inline bool operator> (const ByteArray & x, const ByteArray & y)
 	{
 		return x.compare(y) < 0;
 	}
-	bool operator>=(const ByteArray & x, const ByteArray & y)
+	inline bool operator>=(const ByteArray & x, const ByteArray & y)
 	{
 		return x.compare(y) >= 0;
 	}
-	bool operator<=(const ByteArray & x, const ByteArray & y)
+	inline bool operator<=(const ByteArray & x, const ByteArray & y)
 	{
 		return x.compare(y) <= 0;
 	}

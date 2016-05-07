@@ -317,27 +317,27 @@ namespace cc7
 		
 	// ByteRange comparation operators
 	
-	bool operator==(const ByteRange & x, const ByteRange & y)
+	inline bool operator==(const ByteRange & x, const ByteRange & y)
 	{
 		return x.compare(y) == 0;
 	}
-	bool operator!=(const ByteRange & x, const ByteRange & y)
+	inline bool operator!=(const ByteRange & x, const ByteRange & y)
 	{
 		return x.compare(y) != 0;
 	}
-	bool operator< (const ByteRange & x, const ByteRange & y)
+	inline bool operator< (const ByteRange & x, const ByteRange & y)
 	{
 		return x.compare(y) > 0;
 	}
-	bool operator> (const ByteRange & x, const ByteRange & y)
+	inline bool operator> (const ByteRange & x, const ByteRange & y)
 	{
 		return x.compare(y) < 0;
 	}
-	bool operator>=(const ByteRange & x, const ByteRange & y)
+	inline bool operator>=(const ByteRange & x, const ByteRange & y)
 	{
 		return x.compare(y) >= 0;
 	}
-	bool operator<=(const ByteRange & x, const ByteRange & y)
+	inline bool operator<=(const ByteRange & x, const ByteRange & y)
 	{
 		return x.compare(y) <= 0;
 	}
