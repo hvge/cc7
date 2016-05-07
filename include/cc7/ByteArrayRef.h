@@ -56,12 +56,17 @@ namespace cc7
 	class ByteArray : public std::vector<cc7::byte, ByteArrayAllocator<cc7::byte>>
 	{
 	public:
+		
 		typedef std::vector<cc7::byte, ByteArrayAllocator<cc7::byte>> parent_class;
+		
 		using parent_class::parent_class;
+		using parent_class::assign;
+		using parent_class::insert;
 		
 		ByteArray()
 		{
 		}
+		
 		
 		//
 		// Interaction with ByteRange class
@@ -100,11 +105,9 @@ namespace cc7
 		// dirty.. automatic casting to ByteRange
 		operator ByteRange () const
 		{
-			return ByteRange(data(), size());
+			return byteRange();
 		}
 
-		
-		
 		
 		//
 		// Appending
