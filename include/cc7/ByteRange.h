@@ -154,6 +154,19 @@ namespace cc7
 			_begin = reinterpret_cast<const_pointer>(c_str);
 			_end   = _begin ? _begin + size : nullptr;
 		}
+			
+		template <class _Iterator>
+		void assign(_Iterator begin, _Iterator end)
+		{
+			static_assert(std::is_same<
+							std::random_access_iterator_tag,
+							typename std::iterator_traits<_Iterator>::iterator_category
+						  >::value, "This assign() only accepts random access iterators or raw pointers.");
+			_begin = &(*begin);
+			_end   = &(*end);
+			_validateBeginEnd(_begin, _end);
+		}
+
 		
 		
 		// other methods
