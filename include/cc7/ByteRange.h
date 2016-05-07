@@ -60,18 +60,31 @@ namespace cc7
 		{
 		}
 		
-		ByteRange(const_pointer ptr, size_type count) noexcept :
+		explicit ByteRange(const_pointer ptr, size_type count) noexcept :
 			_begin (ptr),
 			_end   (ptr != nullptr ? ptr + count : 0)
 		{
 		}
 		
-		ByteRange(const_pointer begin, const_pointer end) :
+		explicit ByteRange(const_pointer begin, const_pointer end) :
 			_begin (begin),
 			_end   (end)
 		{
 			_validateBeginEnd(begin, end);
 		}
+		
+		template <class _Iterator>
+		ByteRange(_Iterator begin, _Iterator end) :
+			_begin	(&(*begin)),
+			_end	(&(*end))
+		{
+			static_assert(std::is_same<
+							std::random_access_iterator_tag,
+							typename std::iterator_traits<_Iterator>::iterator_category
+						  >::value, "This constructor only accepts random access iterators or raw pointers.");
+			_validateBeginEnd(_begin, _end);
+		}
+		
 		
 		ByteRange(const ByteRange & r) noexcept :
 			_begin (r.begin()),
@@ -79,19 +92,19 @@ namespace cc7
 		{
 		}
 		
-		ByteRange(const void * ptr, size_type size) noexcept :
+		explicit ByteRange(const void * ptr, size_type size) noexcept :
 			_begin (reinterpret_cast<const_pointer>(ptr)),
 			_end   (_begin ? _begin + size : nullptr)
 		{
 		}
 		
-		ByteRange(const std::string & str) noexcept :
+		explicit ByteRange(const std::string & str) noexcept :
 			_begin (reinterpret_cast<const_pointer>(str.data())),
 			_end   (reinterpret_cast<const_pointer>(str.data()) + str.length())
 		{
 		}
 		
-		ByteRange(const char * c_str) noexcept :
+		explicit ByteRange(const char * c_str) noexcept :
 			_begin (reinterpret_cast<const_pointer>(c_str)),
 			_end   (_begin ? _begin + strlen(c_str) : nullptr)
 		{
@@ -295,7 +308,7 @@ namespace cc7
 			const size_type os = other.size();
 			const size_type ms = std::min(ts, os);
 			int res = memcmp(data(), other.data(), ms);
-			if (res == 0) {
+			if ((res == 0) && (os != ts)) {
 				// Converts difference between other and this size to -1 or 1.
 				res = (static_cast<int>(
 						(os - ts) >> (8 * sizeof(size_type) - 1)) << 1	// 0 or 2, based on signed bit
@@ -327,11 +340,11 @@ namespace cc7
 	}
 	inline bool operator< (const ByteRange & x, const ByteRange & y)
 	{
-		return x.compare(y) > 0;
+		return x.compare(y) < 0;
 	}
 	inline bool operator> (const ByteRange & x, const ByteRange & y)
 	{
-		return x.compare(y) < 0;
+		return x.compare(y) > 0;
 	}
 	inline bool operator>=(const ByteRange & x, const ByteRange & y)
 	{
@@ -340,6 +353,14 @@ namespace cc7
 	inline bool operator<=(const ByteRange & x, const ByteRange & y)
 	{
 		return x.compare(y) <= 0;
+	}
+		
+	/**
+	 Copy conversion from ByteRange to std::string
+	 */
+	inline std::string to_string(const ByteRange & range)
+	{
+		return std::string(reinterpret_cast<const char*>(range.data()), range.size());
 	}
 	
 } // cc7

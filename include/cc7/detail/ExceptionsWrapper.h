@@ -86,6 +86,8 @@ namespace detail
 		static T _foo;
 	};
 	
+	template <typename T> T ExceptionsWrapper<T>::_foo;
+	
 	
 } // cc7::detail
 } // cc7

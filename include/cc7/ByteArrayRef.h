@@ -160,6 +160,14 @@ namespace cc7
 		}
 	
 	};
+	
+	/**
+	 Copy conversion from ByteArray to std::string
+	 */
+	inline std::string to_string(const ByteArray & array)
+	{
+		return std::string(reinterpret_cast<const char*>(array.data()), array.size());
+	}
 
 	
 } // cc7
