@@ -382,7 +382,7 @@ namespace tests
 				return path;
 			}
 		}
-		return delimiter;
+		return delimiter + 1;
 	}
 	
 }
