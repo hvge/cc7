@@ -59,13 +59,17 @@ namespace cc7
 		typedef std::vector<cc7::byte, ByteArrayAllocator<cc7::byte>> parent_class;
 		using parent_class::parent_class;
 		
+		ByteArray()
+		{
+		}
+		
 		//
 		// Interaction with ByteRange class
 		//
 		ByteArray(const ByteRange & range) : ByteArray(range.begin(), range.end())
 		{
 		}
-
+		
 		ByteArray& operator=(const ByteRange& range)
 		{
 			parent_class::assign(range.begin(), range.end());
@@ -132,6 +136,13 @@ namespace cc7
 		ByteArray & append(std::initializer_list<value_type> il)
 		{
 			parent_class::insert(end(), il);
+			return *this;
+		}
+		
+		// append [pointer, size]
+		ByteArray & append(const_pointer p, size_type size)
+		{
+			parent_class::insert(end(), p, p + size);
 			return *this;
 		}
 		

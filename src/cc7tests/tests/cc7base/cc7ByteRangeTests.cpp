@@ -15,22 +15,39 @@
  */
 
 #include <cc7tests/CC7Tests.h>
+#include <cc7/ByteRange.h>
 
 namespace cc7
 {
 namespace tests
 {
-	const UnitTestCreationInfoList _GetDefaultUnitTestCreationInfoList()
+	class cc7ByteRangeTests : public UnitTest
 	{
-		UnitTestCreationInfoList list;
+	public:
+		cc7ByteRangeTests()
+		{
+			CC7_REGISTER_TEST_METHOD(testCreation)
+			CC7_REGISTER_TEST_METHOD(testSquareBracketOperator)
+			CC7_REGISTER_TEST_METHOD(testRelationalOperators)
+		}
 		
-		// cc7 framework tests
-		CC7_ADD_UNIT_TEST(cc7Testception, list);
-		CC7_ADD_UNIT_TEST(cc7ByteArrayTests, list);
-		CC7_ADD_UNIT_TEST(cc7ByteRangeTests, list);
+		// Unit tests
 		
-		return list;
-	}
+		void testCreation()
+		{
+
+		}
+		
+		void testSquareBracketOperator()
+		{
+		}
+		
+		void testRelationalOperators()
+		{
+		}
+	};
+	
+	CC7_CREATE_UNIT_TEST(cc7ByteRangeTests, "cc7")
 	
 } // cc7::tests
 } // cc7

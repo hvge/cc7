@@ -24,7 +24,7 @@
 
 
 /**
- The CC7_CREATE_UNIT_TEST() macro creates a internal registration structure
+ The CC7_CREATE_UNIT_TEST() macro creates an internal registration structure
  which helps with future unit test instantiation. You have to use this macro
  in cooperation with CC7_ADD_UNIT_TEST() for propper test registration and
  usage.
