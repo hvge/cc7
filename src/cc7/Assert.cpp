@@ -30,7 +30,7 @@ namespace error
 	
 	void SetAssertionHandler(const AssertionHandlerSetup & new_setup)
 	{
-		AssertionHandlerSetup default_setup = GetDefaultAssertionHandler();
+		AssertionHandlerSetup default_setup = Platform_GetDefaultAssertionHandler();
 		if (!new_setup.handler) {
 			s_setup = default_setup;
 		}
@@ -40,6 +40,15 @@ namespace error
 	AssertionHandlerSetup GetAssertionHandler()
 	{
 		return s_setup;
+	}
+	
+	bool HasDebugFeaturesTurnedOn()
+	{
+#if defined(DEBUG) || defined(ENABLE_CC7_LOG) || defined(ENABLE_CC7_ASSERT)
+		return true;
+#else
+		return false;
+#endif
 	}
 	
 } // cc7::error
@@ -74,7 +83,7 @@ int CC7AssertImpl(const char * file, int line, const char * fmt, ...)
 	
 	// Pass that message to the assert handler
 	if (!cc7::error::s_setup.handler) {
-		cc7::error::s_setup = cc7::error::GetDefaultAssertionHandler();
+		cc7::error::s_setup = cc7::error::Platform_GetDefaultAssertionHandler();
 		if (cc7::error::s_setup.handler) {
 			cc7::error::s_setup.handler(cc7::error::s_setup.handler_data, file_name, line, message);
 		}

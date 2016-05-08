@@ -23,22 +23,53 @@ namespace cc7
 {
 namespace error
 {
-
+	/**
+	 Defines assertion handler function. You can override behavior of the assertion handler
+	 in DEBUG builds of the CC7 library and register your own handler. 
+	 The handler will be notified about all failures, produced by CC7_ASSERT() macro.
+	 */
 	typedef void (*AssertionHandler)(void * handler_data, const char * file, int line, const char * formatted_string);
 	
+	/**
+	 The AssertionHandlerSetup structure contains pointer to assertion handler and custom data
+	 for the handler. You can change behavior of CC7_ASSERT() in debug builds of the library.
+	 */
 	struct AssertionHandlerSetup
 	{
 		AssertionHandler	handler;
 		void *				handler_data;
 	};
 	
+	/**
+	 Returns true if the library was compiled with a debug features turned on.
+	 It is highly recommended to NOT use this kind of build in the production environment.
+	 */
+	bool HasDebugFeaturesTurnedOn();
+	
 #if defined(ENABLE_CC7_ASSERT)
 
-	void					SetAssertionHandler(const AssertionHandlerSetup & new_setup);
-	AssertionHandlerSetup	GetAssertionHandler();
+	/**
+	 Sets a new setup to internal assertion handler. This function is available only
+	 when CC7_ASSERT() macro is enabled and functional.
+	 
+	 Note that the function is not thread-safe. It is recommended to use this feature
+	 only during the unit testing.
+	 */
+	void SetAssertionHandler(const AssertionHandlerSetup & new_setup);
 	
-	// Platform code must implement following method.
-	AssertionHandlerSetup	GetDefaultAssertionHandler();
+	/**
+	 Returns current assertion handler's setup.
+	 
+	 Note that the function is not thread-safe. It is recommended to use this feature
+	 only during the unit testing.
+	 */
+	AssertionHandlerSetup GetAssertionHandler();
+	
+	/**
+	 Returns default assertion handler's setup.
+	 Note that each platform supported by CC7 has its own implementation of this function.
+	 */
+	AssertionHandlerSetup Platform_GetDefaultAssertionHandler();
 	
 #endif // defined(ENABLE_CC7_ASSERT)
 

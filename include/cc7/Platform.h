@@ -199,6 +199,20 @@
 
 #endif
 
+
+//
+// Default includes, common for ALL platforms
+//
+#ifdef __cplusplus
+	// C++
+	#include <string>
+	#include <vector>
+#endif //__cplusplus
+
+
+//
+// Common types
+//
 namespace cc7
 {
 	typedef uint8_t		byte;

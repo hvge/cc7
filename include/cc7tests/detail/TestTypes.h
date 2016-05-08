@@ -17,7 +17,6 @@
 #pragma once
 
 #include <cc7/Platform.h>
-#include <vector>
 
 namespace cc7
 {

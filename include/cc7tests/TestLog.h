@@ -17,7 +17,6 @@
 #pragma once
 
 #include <cc7/Platform.h>
-#include <string>
 #include <mutex>
 #include <set>
 

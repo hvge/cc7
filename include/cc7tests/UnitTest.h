@@ -19,7 +19,6 @@
 #include <cc7/Platform.h>
 #include <cc7tests/TestLog.h>
 #include <functional>
-#include <vector>
 
 namespace cc7
 {

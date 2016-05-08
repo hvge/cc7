@@ -16,7 +16,6 @@
 
 #include <cc7tests/detail/TestUtilities.h>
 #include <sstream>
-#include <vector>
 
 namespace cc7
 {

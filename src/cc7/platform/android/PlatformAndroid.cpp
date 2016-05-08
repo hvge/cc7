@@ -58,7 +58,7 @@ namespace error
 		// ...unlike ios, android has no SW breakpoint defined.
 	}
 	
-	AssertionHandler GetDefaultAssertionHandler()
+	AssertionHandler Platform_GetDefaultAssertionHandler()
 	{
 		return private_androidDumpToLog;
 	}
