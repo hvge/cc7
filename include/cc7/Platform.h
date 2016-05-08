@@ -16,23 +16,26 @@
 
 #pragma once
 
+// =======================================================================
 //
 // Main platform switch
 //
+// =======================================================================
+
 #ifdef __APPLE__
-    //
-    // Apple build (e.g. iOS, OSX)
-    //
+	// -------------------------------------------------------------------
+	// APPLE PLATFORMS (e.g. iOS, OSX, etc...)
+	// -------------------------------------------------------------------
 	#define __STDC_WANT_LIB_EXT1__ 1
-    #ifdef __OBJC__
-        // Objective-C specific
-        #import <Foundation/Foundation.h>
-    #else
-        // Pure C
-        #include <stdlib.h>
-        #include <string.h>
-    #endif
-    #include "TargetConditionals.h"
+	#ifdef __OBJC__
+		// Objective-C specific
+		#import <Foundation/Foundation.h>
+	#else
+		// Pure C
+		#include <stdlib.h>
+		#include <string.h>
+	#endif
+	#include "TargetConditionals.h"
 	// Switch between iOS & OSX
 	#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
 		#define CC7_IOS
@@ -41,63 +44,63 @@
 	#endif
 	// Common defines for Apple platforms
 	#define CC7_APPLE
-    #define CC7_LITTLE_ENDIAN
-    #define CC7_SecureClean(ptr, size)  memset_s(ptr, size, 0, size)
-    //
+	#define CC7_LITTLE_ENDIAN
+	#define CC7_SecureClean(ptr, size)  memset_s(ptr, size, 0, size)
+	//
 #elif __ANDROID__
-    //
-    // Android macros
-    //
-    #include <stdlib.h>
-    #include <string.h>
-    #include <openssl/crypto.h> // for OPENSSL_cleanse, fix this...
-    //
-    #define CC7_ANDROID
-    // TODO: handle possible BE on Androids
-    #define CC7_LITTLE_ENDIAN
-    #define CC7_SecureClean(ptr, size)  OPENSSL_cleanse(ptr, size)
-    //
+	// -------------------------------------------------------------------
+	// ANDROID PLATFORM
+	// -------------------------------------------------------------------
+	#include <stdlib.h>
+	#include <string.h>
+	#include <openssl/crypto.h> // for OPENSSL_cleanse, fix this...
+	//
+	#define CC7_ANDROID
+	// TODO: handle possible BE on Androids
+	#define CC7_LITTLE_ENDIAN
+	#define CC7_SecureClean(ptr, size)  OPENSSL_cleanse(ptr, size)
+	//
 #elif defined(WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
-    //
-    // Windows8+ Phone
-    //
-    #include <sdkddkver.h>
-    #include <Windows.h>
-    #include <stdlib.h>
-    #include <string.h>
-    //
-    #define CC7_WINDOWS
-    #define CC7_LITTLE_ENDIAN
-    #define CC7_SecureClean(ptr, size)  RtlSecureZeroMemory(ptr, size)
-
-    //
+	// -------------------------------------------------------------------
+	// Windows8+ Phone
+	// -------------------------------------------------------------------
+	#include <sdkddkver.h>
+	#include <Windows.h>
+	#include <stdlib.h>
+	#include <string.h>
+	//
+	#define CC7_WINDOWS
+	#define CC7_LITTLE_ENDIAN
+	#define CC7_SecureClean(ptr, size)  RtlSecureZeroMemory(ptr, size)
+	//
 #elif defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP)
-    //
-    // Windows 10 Universal APP, now has different ifdef branch than WP8,
-    // might be handy in future.
-    //
-    #include <sdkddkver.h>
-    #include <Windows.h>
-    #include <stdlib.h>
-    #include <string.h>
-    //
-    #define CC7_WINDOWS
-    #define CC7_LITTLE_ENDIAN
-    #define CC7_SecureClean(ptr, size)  RtlSecureZeroMemory(ptr, size)
-    //
+	// -------------------------------------------------------------------
+	// Windows 10 Universal APP, now has different ifdef branch than WP8,
+	// might be handy in future.
+	// -------------------------------------------------------------------
+	#include <sdkddkver.h>
+	#include <Windows.h>
+	#include <stdlib.h>
+	#include <string.h>
+	//
+	#define CC7_WINDOWS
+	#define CC7_LITTLE_ENDIAN
+	#define CC7_SecureClean(ptr, size)  RtlSecureZeroMemory(ptr, size)
+	//
 #else
-    //
-    #error "CC7: Unsupported platform. Check Platform.h file"
-    //
-#endif
+	//
+	#error "CC7: Unsupported platform. Check Platform.h file"
+	//
+#endif // end of platform switch
 
-//
+// =======================================================================
 // Setup for implicit features
-//
+// =======================================================================
+
 #if defined (DEBUG)
-    // DEBUG builds have CC7_LOG and CC7_ASSERT macros turned on
-    #define ENABLE_CC7_LOG
-    #define ENABLE_CC7_ASSERT
+	// DEBUG builds have CC7_LOG and CC7_ASSERT macros turned on
+	#define ENABLE_CC7_LOG
+	#define ENABLE_CC7_ASSERT
 #endif
 
 //
@@ -105,120 +108,120 @@
 // which allows you define external functions for both C and C++ codes.
 //
 #ifdef __cplusplus
-    // C++
-    #define CC7_EXTERN_C				extern "C"
-    #define CC7_EXTERN_C_BEGIN          extern "C" {
-    #define CC7_EXTERN_C_END			}
+	// C++
+	#define CC7_EXTERN_C				extern "C"
+	#define CC7_EXTERN_C_BEGIN          extern "C" {
+	#define CC7_EXTERN_C_END			}
 #else
-    // C
-    #define CC7_EXTERN_C				extern
-    #define CC7_EXTERN_C_BEGIN
-    #define CC7_EXTERN_C_END
+	// C
+	#define CC7_EXTERN_C				extern
+	#define CC7_EXTERN_C_BEGIN
+	#define CC7_EXTERN_C_END
 #endif
 
 
-//
-// Features
-//
+// =======================================================================
+// Debug Features
+// =======================================================================
+
 #if defined(ENABLE_CC7_LOG)
-    //
-    // CC7Log is enabled
-    //
-    CC7_EXTERN_C void CC7LogImpl(const char * fmt, ...);
+	//
+	// CC7Log is enabled
+	//
+	CC7_EXTERN_C void CC7LogImpl(const char * fmt, ...);
 	#define CC7_LOG(...) CC7LogImpl(__VA_ARGS__)
+
 #else
-    //
-    // CC7Log is disabled
-    //
-    #define CC7_LOG(...)
+	//
+	// CC7Log is disabled
+	//
+	#define CC7_LOG(...)
+
 #endif
 
 
 #if defined(ENABLE_CC7_ASSERT)
-    //
-    // CC7_ASSERT is enabled
-    //
-    CC7_EXTERN_C int CC7AssertImpl(const char * file, int line, const char * format, ...);
+	//
+	// CC7_ASSERT is enabled
+	//
+	CC7_EXTERN_C int CC7AssertImpl(const char * file, int line, const char * format, ...);
 
-    #ifdef CC7_IOS
-        #if	TARGET_CPU_ARM == 1
-                // 32 bit ARM
-                #define CC7_BREAKPOINT() __asm__ volatile ("bkpt 0");
-                //
-        #elif TARGET_CPU_ARM64 == 1
-                // 64 bit ARM
-                #define CC7_BREAKPOINT() __asm__ volatile ("brk 0");
-                //
-        #elif TARGET_CPU_X86 == 1
-                // x86 (32 bit simulator)
-                #define CC7_BREAKPOINT() __asm__ volatile ("int3");
-                //
-        #elif TARGET_CPU_X86_64 == 1
-                // x86_64 (64 bit simulator)
-                #define CC7_BREAKPOINT() __asm__ volatile ("int3");
-                //
-        #else
-                // Undefined platform
-                #warning "CC7_BREAKPOINT is not defined for this iOS platform"
-                #define CC7_BREAKPOINT()
-                //
-        #endif
-    #endif // CC7_IOS
+	#ifdef CC7_IOS
+		#if	TARGET_CPU_ARM == 1
+			// 32 bit ARM
+			#define CC7_BREAKPOINT() __asm__ volatile ("bkpt 0");
+			//
+		#elif TARGET_CPU_ARM64 == 1
+			// 64 bit ARM
+			#define CC7_BREAKPOINT() __asm__ volatile ("brk 0");
+			//
+		#elif TARGET_CPU_X86 == 1
+			// x86 (32 bit simulator)
+			#define CC7_BREAKPOINT() __asm__ volatile ("int3");
+			//
+		#elif TARGET_CPU_X86_64 == 1
+			// x86_64 (64 bit simulator)
+			#define CC7_BREAKPOINT() __asm__ volatile ("int3");
+			//
+		#else
+			// Undefined platform
+			#warning "CC7_BREAKPOINT is not defined for this iOS platform"
+			#define CC7_BREAKPOINT()
+			//
+		#endif
+	#endif // CC7_IOS
 
-    #ifdef CC7_ANDROID
-        #define CC7_BREAKPOINT()
-    #endif // CC7_ANDROID
+	#ifdef CC7_ANDROID
+		#define CC7_BREAKPOINT()
+	#endif // CC7_ANDROID
 
-    #ifdef CC7_WINDOWS
-        #define CC7_BREAKPOINT()
-    #endif // CC7_WINDOWS
+	#ifdef CC7_WINDOWS
+		#define CC7_BREAKPOINT()
+	#endif // CC7_WINDOWS
 
-    #define CC7_ASSERT(cond, ...)												\
-        if (!(cond)) {															\
-            CC7AssertImpl(__FILE__, __LINE__, "" __VA_ARGS__);					\
-        }
-    #define CC7_CHECK(cond, ...)												\
-        (((!(cond)) && CC7AssertImpl(__FILE__, __LINE__, "" __VA_ARGS__)), cond)
-
+	#define CC7_ASSERT(cond, ...)												\
+		if (!(cond)) {															\
+			CC7AssertImpl(__FILE__, __LINE__, "" __VA_ARGS__);					\
+		}
+	#define CC7_CHECK(cond, ...)												\
+		(((!(cond)) && CC7AssertImpl(__FILE__, __LINE__, "" __VA_ARGS__)), cond)
 
 #else
-    //
-    // CC7_ASSERT is disabled
-    //
-    #ifndef CC7_WINDOWS
-        // Non-MSVC compilers (gcc, clang)
-        #define CC7_BREAKPOINT()
-        #define CC7_ASSERT(cond, message...)
-        #define CC7_CHECK(cond, message...) (cond)
-    #else
-        // MSVC compiler
-        #define CC7_BREAKPOINT()
-        #define CC7_ASSERT
-        #define CC7_CHECK(cond, ...) (cond)
-    #endif
+	//
+	// CC7_ASSERT is disabled
+	//
+	#ifndef CC7_WINDOWS
+		// Non-MSVC compilers (gcc, clang)
+		#define CC7_BREAKPOINT()
+		#define CC7_ASSERT(cond, message...)
+		#define CC7_CHECK(cond, message...) (cond)
+	#else
+		// MSVC compiler
+		#define CC7_BREAKPOINT()
+		#define CC7_ASSERT
+		#define CC7_CHECK(cond, ...) (cond)
+	#endif
 
-#endif
+#endif // defined(ENABLE_CC7_ASSERT)
 
 
-//
-// Default includes, common for ALL platforms
-//
+// =======================================================================
+// Default includes & common types, valid for ALL platforms
+// =======================================================================
+
 #ifdef __cplusplus
 	// C++
 	#include <string>
 	#include <vector>
+
+	namespace cc7
+	{
+		typedef uint8_t		byte;
+		typedef uint8_t		U8;
+		typedef uint16_t	U16;
+		typedef uint32_t	U32;
+		typedef uint64_t	U64;
+		
+	} // cc7
+
 #endif //__cplusplus
-
-
-//
-// Common types
-//
-namespace cc7
-{
-	typedef uint8_t		byte;
-	typedef uint8_t		U8;
-	typedef uint16_t	U16;
-	typedef uint32_t	U32;
-	typedef uint64_t	U64;
-	
-} // cc7
