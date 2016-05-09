@@ -30,6 +30,7 @@ namespace tests
 	// MARK: Instantiation
 	
 	TestManager::TestManager() :
+		_test_manager_name("CC7"),
 		_assertion_breakpoint_enabled(false),
 		_old_assertion_setup({nullptr, nullptr})
 	{
@@ -139,7 +140,7 @@ namespace tests
 		
 		_test_log.clearLogData();
 		
-		logHeader("== CC7 Unit Tests Log");
+		logHeader("== " + _test_manager_name + " Unit Tests Log");
 		
 		if (included_tags.size() > 0 || excluded_tags.size() > 0) {
 			if (included_tags.size()) {
@@ -304,6 +305,16 @@ namespace tests
 	
 	// ------------------------------------------------------------------------------------
 	// MARK: Logging
+	
+	void TestManager::setTestManagerName(const std::string &name)
+	{
+		_test_manager_name = name;
+	}
+	
+	const std::string & TestManager::testManagerName() const
+	{
+		return _test_manager_name;
+	}
 	
 	static const std::string s_normal_line("----------------------------------------------------------------------------");
 	static const std::string s_header_line("============================================================================");

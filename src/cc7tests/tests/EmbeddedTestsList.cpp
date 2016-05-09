@@ -25,6 +25,7 @@ namespace tests
 		UnitTestCreationInfoList list;
 		
 		// cc7 framework tests
+		CC7_ADD_UNIT_TEST(cc7PlatformTests, list);
 		CC7_ADD_UNIT_TEST(cc7Testception, list);
 		CC7_ADD_UNIT_TEST(cc7ByteArrayTests, list);
 		CC7_ADD_UNIT_TEST(cc7ByteRangeTests, list);

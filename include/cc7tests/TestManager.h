@@ -132,6 +132,16 @@ namespace tests
 		// Logging
 		
 		/**
+		 Sets custom symbolic name for TestManager object. The name will be displayed at the beginning
+		 of test log.
+		 */
+		void setTestManagerName(const std::string & name);
+		/**
+		 Returns current symbolic name of TestManager object.
+		 */
+		const std::string & testManagerName() const;
+		
+		/**
 		 Returns reference to TestLog object. The method is mostly used in
 		 macros implementing testing assertions.
 		 */
@@ -173,6 +183,10 @@ namespace tests
 		// Private members
 		
 		/**
+		 Symbolic name
+		 */
+		std::string _test_manager_name;
+		/**
 		 List of registered tests.
 		 */
 		UnitTestCreationInfoList _registered_tests;
@@ -181,7 +195,7 @@ namespace tests
 		 */
 		TestLog _test_log;
 		/**
-		 
+		 Assertions configuration
 		 */
 		bool _assertion_breakpoint_enabled;
 		error::AssertionHandlerSetup _old_assertion_setup;

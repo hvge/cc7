@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF1C7BBF1CE0CE9300C4399E /* cc7PlatformTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1C7BBE1CE0CE9300C4399E /* cc7PlatformTests.cpp */; };
 		BF30682C1CC8F87E002FD3BC /* BasicBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF30682B1CC8F87E002FD3BC /* BasicBuffer.cpp */; };
 		BF30683A1CC91BA6002FD3BC /* libcc7-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */; };
 		BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3068511CC91E56002FD3BC /* TestManager.cpp */; };
@@ -67,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF1C7BBE1CE0CE9300C4399E /* cc7PlatformTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7PlatformTests.cpp; sourceTree = "<group>"; };
 		BF30682B1CC8F87E002FD3BC /* BasicBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicBuffer.cpp; sourceTree = "<group>"; };
 		BF3068371CC91B20002FD3BC /* libcc7tests-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7tests-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3068501CC91DA4002FD3BC /* TestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestManager.h; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 		BF498AB11CDCC22500D7E904 /* cc7base */ = {
 			isa = PBXGroup;
 			children = (
+				BF1C7BBE1CE0CE9300C4399E /* cc7PlatformTests.cpp */,
 				BF498AB91CDD065B00D7E904 /* cc7Testception.cpp */,
 				BF498AC91CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp */,
 				BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */,
@@ -692,6 +695,7 @@
 				BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */,
 				BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */,
 				BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */,
+				BF1C7BBF1CE0CE9300C4399E /* cc7PlatformTests.cpp in Sources */,
 				BF498ACA1CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp in Sources */,
 				BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */,
 				BF3068551CC91EE4002FD3BC /* UnitTest.cpp in Sources */,

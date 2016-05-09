@@ -16,6 +16,23 @@
 
 #include <cc7/Assert.h>
 
+namespace cc7
+{
+namespace error
+{
+	// Must be always implemented. Doesn't depend on assert.
+	bool HasDebugFeaturesTurnedOn()
+	{
+#if defined(DEBUG) || defined(ENABLE_CC7_LOG) || defined(ENABLE_CC7_ASSERT)
+		return true;
+#else
+		return false;
+#endif
+	}
+} // cc7::error
+} // cc7
+
+
 #if defined(ENABLE_CC7_ASSERT)
 
 namespace cc7
@@ -40,15 +57,6 @@ namespace error
 	AssertionHandlerSetup GetAssertionHandler()
 	{
 		return s_setup;
-	}
-	
-	bool HasDebugFeaturesTurnedOn()
-	{
-#if defined(DEBUG) || defined(ENABLE_CC7_LOG) || defined(ENABLE_CC7_ASSERT)
-		return true;
-#else
-		return false;
-#endif
 	}
 	
 } // cc7::error
@@ -94,6 +102,5 @@ int CC7AssertImpl(const char * file, int line, const char * fmt, ...)
 	// Function must return 0 due to fact, that CC7AssertImpl() is also used in CC7_CHECK() macros.
 	return 0;
 }
-
 
 #endif //ENABLE_CC7_ASSERT

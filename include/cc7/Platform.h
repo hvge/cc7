@@ -44,8 +44,19 @@
 	#endif
 	// Common defines for Apple platforms
 	#define CC7_APPLE
-	#define CC7_LITTLE_ENDIAN
 	#define CC7_SecureClean(ptr, size)  memset_s(ptr, size, 0, size)
+	// 64 bit
+	#if TARGET_RT_64_BIT == 0
+		#define CC7_PLATFORM32
+	#else
+		#define CC7_PLATFORM64
+	#endif
+	// Little / Big endian
+	#if TARGET_RT_LITTLE_ENDIAN == 1
+		#define CC7_LITTLE_ENDIAN
+	#else
+		#define CC7_BIG_ENDIAN
+	#endif
 	//
 #elif __ANDROID__
 	// -------------------------------------------------------------------
@@ -56,9 +67,15 @@
 	#include <openssl/crypto.h> // for OPENSSL_cleanse, fix this...
 	//
 	#define CC7_ANDROID
+	#define CC7_SecureClean(ptr, size)  OPENSSL_cleanse(ptr, size)
+	// 64 bit
+	#if __SIZEOF_POINTER__ == 8
+		#define CC7_PLATFORM64
+	#else
+		#define CC7_PLATFORM32
+	#endif
 	// TODO: handle possible BE on Androids
 	#define CC7_LITTLE_ENDIAN
-	#define CC7_SecureClean(ptr, size)  OPENSSL_cleanse(ptr, size)
 	//
 #elif defined(WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
 	// -------------------------------------------------------------------
@@ -193,8 +210,8 @@
 	#ifndef CC7_WINDOWS
 		// Non-MSVC compilers (gcc, clang)
 		#define CC7_BREAKPOINT()
-		#define CC7_ASSERT(cond, message...)
-		#define CC7_CHECK(cond, message...) (cond)
+		#define CC7_ASSERT(cond, ...)
+		#define CC7_CHECK(cond, ...) (cond)
 	#else
 		// MSVC compiler
 		#define CC7_BREAKPOINT()
