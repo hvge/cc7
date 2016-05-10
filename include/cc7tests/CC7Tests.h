@@ -21,3 +21,4 @@
 #include <cc7tests/TestRegistrationMacros.h>
 #include <cc7tests/TestFile.h>
 #include <cc7tests/TestDirectory.h>
+#include <cc7tests/TestUtils.h>

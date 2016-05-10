@@ -20,9 +20,7 @@
 namespace cc7
 {
 namespace tests
-{
-	typedef std::vector<cc7::byte> bvec;
-	
+{	
 	class cc7ByteArrayTests : public UnitTest
 	{
 	public:
@@ -45,25 +43,14 @@ namespace tests
 		{
 			return ByteArray(a1).append(a2);
 		}
-		
-		bvec randomData(size_t n)
-		{
-			bvec result;
-			result.reserve(n);
-			while (n > 0) {
-				result.push_back(random() & 0xFF);
-				--n;
-			}
-			return result;
-		}
-		
+			
 		// Unit tests
 		
 		void testCreation()
 		{
-			const bvec v123   = {1, 2, 3};
-			const bvec v4zero = {0, 0, 0, 0};
-			const bvec v5one  = {1, 1, 1, 1, 1};
+			const TestByteVector v123   = {1, 2, 3};
+			const TestByteVector v4zero = {0, 0, 0, 0};
+			const TestByteVector v5one  = {1, 1, 1, 1, 1};
 			
 			ByteArray a1;
 			ccstAssertTrue(a1.empty());
@@ -157,9 +144,9 @@ namespace tests
 
 		void testAssign()
 		{
-			const bvec v123   = {1, 2, 3};
-			const bvec v4zero = {0, 0, 0, 0};
-			const bvec v5one  = {1, 1, 1, 1, 1};
+			const TestByteVector v123   = {1, 2, 3};
+			const TestByteVector v4zero = {0, 0, 0, 0};
+			const TestByteVector v5one  = {1, 1, 1, 1, 1};
 			
 			ByteArray a1;
 			a1.assign(ByteArray());
@@ -188,10 +175,10 @@ namespace tests
 		{
 			{
 				// += [ begin, end ]
-				bvec		bv;
-				ByteArray	ba;
+				TestByteVector bv;
+				ByteArray      ba;
 				for (size_t i = 0; i < 16; i++) {
-					bvec rdata = randomData(random() & 0x1f + 1);
+					TestByteVector rdata = getTestRandomDataVector(random() & 0x1f + 1);
 					bv.insert(bv.end(), rdata.begin(), rdata.end());
 					ba.append(rdata.begin(), rdata.end());
 				}
@@ -200,10 +187,10 @@ namespace tests
 			}
 			{
 				// += [ ptr, size ]
-				bvec		bv;
-				ByteArray	ba;				
+				TestByteVector bv;
+				ByteArray      ba;
 				for (size_t i = 0; i < 16; i++) {
-					bvec rdata = randomData(random() & 0x1f + 1);
+					TestByteVector rdata = getTestRandomDataVector(random() & 0x1f + 1);
 					bv.insert(bv.end(), rdata.begin(), rdata.end());
 					ba.append(rdata.data(), rdata.size());
 				}
@@ -212,10 +199,10 @@ namespace tests
 			}
 			{
 				// += ByteArray
-				bvec		bv;
-				ByteArray	ba;
+				TestByteVector bv;
+				ByteArray      ba;
 				for (size_t i = 0; i < 16; i++) {
-					bvec rdata = randomData(random() & 0x1f + 1);
+					TestByteVector rdata = getTestRandomDataVector(random() & 0x1f + 1);
 					ByteArray radata(rdata.begin(), rdata.end());
 					bv.insert(bv.end(), rdata.begin(), rdata.end());
 					ba.append(radata);
@@ -225,10 +212,10 @@ namespace tests
 			}
 			{
 				// += ByteRange
-				bvec		bv;
-				ByteArray	ba;
+				TestByteVector bv;
+				ByteArray      ba;
 				for (size_t i = 0; i < 16; i++) {
-					bvec rdata = randomData(random() & 0x1f + 1);
+					TestByteVector rdata = getTestRandomDataVector(random() & 0x1f + 1);
 					ByteRange range(rdata.data(), rdata.size());
 					bv.insert(bv.end(), rdata.begin(), rdata.end());
 					ba.append(range);
@@ -238,8 +225,8 @@ namespace tests
 			}
 			{
 				// += fill [ n x 0 ]  or  [ n x value ]
-				bvec		bv;
-				ByteArray	ba;
+				TestByteVector bv;
+				ByteArray      ba;
 				for (size_t i = 0; i < 16; i++) {
 					size_t fill_count    = random() & 0x1F;
 					cc7::byte fill_value = random() & 0xff;

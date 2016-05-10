@@ -114,6 +114,7 @@
 		BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceTimer.cpp; sourceTree = "<group>"; };
 		BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceTimerApple.cpp; sourceTree = "<group>"; };
 		BFC5254F1CDBCC48002E653C /* TestUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestUtilities.h; sourceTree = "<group>"; };
+		BFD7D6521CE258D8002382CB /* TestUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestUtils.h; sourceTree = "<group>"; };
 		BFE173B01CC9639B00039466 /* aes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		BFE173B11CC9639B00039466 /* asn1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
 		BFE173B21CC9639B00039466 /* asn1_mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asn1_mac.h; sourceTree = "<group>"; };
@@ -401,6 +402,7 @@
 				BFE1740B1CCCE59200039466 /* TestDirectory.h */,
 				BFE1740A1CCCE53E00039466 /* TestResource.h */,
 				BFC525491CDBC79F002E653C /* PerformanceTimer.h */,
+				BFD7D6521CE258D8002382CB /* TestUtils.h */,
 			);
 			path = cc7tests;
 			sourceTree = "<group>";
