@@ -22,8 +22,6 @@ namespace cc7
 {
 namespace tests
 {
-	typedef std::vector<cc7::byte> bvec;
-	
 	class cc7ByteRangeTests : public UnitTest
 	{
 	public:
@@ -50,7 +48,7 @@ namespace tests
 		
 		void testCreation()
 		{
-			const bvec v123   = {1, 2, 3};
+			const TestByteVector v123   = {1, 2, 3};
 			
 			const std::string s1 = "Hello world";
 			const char * chp1	 = "Hello world";
@@ -105,7 +103,7 @@ namespace tests
 		
 		void testAssign()
 		{
-			const bvec v123   = {1, 2, 3};
+			const TestByteVector v123   = {1, 2, 3};
 			
 			const std::string s1 = "Hello world";
 			const char * chp1	 = "Hello world";
