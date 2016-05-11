@@ -22,6 +22,10 @@
 		BF498ACA1CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AC91CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp */; };
 		BF498ACD1CDDDABE00D7E904 /* cc7ByteRangeTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */; };
 		BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */; };
+		BF9FFBC51CE3AEFE006CAA74 /* Base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBC41CE3AEFE006CAA74 /* Base64.cpp */; };
+		BF9FFBC71CE3B94D006CAA74 /* HexString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBC61CE3B94D006CAA74 /* HexString.cpp */; };
+		BF9FFBCA1CE3BF08006CAA74 /* cc7Base64Tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBC91CE3BF08006CAA74 /* cc7Base64Tests.cpp */; };
+		BF9FFBCC1CE3C172006CAA74 /* cc7HexStringTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBCB1CE3C172006CAA74 /* cc7HexStringTests.cpp */; };
 		BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */; };
 		BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */; };
 		BFE173FD1CC963DE00039466 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE173FC1CC9639B00039466 /* libcrypto.a */; };
@@ -98,6 +102,12 @@
 		BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7ByteRangeTests.cpp; sourceTree = "<group>"; };
 		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
 		BF4B4AB41CC6BF6100BF2C9D /* CC7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC7.h; sourceTree = "<group>"; };
+		BF9FFBC31CE3ADB3006CAA74 /* Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		BF9FFBC41CE3AEFE006CAA74 /* Base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Base64.cpp; sourceTree = "<group>"; };
+		BF9FFBC61CE3B94D006CAA74 /* HexString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HexString.cpp; sourceTree = "<group>"; };
+		BF9FFBC81CE3B962006CAA74 /* HexString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HexString.h; sourceTree = "<group>"; };
+		BF9FFBC91CE3BF08006CAA74 /* cc7Base64Tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7Base64Tests.cpp; sourceTree = "<group>"; };
+		BF9FFBCB1CE3C172006CAA74 /* cc7HexStringTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7HexStringTests.cpp; sourceTree = "<group>"; };
 		BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB1A6C31CB594BF00B2D172 /* Assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
 		BFB1A6C51CB594BF00B2D172 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
@@ -283,6 +293,8 @@
 				BF498AB91CDD065B00D7E904 /* cc7Testception.cpp */,
 				BF498AC91CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp */,
 				BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */,
+				BF9FFBC91CE3BF08006CAA74 /* cc7Base64Tests.cpp */,
+				BF9FFBCB1CE3C172006CAA74 /* cc7HexStringTests.cpp */,
 			);
 			path = cc7base;
 			sourceTree = "<group>";
@@ -320,6 +332,8 @@
 				BFE174061CC96D3600039466 /* Assert.cpp */,
 				BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */,
 				BF388B621CC62CF700DEC1AE /* ByteArray.cpp */,
+				BF9FFBC41CE3AEFE006CAA74 /* Base64.cpp */,
+				BF9FFBC61CE3B94D006CAA74 /* HexString.cpp */,
 			);
 			path = cc7;
 			sourceTree = "<group>";
@@ -384,6 +398,8 @@
 				BF388B611CC62C0F00DEC1AE /* ByteArray.h */,
 				BF388B841CC68E6500DEC1AE /* Utilities.h */,
 				BF388B851CC68FAA00DEC1AE /* Endian.h */,
+				BF9FFBC31CE3ADB3006CAA74 /* Base64.h */,
+				BF9FFBC81CE3B962006CAA74 /* HexString.h */,
 			);
 			path = cc7;
 			sourceTree = "<group>";
@@ -691,9 +707,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF9FFBCA1CE3BF08006CAA74 /* cc7Base64Tests.cpp in Sources */,
 				BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */,
 				BF3068581CC95503002FD3BC /* TestLog.cpp in Sources */,
 				BF498ABA1CDD065B00D7E904 /* cc7Testception.cpp in Sources */,
+				BF9FFBCC1CE3C172006CAA74 /* cc7HexStringTests.cpp in Sources */,
 				BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */,
 				BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */,
 				BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */,
@@ -717,6 +735,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF9FFBC51CE3AEFE006CAA74 /* Base64.cpp in Sources */,
+				BF9FFBC71CE3B94D006CAA74 /* HexString.cpp in Sources */,
 				BF30682C1CC8F87E002FD3BC /* BasicBuffer.cpp in Sources */,
 				BFE174041CC9664500039466 /* PlatformApple.mm in Sources */,
 				BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */,

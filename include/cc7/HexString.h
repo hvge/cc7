@@ -16,10 +16,33 @@
 
 #pragma once
 
-#include <cc7/Platform.h>
-#include <cc7/Endian.h>
-#include <cc7/Assert.h>
 #include <cc7/ByteArray.h>
-#include <cc7/Utilities.h>
-#include <cc7/Base64.h>
-#include <cc7/HexString.h>
+
+namespace cc7
+{
+	/**
+	 Converts input byte range into hexadecimal string.
+	 */
+	bool HexString_Encode(const ByteRange & in_data, bool use_lowercase, std::string & out_string);
+	
+	/**
+	 Converts hexadecimal encoded string into ByteArray.
+	 */
+	bool HexString_Decode(const std::string & in_string, ByteArray & out_data);
+	
+	
+	inline std::string ToHexString(const ByteRange & data)
+	{
+		std::string result;
+		HexString_Encode(data, false, result);
+		return result;
+	}
+	
+	inline ByteArray FromHexString(const std::string & string)
+	{
+		ByteArray result;
+		HexString_Decode(string, result);
+		return result;
+	}
+	
+} // cc7

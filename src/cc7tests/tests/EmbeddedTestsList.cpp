@@ -29,6 +29,8 @@ namespace tests
 		CC7_ADD_UNIT_TEST(cc7Testception, list);
 		CC7_ADD_UNIT_TEST(cc7ByteArrayTests, list);
 		CC7_ADD_UNIT_TEST(cc7ByteRangeTests, list);
+		CC7_ADD_UNIT_TEST(cc7Base64Tests, list);
+		CC7_ADD_UNIT_TEST(cc7HexStringTests, list);
 		
 		return list;
 	}

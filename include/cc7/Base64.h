@@ -16,10 +16,33 @@
 
 #pragma once
 
-#include <cc7/Platform.h>
-#include <cc7/Endian.h>
-#include <cc7/Assert.h>
 #include <cc7/ByteArray.h>
-#include <cc7/Utilities.h>
-#include <cc7/Base64.h>
-#include <cc7/HexString.h>
+
+namespace cc7
+{
+	/**
+	 Converts input byte range into Base64 encoded string.
+	 */
+	bool Base64_Encode(const ByteRange & in_data, size_t wrap_size, std::string & out_string);
+	
+	/**
+	 Converts Base64 encoded string into ByteArray.
+	 */
+	bool Base64_Decode(const std::string & in_string, size_t wrap_size, ByteArray & out_data);
+	
+	
+	inline std::string ToBase64String(const ByteRange & data)
+	{
+		std::string result;
+		Base64_Encode(data, 0, result);
+		return result;
+	}
+	
+	inline ByteArray FromBase64String(const std::string & string)
+	{
+		ByteArray result;
+		Base64_Decode(string, 0, result);
+		return result;
+	}
+	
+} // cc7
