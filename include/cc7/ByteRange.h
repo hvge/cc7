@@ -270,6 +270,10 @@ namespace cc7
 		
 		// Non-STL methods
 		
+		std::string base64String(size_t wrap_size = 0) const;
+		std::string hexString(bool lower_case = false) const;
+		
+			
 		// Prefix / Suffix remove, SubRange
 		void removePrefix(size_t count)
 		{

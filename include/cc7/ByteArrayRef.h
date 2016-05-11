@@ -158,7 +158,12 @@ namespace cc7
 			CC7_SecureClean(data(), capacity());
 			parent_class::clear();
 		}
-	
+		
+		bool readFromBase64String(const std::string & base64_string, size_t wrap_size = 0);
+		bool readFromHexString(const std::string & hex_string);
+		
+		std::string base64String(size_t wrap_size = 0) const;
+		std::string hexString(bool lower_case = false) const;
 	};
 	
 	/**
