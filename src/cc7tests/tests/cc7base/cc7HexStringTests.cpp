@@ -55,7 +55,7 @@ namespace tests
 			
 			// Read from hex
 			for (size_t s = 0; s < expected.length(); s += 2) {
-				std::string hex = expected.substr(0, s*2);
+				std::string hex = expected.substr(0, s);
 				ByteArray d;
 				bool result = HexString_Decode(hex, d);
 				ccstAssertTrue(result);
@@ -67,6 +67,19 @@ namespace tests
 				result = HexString_Decode(hex, d);
 				ccstAssertTrue(result);
 				ccstAssertEqualMemSize(d.data(), data, s / 2);
+				
+				// Other forms
+				ByteArray d2 = FromHexString(hex);
+				ByteArray d3;
+				result = d3.readFromHexString(hex);
+				ccstAssertTrue(result);
+				ccstAssertEqual(d, d2);
+				ccstAssertEqual(d, d3);
+				
+				// back conversion
+				ccstAssertEqual(hex, ToHexString(d, true));
+				std::string hex3 = d.hexString(false);
+				ccstAssertEqual(expected.substr(0, s), hex3);
 			}
 			
 			// odd number of characters
