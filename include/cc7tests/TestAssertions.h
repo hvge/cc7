@@ -29,7 +29,7 @@
 #define ccstAssertTrue(condition, ...)																	\
 	try {																								\
 		if ((condition) != true) {																		\
-			this->tl().logIncident(__FILE__, __LINE__, "(" #condition ") != true", "" __VA_ARGS__);		\
+			this->tl().logIncident(__FILE__, __LINE__, "(" #condition ") == true", "" __VA_ARGS__);		\
 		}																								\
 	} catch (...) {																						\
 		this->tl().logIncident(__FILE__, __LINE__, "Evaluation failed (" #condition ")", "");			\
@@ -41,7 +41,7 @@
 #define ccstAssertFalse(condition, ...)																	\
 	try {																								\
 		if ((condition) != false) {																		\
-			this->tl().logIncident(__FILE__, __LINE__, "(" #condition ") != false", "" __VA_ARGS__);	\
+			this->tl().logIncident(__FILE__, __LINE__, "(" #condition ") == false", "" __VA_ARGS__);	\
 		}																								\
 	} catch (...) {																						\
 		this->tl().logIncident(__FILE__, __LINE__, "Evaluation failed (" #condition ")", "");			\
@@ -52,7 +52,7 @@
  */
 #define ccstAssertNull(object, ...)																		\
 	if (object != nullptr) {																			\
-		this->tl().logIncident(__FILE__, __LINE__, "(" #object ") != NULL", "" __VA_ARGS__);			\
+		this->tl().logIncident(__FILE__, __LINE__, "(" #object ") == NULL", "" __VA_ARGS__);			\
 	}
 
 /**
@@ -60,7 +60,7 @@
  */
 #define ccstAssertNotNull(object, ...)																	\
 	if (object == nullptr) {																			\
-		this->tl().logIncident(__FILE__, __LINE__, "(" #object ") == NULL", "" __VA_ARGS__);			\
+		this->tl().logIncident(__FILE__, __LINE__, "(" #object ") != NULL", "" __VA_ARGS__);			\
 	}
 
 /**
@@ -69,7 +69,7 @@
 #define ccstAssertEqual(aa, bb, ...)																	\
 	try {																								\
 		if (!(aa == bb)) {																				\
-			this->tl().logIncident(__FILE__, __LINE__, "(" #aa " != " #bb ")", "" __VA_ARGS__);			\
+			this->tl().logIncident(__FILE__, __LINE__, "(" #aa " == " #bb ")", "" __VA_ARGS__);			\
 		}																								\
 	} catch (...) {																						\
 		this->tl().logIncident(__FILE__, __LINE__, "Evaluation failed (" #aa " == " #bb ")", "");		\
@@ -81,7 +81,7 @@
 #define ccstAssertNotEqual(aa, bb, ...)																	\
 	try {																								\
 		if (aa == bb) {																					\
-			this->tl().logIncident(__FILE__, __LINE__, "(" #aa " == " #bb ")", "" __VA_ARGS__);			\
+			this->tl().logIncident(__FILE__, __LINE__, "(" #aa " != " #bb ")", "" __VA_ARGS__);			\
 		}																								\
 	} catch (...) {																						\
 		this->tl().logIncident(__FILE__, __LINE__, "Evaluation failed (" #aa " != " #bb ")", "");		\
@@ -91,9 +91,14 @@
  Triggers failure when both memory regions are not equal
  */
 #define ccstAssertEqualMemSize(p1, p2, size, ...)														\
-	if (memcmp(p1, p2, size) != 0) {																	\
-		this->tl().logIncident(__FILE__, __LINE__, "mem(" #p1 ") == mem(" #p2 ")", "" __VA_ARGS__);		\
+	if (p1 && p2) {																						\
+		if (memcmp(p1, p2, size) != 0) {																\
+			this->tl().logIncident(__FILE__, __LINE__, "mem(" #p1 ") == mem(" #p2 ")", "" __VA_ARGS__);	\
+		}																								\
+	} else if (size > 0) {																				\
+		this->tl().logIncident(__FILE__, __LINE__, "(" #p1 ") or (" #p2 ") is NULL", "" __VA_ARGS__);	\
 	}
+
 
 /**
  Triggers failure when both memory regions are not equal. The size of memory area 
@@ -101,8 +106,12 @@
  to at least the same amount of bytes.
  */
 #define ccstAssertEqualMemArray(ptr, expected_array, ...)												\
-	if (memcmp(ptr, expected_array, sizeof(expected_array)) != 0) {										\
-		this->tl().logIncident(__FILE__, __LINE__, "mem(" #ptr ") == mem(" #expected_array ")", "" __VA_ARGS__);	\
+	if (ptr) {																							\
+		if (memcmp(ptr, expected_array, sizeof(expected_array)) != 0) {									\
+			this->tl().logIncident(__FILE__, __LINE__, "mem(" #ptr ") == mem(" #expected_array ")", "" __VA_ARGS__);\
+		}																								\
+	} else if (sizeof(expected_array) > 0) {															\
+		this->tl().logIncident(__FILE__, __LINE__, "(" #ptr ") is NULL", "" __VA_ARGS__);				\
 	}
 
 

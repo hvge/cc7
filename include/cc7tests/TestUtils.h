@@ -24,7 +24,7 @@ namespace tests
 {
 	/**
 	 Generates a required amount of random bytes.
-	 This function uses OpenSSL as a PRNG generator.
+	 The function doesn't use OpenSSL as a PRNG.
 	 */
 	inline cc7::ByteArray getTestRandomData(size_t size)
 	{
@@ -39,21 +39,21 @@ namespace tests
 	
 	/**
 	 The TestByteVector is useful as an reference data
-	 storage
+	 storage.
 	 */
 	typedef std::vector<cc7::byte> TestByteVector;
 	
 	/**
-	 Similar to getRandomData(), but doesn't use OpenSSL
-	 as PRNG.
+	 Like the getTestRandomData(), but result is stored
+	 to the TestByteVector instead of ByteArray.
 	 */
-	inline TestByteVector getTestRandomDataVector(size_t n)
+	inline TestByteVector getTestRandomDataVector(size_t size)
 	{
 		TestByteVector result;
-		result.reserve(n);
-		while (n > 0) {
+		result.reserve(size);
+		while (size > 0) {
 			result.push_back(random() & 0xFF);
-			--n;
+			--size;
 		}
 		return result;
 	}
