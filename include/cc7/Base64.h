@@ -31,17 +31,17 @@ namespace cc7
 	bool Base64_Decode(const std::string & in_string, size_t wrap_size, ByteArray & out_data);
 	
 	
-	inline std::string ToBase64String(const ByteRange & data)
+	inline std::string ToBase64String(const ByteRange & data, size_t wrap_size = 0)
 	{
 		std::string result;
-		Base64_Encode(data, 0, result);
+		Base64_Encode(data, wrap_size, result);
 		return result;
 	}
 	
-	inline ByteArray FromBase64String(const std::string & string)
+	inline ByteArray FromBase64String(const std::string & string, size_t wrap_size = 0)
 	{
 		ByteArray result;
-		Base64_Decode(string, 0, result);
+		Base64_Decode(string, wrap_size, result);
 		return result;
 	}
 	

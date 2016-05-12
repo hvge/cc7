@@ -21,12 +21,13 @@ namespace cc7
 	// MARK: Encoder -
 	
 	static const char s_hex_table_uc[16] = { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
-	static const char s_hex_table_lc[16] = { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
+	static const char s_hex_table_lc[16] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
 	
 	bool HexString_Encode(const ByteRange & in_data, bool use_lowercase, std::string & out_string)
 	{
 		const char * table = use_lowercase ? s_hex_table_lc : s_hex_table_uc;
 		
+		out_string.clear();
 		out_string.reserve(in_data.size() << 1);
 		auto data_it  = in_data.cbegin();
 		auto data_end = in_data.cend();
@@ -47,6 +48,7 @@ namespace cc7
 		size_t str_len = in_string.length();
 		
 		// Reserve buffer for data
+		out_data.clear();
 		out_data.reserve((str_len >> 1) + (str_len & 1));
 		
 		const char * str_p = in_string.c_str();

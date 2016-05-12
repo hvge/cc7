@@ -31,10 +31,10 @@ namespace cc7
 	bool HexString_Decode(const std::string & in_string, ByteArray & out_data);
 	
 	
-	inline std::string ToHexString(const ByteRange & data)
+	inline std::string ToHexString(const ByteRange & data, bool use_lowercase = false)
 	{
 		std::string result;
-		HexString_Encode(data, false, result);
+		HexString_Encode(data, use_lowercase, result);
 		return result;
 	}
 	

@@ -242,7 +242,7 @@ namespace cc7
 			result = true;
 			
 			bool end_marker = false;
-			while (str_p < str_end) {
+			while (result && str_p < str_end) {
 				// Find begin of the line, by skipping leading whitespaces
 				while (str_p < str_end) {
 					char c = *str_p;
@@ -271,10 +271,6 @@ namespace cc7
 					}
 					// The rest of the decoding is handled in the "NoWrap" routine.
 					result = Base64_DecodeNoWrap(string, line_begin - string.c_str(), line_length, out_data, end_marker);
-					if (!result) {
-						out_data.clear();
-						break;
-					}
 				}
 			}
 			//
@@ -284,9 +280,9 @@ namespace cc7
 			//
 			bool foo;
 			result = Base64_DecodeNoWrap(string, 0, string.length(), out_data, foo);
-			if (!result) {
-				out_data.clear();
-			}
+		}
+		if (!result) {
+			out_data.clear();
 		}
 		return result;
 	}
