@@ -27,13 +27,13 @@ namespace cc7
 	namespace detail
 	{
 		// TODO: use some std implementations or intrinsics
-		inline U16 SwapEndian(U16 n)
+		inline cc7::U16 SwapEndian(cc7::U16 n)
 		{
 			return	(n>>8) |
 					(n<<8);
 		}
 		
-		inline U32 SwapEndian(U32 n)
+		inline cc7::U32 SwapEndian(cc7::U32 n)
 		{
 			return	( n>>24) |
 					((n<<8)  & 0x00FF0000) |
@@ -41,7 +41,7 @@ namespace cc7
 					( n<<24);
 		}
 		
-		inline U64 SwapEndian(U64 n)
+		inline cc7::U64 SwapEndian(cc7::U64 n)
 		{
 			return  ( n>>56) |
 					((n<<40) & 0x00FF000000000000LL) |

@@ -72,6 +72,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF0D67EF1CE63DF90070D853 /* PrefixCC7.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixCC7.pch; sourceTree = "<group>"; };
+		BF0D67F01CE63EDA0070D853 /* PrefixCC7Tests.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixCC7Tests.pch; sourceTree = "<group>"; };
 		BF1C7BBE1CE0CE9300C4399E /* cc7PlatformTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7PlatformTests.cpp; sourceTree = "<group>"; };
 		BF30682B1CC8F87E002FD3BC /* BasicBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicBuffer.cpp; sourceTree = "<group>"; };
 		BF3068371CC91B20002FD3BC /* libcc7tests-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7tests-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -450,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */,
+				BF0D67F01CE63EDA0070D853 /* PrefixCC7Tests.pch */,
 			);
 			path = platform;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 			isa = PBXGroup;
 			children = (
 				BFE174021CC9664500039466 /* PlatformApple.mm */,
+				BF0D67EF1CE63DF90070D853 /* PrefixCC7.pch */,
 			);
 			path = apple;
 			sourceTree = "<group>";
@@ -764,6 +768,7 @@
 		BF3068351CC91B20002FD3BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../src/cc7tests/platform/PrefixCC7Tests.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -773,6 +778,7 @@
 		BF3068361CC91B20002FD3BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../src/cc7tests/platform/PrefixCC7Tests.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -899,6 +905,7 @@
 		BFB1A6BE1CB5937800B2D172 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../src/cc7/platform/apple/PrefixCC7.pch";
 				GCC_WARN_PEDANTIC = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -909,6 +916,7 @@
 		BFB1A6BF1CB5937800B2D172 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../src/cc7/platform/apple/PrefixCC7.pch";
 				GCC_WARN_PEDANTIC = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
