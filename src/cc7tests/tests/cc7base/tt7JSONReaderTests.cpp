@@ -74,7 +74,7 @@ namespace tests
 			ccstAssertEqual(root.objectAtPath("object.xxx").asString(), "this is xxx");
 			ccstAssertEqual(root.objectAtPath("object.yyy").asBoolean(), false);
 			
-			auto & array = root.objectAtPath("array").asArray();
+			auto&& array = root.objectAtPath("array").asArray();
 			ccstAssertEqual(array[0].asString(), "a");
 			ccstAssertEqual(array[1].asString(), "b");
 			ccstAssertEqual(array[2].asString(), "c");

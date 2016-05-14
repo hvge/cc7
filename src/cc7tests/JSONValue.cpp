@@ -32,9 +32,9 @@ namespace tests
 			throw std::invalid_argument("JSONValue is not an Object. Key: this");
 		}
 		const JSONValue * selected_obj = this;
-		for (auto & key : path_components) {
+		for (auto&& key : path_components) {
 			if (selected_obj->isType(JSONValue::Object)) {
-				auto & object_map = selected_obj->asObject();
+				auto&& object_map = selected_obj->asObject();
 				auto value = object_map.find(key);
 				if (value != object_map.end()) {
 					selected_obj = &value->second;
