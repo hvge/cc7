@@ -14,29 +14,19 @@
  * limitations under the License.
  */
 
-#include <cc7tests/CC7Tests.h>
+#include <cc7/Platform.h>
+#include <cc7tests/JSONValue.h>
 
 namespace cc7
 {
 namespace tests
 {
-	const UnitTestCreationInfoList _GetDefaultUnitTestCreationInfoList()
-	{
-		UnitTestCreationInfoList list;
-		
-		// cc7::tests framework tests
-		CC7_ADD_UNIT_TEST(tt7Testception, list);
-		CC7_ADD_UNIT_TEST(tt7JSONReaderTests, list);
-		
-		// cc7 framework tests
-		CC7_ADD_UNIT_TEST(cc7PlatformTests, list);
-		CC7_ADD_UNIT_TEST(cc7ByteArrayTests, list);
-		CC7_ADD_UNIT_TEST(cc7ByteRangeTests, list);
-		CC7_ADD_UNIT_TEST(cc7Base64Tests, list);
-		CC7_ADD_UNIT_TEST(cc7HexStringTests, list);
-		
-		return list;
-	}
+	//
+	// This is Yet another JSON parser :)
+	//
+	
+	bool JSON_ReadString(const std::string & str, JSONValue & out_value, std::string * out_error = nullptr);
+	
 	
 } // cc7::tests
 } // cc7

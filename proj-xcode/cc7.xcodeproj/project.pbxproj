@@ -18,7 +18,7 @@
 		BF498AA71CDCBE8400D7E904 /* libcc7tests-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3068371CC91B20002FD3BC /* libcc7tests-ios.a */; };
 		BF498AAE1CDCBEC000D7E904 /* CC7TestWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF498AAD1CDCBEC000D7E904 /* CC7TestWrapper.mm */; };
 		BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AB61CDCC24F00D7E904 /* EmbeddedTestsList.cpp */; };
-		BF498ABA1CDD065B00D7E904 /* cc7Testception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AB91CDD065B00D7E904 /* cc7Testception.cpp */; };
+		BF498ABA1CDD065B00D7E904 /* tt7Testception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AB91CDD065B00D7E904 /* tt7Testception.cpp */; };
 		BF498ACA1CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AC91CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp */; };
 		BF498ACD1CDDDABE00D7E904 /* cc7ByteRangeTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */; };
 		BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */; };
@@ -26,6 +26,9 @@
 		BF9FFBC71CE3B94D006CAA74 /* HexString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBC61CE3B94D006CAA74 /* HexString.cpp */; };
 		BF9FFBCA1CE3BF08006CAA74 /* cc7Base64Tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBC91CE3BF08006CAA74 /* cc7Base64Tests.cpp */; };
 		BF9FFBCC1CE3C172006CAA74 /* cc7HexStringTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBCB1CE3C172006CAA74 /* cc7HexStringTests.cpp */; };
+		BFB493D41CE750EC00F8D81B /* JSONReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB493D21CE750EC00F8D81B /* JSONReader.cpp */; };
+		BFB493D71CE75C7F00F8D81B /* JSONValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB493D61CE75C7F00F8D81B /* JSONValue.cpp */; };
+		BFB493D91CE7769500F8D81B /* tt7JSONReaderTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB493D81CE7769500F8D81B /* tt7JSONReaderTests.cpp */; };
 		BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */; };
 		BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */; };
 		BFE173FD1CC963DE00039466 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE173FC1CC9639B00039466 /* libcrypto.a */; };
@@ -99,7 +102,7 @@
 		BF498AB41CDCC22500D7E904 /* EMPTY */ = {isa = PBXFileReference; lastKnownFileType = text; path = EMPTY; sourceTree = "<group>"; };
 		BF498AB61CDCC24F00D7E904 /* EmbeddedTestsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EmbeddedTestsList.cpp; sourceTree = "<group>"; };
 		BF498AB81CDCC34A00D7E904 /* TestRegistrationMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestRegistrationMacros.h; sourceTree = "<group>"; };
-		BF498AB91CDD065B00D7E904 /* cc7Testception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7Testception.cpp; sourceTree = "<group>"; };
+		BF498AB91CDD065B00D7E904 /* tt7Testception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tt7Testception.cpp; sourceTree = "<group>"; };
 		BF498AC91CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7ByteArrayTests.cpp; sourceTree = "<group>"; };
 		BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7ByteRangeTests.cpp; sourceTree = "<group>"; };
 		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
@@ -114,6 +117,11 @@
 		BFB1A6C31CB594BF00B2D172 /* Assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
 		BFB1A6C51CB594BF00B2D172 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		BFB1A6C61CB594BF00B2D172 /* ByteRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ByteRange.h; sourceTree = "<group>"; };
+		BFB493D11CE750CD00F8D81B /* JSONReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONReader.h; sourceTree = "<group>"; };
+		BFB493D21CE750EC00F8D81B /* JSONReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONReader.cpp; sourceTree = "<group>"; };
+		BFB493D51CE75C1B00F8D81B /* JSONValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONValue.h; sourceTree = "<group>"; };
+		BFB493D61CE75C7F00F8D81B /* JSONValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONValue.cpp; sourceTree = "<group>"; };
+		BFB493D81CE7769500F8D81B /* tt7JSONReaderTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tt7JSONReaderTests.cpp; sourceTree = "<group>"; };
 		BFC3F44F1CD3D15F00883E91 /* invalid-conf-01.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-01.conf"; sourceTree = "<group>"; };
 		BFC3F4501CD3D15F00883E91 /* invalid-conf-02.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-02.conf"; sourceTree = "<group>"; };
 		BFC3F4511CD3D15F00883E91 /* invalid-conf-03.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-03.conf"; sourceTree = "<group>"; };
@@ -291,8 +299,9 @@
 		BF498AB11CDCC22500D7E904 /* cc7base */ = {
 			isa = PBXGroup;
 			children = (
+				BF498AB91CDD065B00D7E904 /* tt7Testception.cpp */,
+				BFB493D81CE7769500F8D81B /* tt7JSONReaderTests.cpp */,
 				BF1C7BBE1CE0CE9300C4399E /* cc7PlatformTests.cpp */,
-				BF498AB91CDD065B00D7E904 /* cc7Testception.cpp */,
 				BF498AC91CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp */,
 				BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */,
 				BF9FFBC91CE3BF08006CAA74 /* cc7Base64Tests.cpp */,
@@ -351,6 +360,8 @@
 				BF3068541CC91EE4002FD3BC /* UnitTest.cpp */,
 				BF3068571CC95503002FD3BC /* TestLog.cpp */,
 				BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */,
+				BFB493D21CE750EC00F8D81B /* JSONReader.cpp */,
+				BFB493D61CE75C7F00F8D81B /* JSONValue.cpp */,
 			);
 			path = cc7tests;
 			sourceTree = "<group>";
@@ -421,6 +432,8 @@
 				BFE1740A1CCCE53E00039466 /* TestResource.h */,
 				BFC525491CDBC79F002E653C /* PerformanceTimer.h */,
 				BFD7D6521CE258D8002382CB /* TestUtils.h */,
+				BFB493D11CE750CD00F8D81B /* JSONReader.h */,
+				BFB493D51CE75C1B00F8D81B /* JSONValue.h */,
 			);
 			path = cc7tests;
 			sourceTree = "<group>";
@@ -714,8 +727,10 @@
 				BF9FFBCA1CE3BF08006CAA74 /* cc7Base64Tests.cpp in Sources */,
 				BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */,
 				BF3068581CC95503002FD3BC /* TestLog.cpp in Sources */,
-				BF498ABA1CDD065B00D7E904 /* cc7Testception.cpp in Sources */,
+				BF498ABA1CDD065B00D7E904 /* tt7Testception.cpp in Sources */,
+				BFB493D91CE7769500F8D81B /* tt7JSONReaderTests.cpp in Sources */,
 				BF9FFBCC1CE3C172006CAA74 /* cc7HexStringTests.cpp in Sources */,
+				BFB493D71CE75C7F00F8D81B /* JSONValue.cpp in Sources */,
 				BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */,
 				BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */,
 				BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */,
@@ -724,6 +739,7 @@
 				BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */,
 				BF3068551CC91EE4002FD3BC /* UnitTest.cpp in Sources */,
 				BF498ACD1CDDDABE00D7E904 /* cc7ByteRangeTests.cpp in Sources */,
+				BFB493D41CE750EC00F8D81B /* JSONReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

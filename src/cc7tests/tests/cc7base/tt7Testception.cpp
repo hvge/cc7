@@ -172,7 +172,7 @@ namespace tests
 	/**
 	 The cc7Testception is a globally registered class.
 	 */
-	class cc7Testception : public UnitTest
+	class tt7Testception : public UnitTest
 	{
 		TestManager * _manager;
 		
@@ -181,7 +181,7 @@ namespace tests
 
 	public:
 		
-		cc7Testception() : _manager(nullptr)
+		tt7Testception() : _manager(nullptr)
 		{
 			CC7_REGISTER_TEST_METHOD(splitStringTest);
 			CC7_REGISTER_TEST_METHOD(allTests);
@@ -190,7 +190,7 @@ namespace tests
 			CC7_REGISTER_TEST_METHOD(filterTests);
 		}
 		
-		~cc7Testception()
+		~tt7Testception()
 		{
 			TestManager::releaseManager(_manager);
 		}
@@ -367,7 +367,7 @@ namespace tests
 		}
 	};
 	
-	CC7_CREATE_UNIT_TEST(cc7Testception, "cc7")
+	CC7_CREATE_UNIT_TEST(tt7Testception, "cc7 test")
 	
 } // cc7::tests
 } // cc7
