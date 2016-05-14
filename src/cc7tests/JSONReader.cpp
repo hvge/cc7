@@ -56,18 +56,9 @@ namespace tests
 	};
 	
 	
-	struct NumberInfo
-	{
-		int		begin;
-		int		end;
-		int		exponent;
-	};
-	
-	
 	//
 	// MARK: helper functions -
 	//
-	
 	
 	static void _SetParserError(JSONParserContext * ctx, const char * reason)
 	{
@@ -112,8 +103,7 @@ namespace tests
 			return 0;
 		}
 		
-		do
-		{
+		do {
 			char uc = ctx->ptr[ctx->offset++];
 			if (!isspace(uc)) {
 				return uc;
@@ -122,7 +112,6 @@ namespace tests
 				ctx->line++;
 				ctx->lineBegin = ctx->offset - 1;
 			}
-			
 		} while (ctx->offset < ctx->length);
 		
 		return 0;
@@ -487,6 +476,33 @@ namespace tests
 		return true;
 	}
 	
+	static bool _UTF8Encode(int codepoint, std::string & out)
+	{
+		char buffer[4];
+		if(codepoint < 0x80) {
+			buffer[0] = (char)codepoint;
+			out.append(buffer, 1);
+		} else if(codepoint < 0x800) {
+			buffer[0] = 0xC0 + ((codepoint & 0x7C0) >> 6);
+			buffer[1] = 0x80 + ((codepoint & 0x03F));
+			out.append(buffer, 2);
+		} else if(codepoint < 0x10000) {
+			buffer[0] = 0xE0 + ((codepoint & 0xF000) >> 12);
+			buffer[1] = 0x80 + ((codepoint & 0x0FC0) >> 6);
+			buffer[2] = 0x80 + ((codepoint & 0x003F));
+			out.append(buffer, 3);
+		} else if(codepoint <= 0x10FFFF) {
+			buffer[0] = 0xF0 + ((codepoint & 0x1C0000) >> 18);
+			buffer[1] = 0x80 + ((codepoint & 0x03F000) >> 12);
+			buffer[2] = 0x80 + ((codepoint & 0x000FC0) >> 6);
+			buffer[3] = 0x80 + ((codepoint & 0x00003F));
+			out.append(buffer, 4);
+		} else {
+			return false;
+		}
+		return true;
+	}
+	
 	static bool _ParseEscapedCharacter(JSONParserContext * ctx, std::string & result)
 	{
 		//
@@ -543,10 +559,12 @@ namespace tests
 					_SetParserError(ctx, "Wrong hexadecimal value in escaped unicode character");
 					return true;
 				}
-				_SetParserError(ctx, "Unicode escaping in string is not supported yet.");
-				return true;
-//				consumed = 5;
-//				break;
+				if (!_UTF8Encode((int(uc_bytes[1]) << 8) | uc_bytes[0], result)) {
+					_SetParserError(ctx, "Wrong UTF8 codepoint");
+					return true;
+				}
+				consumed = 5;
+				break;
 				
 			default:
 				_SetParserError(ctx, "Wrong escaped character in string");
@@ -557,12 +575,24 @@ namespace tests
 		return false;
 	}
 	
+	
 	//
 	// Parse number
 	//
 	
+	struct NumberInfo
+	{
+		size_t		begin;
+		size_t		end;
+		size_t		exponent;
+	};
+
+	
 	static JSONValue _ParseNumber(JSONParserContext * ctx)
 	{
+		NumberInfo ninfo;
+		ninfo.begin = ctx->offset;
+		
 		_SetParserError(ctx, "JSON numbers are not supported yet.");
 		return JSONValue();
 	}
@@ -572,13 +602,20 @@ namespace tests
 	// MARK: Reader implementation
 	//
 	
-	bool JSON_ReadString(const std::string & str, JSONValue & out_value, std::string * out_error)
+	bool JSON_ParseString(const std::string & str, JSONValue & out_value, std::string * out_error)
 	{
 		JSONParserContext ctx(str);
 		out_value = _ParseValue(&ctx, nullptr);
 		if (out_value.isValid() && ctx.error.empty()) {
+			// valid result
 			return true;
 		}
+		if (ctx.error.empty() & out_value.isType(JSONValue::NaT)) {
+			// empty result, no error
+			out_value.assignNull();
+			return true;
+		}
+		// regular error
 		if (out_error) {
 			out_error->assign(ctx.error);
 		}

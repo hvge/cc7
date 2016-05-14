@@ -22,7 +22,7 @@ namespace cc7
 {
 namespace tests
 {
-	const JSONValue & JSONValue::objectAtPath(const std::string & path, Type expected_type) const
+	const JSONValue & JSONValue::valueAtPath(const std::string & path, Type expected_type) const
 	{
 		auto path_components = detail::SplitString(path, '.');
 		if (path_components.empty()) {

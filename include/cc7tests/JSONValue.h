@@ -220,7 +220,37 @@ namespace tests
 			return _t == t;
 		}
 		
-		const JSONValue & objectAtPath(const std::string & path, Type expected_type = NaT) const;
+		const JSONValue & valueAtPath(const std::string & path, Type expected_type = NaT) const;
+		
+		const JSONValue::TObject & objectAtPath(const std::string & path) const
+		{
+			return valueAtPath(path, Object).asObject();
+		}
+		
+		const JSONValue::TArray & arrayAtPath(const std::string & path) const
+		{
+			return valueAtPath(path, Array).asArray();
+		}
+		
+		const JSONValue::TString & stringAtPath(const std::string & path) const
+		{
+			return valueAtPath(path, String).asString();
+		}
+		
+		const bool booleanAtPath(const std::string & path) const
+		{
+			return valueAtPath(path, Boolean).asBoolean();
+		}
+		
+		const int64_t integerAtPath(const std::string & path) const
+		{
+			return valueAtPath(path, Boolean).asInteger();
+		}
+		
+		const double doubleAtPath(const std::string & path) const
+		{
+			return valueAtPath(path).asDouble();
+		}
 		
 	private:
 		

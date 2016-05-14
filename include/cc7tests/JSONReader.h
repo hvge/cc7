@@ -22,10 +22,10 @@ namespace cc7
 namespace tests
 {
 	//
-	// This is Yet another JSON parser :)
+	// Yet another JSON parser :)
 	//
 	
-	bool JSON_ReadString(const std::string & str, JSONValue & out_value, std::string * out_error = nullptr);
+	bool JSON_ParseString(const std::string & str, JSONValue & out_value, std::string * out_error = nullptr);
 	
 	
 } // cc7::tests

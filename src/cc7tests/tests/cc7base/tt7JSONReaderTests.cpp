@@ -58,23 +58,23 @@ namespace tests
 		{
 			JSONValue root;
 			std::string error;
-			bool result = JSON_ReadString(_json1, root, &error);
+			bool result = JSON_ParseString(_json1, root, &error);
 			if (!result) {
 				ccstFailure("Parser failed with error: %s", error.c_str());
 				return;
 			}
 			
-			ccstAssertEqual(root.objectAtPath("key1").asString(), "value1");
-			ccstAssertEqual(root.objectAtPath("true").asBoolean(), true);
-			ccstAssertEqual(root.objectAtPath("false").asBoolean(), false);
-			ccstAssertEqual(root.objectAtPath("empty").isNull(), true);
-			ccstAssertEqual(root.objectAtPath("object").isType(JSONValue::Object), true);
-			ccstAssertEqual(root.objectAtPath("array").isType(JSONValue::Array), true);
+			ccstAssertEqual(root.valueAtPath("key1").asString(), "value1");
+			ccstAssertEqual(root.booleanAtPath("true"), true);
+			ccstAssertEqual(root.booleanAtPath("false"), false);
+			ccstAssertEqual(root.valueAtPath("empty").isNull(), true);
+			ccstAssertEqual(root.valueAtPath("object").isType(JSONValue::Object), true);
+			ccstAssertEqual(root.valueAtPath("array").isType(JSONValue::Array), true);
 			
-			ccstAssertEqual(root.objectAtPath("object.xxx").asString(), "this is xxx");
-			ccstAssertEqual(root.objectAtPath("object.yyy").asBoolean(), false);
+			ccstAssertEqual(root.stringAtPath("object.xxx"), "this is xxx");
+			ccstAssertEqual(root.booleanAtPath("object.yyy"), false);
 			
-			auto&& array = root.objectAtPath("array").asArray();
+			auto&& array = root.valueAtPath("array").asArray();
 			ccstAssertEqual(array[0].asString(), "a");
 			ccstAssertEqual(array[1].asString(), "b");
 			ccstAssertEqual(array[2].asString(), "c");
