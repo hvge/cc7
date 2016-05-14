@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#ifndef PrefixCC7_pch
-#define PrefixCC7_pch
+#ifndef PrefixCC7Tests_pch
+#define PrefixCC7Tests_pch
 
 #include <cc7/Platform.h>
 
-#endif /* PrefixCC7_pch */
+#endif /* PrefixCC7Tests */

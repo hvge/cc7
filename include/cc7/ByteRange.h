@@ -58,9 +58,9 @@ namespace cc7
 		{
 		}
 		
-		explicit ByteRange(const_pointer ptr, size_type count) noexcept :
+		explicit ByteRange(const_pointer ptr, size_type size) noexcept :
 			_begin (ptr),
-			_end   (ptr != nullptr ? ptr + count : 0)
+			_end   (ptr != nullptr ? ptr + size : 0)
 		{
 		}
 		
@@ -117,10 +117,10 @@ namespace cc7
 			_end   = end;
 		}
 		
-		void assign(const_pointer ptr, size_type count) noexcept
+		void assign(const_pointer ptr, size_type size) noexcept
 		{
 			_begin = ptr;
-			_end   = _begin != nullptr ? _begin + count : nullptr;
+			_end   = _begin != nullptr ? _begin + size : nullptr;
 		}
 		
 		void assign(const ByteRange & r) noexcept
