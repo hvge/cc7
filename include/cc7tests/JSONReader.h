@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#pragma once
+
 #include <cc7/Platform.h>
 #include <cc7tests/JSONValue.h>
 
@@ -30,7 +32,7 @@ namespace tests
 	
 	bool JSON_ParseString(const std::string & str, JSONValue & out_value, std::string * out_error = nullptr);
 	
-	bool JSON_ParseData(const ByteRange & range, JSONValue & out_value, std::string * out_error = nullptr);
+	bool JSON_ParseData(const cc7::ByteRange & range, JSONValue & out_value, std::string * out_error = nullptr);
 	
 	JSONValue JSON_ParseFile(const TestDirectory & dir, const std::string & file_name);
 	

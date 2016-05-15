@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#pragma once
+
 #include <cc7/ByteArray.h>
 #include <map>
 #include <vector>
