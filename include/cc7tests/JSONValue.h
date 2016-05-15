@@ -35,7 +35,7 @@ namespace tests
 			Object	= 1 << 0,
 			Array	= 1 << 1,
 			String	= 1 << 2,
-			Decimal = 1 << 3,
+			Integer = 1 << 3,
 			Double  = 1 << 4,
 			Boolean = 1 << 5,
 			Null    = 1 << 6
@@ -46,8 +46,9 @@ namespace tests
 		typedef std::string TString;
 		
 		
-		JSONValue() : _t(NaT), _decimal(0) {}
-		JSONValue(Type t) : _t(t), _decimal(0)
+		JSONValue()						: _t(NaT), _integer(0) {}
+		
+		JSONValue(Type t)				: _t(t), _integer(0)
 		{
 			switch (_t) {
 				case String: _string = new TString(); break;
@@ -58,9 +59,9 @@ namespace tests
 			}
 		}
 		
-		explicit JSONValue(bool v)            : _t(Boolean), _boolean(v) {}
-		explicit JSONValue(int64_t v)         : _t(Decimal), _decimal(v) {}
-		explicit JSONValue(double v)          : _t(Double),  _double(v) {}
+		explicit JSONValue(bool v)		: _t(Boolean), _boolean(v) {}
+		explicit JSONValue(int64_t v)	: _t(Integer), _integer(v) {}
+		explicit JSONValue(double v)	: _t(Double),  _double(v) {}
 		
 		// Copy / Move
 		
@@ -69,7 +70,7 @@ namespace tests
 			copyFrom(o);
 		}
 		
-		JSONValue(JSONValue && o) : _t(o._t), _decimal(o._decimal)
+		JSONValue(JSONValue && o) : _t(o._t), _integer(o._integer)
 		{
 			o._t = NaT;
 		}
@@ -86,7 +87,7 @@ namespace tests
 		JSONValue & operator=(JSONValue && o)
 		{
 			_t = o._t;
-			_decimal = o._decimal;
+			_integer = o._integer;
 			o._t = NaT;
 			return *this;
 		}
@@ -110,8 +111,8 @@ namespace tests
 		void assign(int64_t value)
 		{
 			destroy();
-			_t = Decimal;
-			_decimal = value;
+			_t = Integer;
+			_integer = value;
 		}
 
 		void assign(double value)
@@ -186,7 +187,6 @@ namespace tests
 			return *_string;
 		}
 
-		
 		double asDouble() const
 		{
 			castToType(Double);
@@ -195,8 +195,8 @@ namespace tests
 		
 		int64_t asInteger() const
 		{
-			castToType(Decimal);
-			return _decimal;
+			castToType(Integer);
+			return _integer;
 		}
 		
 		bool asBoolean() const
@@ -244,12 +244,12 @@ namespace tests
 		
 		const int64_t integerAtPath(const std::string & path) const
 		{
-			return valueAtPath(path, Boolean).asInteger();
+			return valueAtPath(path, Integer).asInteger();
 		}
 		
 		const double doubleAtPath(const std::string & path) const
 		{
-			return valueAtPath(path).asDouble();
+			return valueAtPath(path, Double).asDouble();
 		}
 		
 	private:
@@ -260,7 +260,7 @@ namespace tests
 		union
 		{
 			bool		_boolean;
-			int64_t		_decimal;
+			int64_t		_integer;
 			double		_double;
 			TObject *	_object;
 			TArray *	_array;
@@ -278,7 +278,7 @@ namespace tests
 				default:
 					break;
 			}
-			_decimal = 0;
+			_integer = 0;
 		}
 		
 		void copyFrom(const JSONValue & o)
@@ -289,7 +289,7 @@ namespace tests
 				case Object: _object = new TObject(*o._object); break;
 				case Array:  _array  = new TArray(*o._array);   break;
 				default:
-					_decimal = o._decimal;
+					_integer = o._integer;
 					break;
 			}
 		}
