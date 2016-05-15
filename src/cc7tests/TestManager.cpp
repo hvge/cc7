@@ -20,8 +20,6 @@
 
 #include <cc7/Assert.h>
 
-#include <sstream>
-
 namespace cc7
 {
 namespace tests

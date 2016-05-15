@@ -1,0 +1,28 @@
+{
+ "key1"		: "value1",
+ "true":		true	,
+ "false" :		false,
+ "empty"	:	null,
+ "object" :
+ {
+	 "xxx":"this is xxx" ,
+	 "yyy":false,
+	 "zzz":{
+		 "integer" :
+			64,
+		 "double"  :
+			6.4,
+		 "unicode1":"Švárny ščípäk",
+		 "unicode2":"\u0160v\u00E1rny \u0161\u010d\u00eDp\u00E4k"
+	 }
+ },
+ "array" :
+ [
+		"a", "b", "c", true,
+		{"sub-array":[1,2,3,4]},
+		{"sub-array":[1.1,2.2,3.3,4.4]},
+		{"sub-array":[-1, -1.1, 1e3
+					  ,3.2e-1]
+	    }
+  ]
+}

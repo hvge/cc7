@@ -15,6 +15,7 @@
  */
 
 #include <cc7tests/JSONReader.h>
+#include <cc7tests/TestDirectory.h>
 #include <cc7tests/detail/TestUtilities.h>
 #include <ctype.h>
 
@@ -39,10 +40,10 @@ namespace tests
 		
 		std::string error;
 		
-		JSONParserContext(const std::string & str) :
-			ptr(reinterpret_cast<const cc7::byte*>(str.c_str())),
+		JSONParserContext(const cc7::ByteRange & range) :
+			ptr(range.data()),
 			offset(0),
-			length(str.length()),
+			length(range.length()),
 			line(0),
 			lineBegin(0),
 			stack(0),
@@ -674,7 +675,13 @@ namespace tests
 	
 	bool JSON_ParseString(const std::string & str, JSONValue & out_value, std::string * out_error)
 	{
-		JSONParserContext ctx(str);
+		return JSON_ParseData(cc7::ByteRange(str), out_value, out_error);
+	}
+	
+	
+	bool JSON_ParseData(const ByteRange & range, JSONValue & out_value, std::string * out_error)
+	{
+		JSONParserContext ctx(range);
 		out_value = _ParseValue(&ctx, nullptr);
 		if (out_value.isValid() && ctx.error.empty()) {
 			// valid result
@@ -691,6 +698,21 @@ namespace tests
 		}
 		return false;
 	}
+	
+	
+	JSONValue JSON_ParseFile(const TestDirectory & dir, const std::string & file_name)
+	{
+		TestFile f = dir.findFile(file_name);
+		// Read a whole file
+		
+		JSONValue root;
+		std::string error;
+		if (!JSON_ParseData(f.readMemory(f.size()), root, &error)) {
+			throw std::invalid_argument("Unable to parse JSON file: " + file_name);
+		}
+		return root;
+	}
+
 	
 
 	

@@ -16,18 +16,28 @@
 
 #pragma once
 
-#include <cc7/Platform.h>
+#include <cc7tests/TestFile.h>
 
 namespace cc7
 {
 namespace tests
 {
+	class TestResource;
+	
 	class TestDirectory
 	{
 	public:
+		typedef const cc7::tests::TestResource* TResource;
+		typedef std::vector<TResource> TResourceList;
+		
+		TestDirectory(std::initializer_list<TResource> il);
+		~TestDirectory();
+		
+		TestFile findFile(const std::string & path) const;
+		const TResourceList & allResources() const;
 		
 	private:
-		
+		TResourceList _resources;
 	};
 	
 } // cc7::tests

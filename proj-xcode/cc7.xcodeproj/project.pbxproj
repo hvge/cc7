@@ -29,6 +29,10 @@
 		BFB493D41CE750EC00F8D81B /* JSONReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB493D21CE750EC00F8D81B /* JSONReader.cpp */; };
 		BFB493D71CE75C7F00F8D81B /* JSONValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB493D61CE75C7F00F8D81B /* JSONValue.cpp */; };
 		BFB493D91CE7769500F8D81B /* tt7JSONReaderTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB493D81CE7769500F8D81B /* tt7JSONReaderTests.cpp */; };
+		BFB493FF1CE8E74600F8D81B /* TestFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB493FE1CE8E74600F8D81B /* TestFile.cpp */; };
+		BFB494011CE8E79400F8D81B /* TestDirectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB494001CE8E79400F8D81B /* TestDirectory.cpp */; };
+		BFB494031CE8E7C600F8D81B /* TestResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB494021CE8E7C600F8D81B /* TestResource.cpp */; };
+		BFB494071CE900E500F8D81B /* g_baseFiles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFB494041CE900E500F8D81B /* g_baseFiles.cpp */; };
 		BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */; };
 		BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */; };
 		BFE173FD1CC963DE00039466 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE173FC1CC9639B00039466 /* libcrypto.a */; };
@@ -131,6 +135,16 @@
 		BFB493E51CE8B29500F8D81B /* invalid-conf-05.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "invalid-conf-05.conf"; sourceTree = "<group>"; };
 		BFB493E61CE8B29500F8D81B /* run-tests.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
 		BFB493E71CE8B29500F8D81B /* valid-conf-01.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "valid-conf-01.conf"; sourceTree = "<group>"; };
+		BFB493EB1CE8B97300F8D81B /* test-data.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "test-data.conf"; sourceTree = "<group>"; };
+		BFB493F11CE8BBE600F8D81B /* json-simple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "json-simple.json"; sourceTree = "<group>"; };
+		BFB493F31CE8BBE600F8D81B /* EMPTY */ = {isa = PBXFileReference; lastKnownFileType = text; path = EMPTY; sourceTree = "<group>"; };
+		BFB493F51CE8BBE600F8D81B /* EMPTY */ = {isa = PBXFileReference; lastKnownFileType = text; path = EMPTY; sourceTree = "<group>"; };
+		BFB493F61CE8BEAF00F8D81B /* update-test-data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "update-test-data.sh"; sourceTree = "<group>"; };
+		BFB493F71CE8D22300F8D81B /* json-complex.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "json-complex.json"; sourceTree = "<group>"; };
+		BFB493FE1CE8E74600F8D81B /* TestFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestFile.cpp; sourceTree = "<group>"; };
+		BFB494001CE8E79400F8D81B /* TestDirectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDirectory.cpp; sourceTree = "<group>"; };
+		BFB494021CE8E7C600F8D81B /* TestResource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestResource.cpp; sourceTree = "<group>"; };
+		BFB494041CE900E500F8D81B /* g_baseFiles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = g_baseFiles.cpp; sourceTree = "<group>"; };
 		BFC525481CDB9C13002E653C /* TestTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTypes.h; sourceTree = "<group>"; };
 		BFC525491CDBC79F002E653C /* PerformanceTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerformanceTimer.h; sourceTree = "<group>"; };
 		BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceTimer.cpp; sourceTree = "<group>"; };
@@ -287,6 +301,10 @@
 		BF498AB01CDCC22500D7E904 /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				BFB493EC1CE8B9A000F8D81B /* test-data */,
+				BFB493ED1CE8B9A000F8D81B /* test-data.generated */,
+				BFB493EB1CE8B97300F8D81B /* test-data.conf */,
+				BFB493F61CE8BEAF00F8D81B /* update-test-data.sh */,
 				BF498AB11CDCC22500D7E904 /* cc7base */,
 				BF498AB31CDCC22500D7E904 /* cc7crypto */,
 				BF498AB51CDCC22500D7E904 /* openssl */,
@@ -358,6 +376,9 @@
 				BF3068511CC91E56002FD3BC /* TestManager.cpp */,
 				BF3068541CC91EE4002FD3BC /* UnitTest.cpp */,
 				BF3068571CC95503002FD3BC /* TestLog.cpp */,
+				BFB493FE1CE8E74600F8D81B /* TestFile.cpp */,
+				BFB494001CE8E79400F8D81B /* TestDirectory.cpp */,
+				BFB494021CE8E7C600F8D81B /* TestResource.cpp */,
 				BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */,
 				BFB493D21CE750EC00F8D81B /* JSONReader.cpp */,
 				BFB493D61CE75C7F00F8D81B /* JSONValue.cpp */,
@@ -467,6 +488,49 @@
 				BFB493E61CE8B29500F8D81B /* run-tests.sh */,
 			);
 			path = "unit-tests";
+			sourceTree = "<group>";
+		};
+		BFB493EC1CE8B9A000F8D81B /* test-data */ = {
+			isa = PBXGroup;
+			children = (
+				BFB493F01CE8BBE600F8D81B /* cc7base */,
+				BFB493F21CE8BBE600F8D81B /* cc7crypto */,
+				BFB493F41CE8BBE600F8D81B /* openssl */,
+			);
+			path = "test-data";
+			sourceTree = "<group>";
+		};
+		BFB493ED1CE8B9A000F8D81B /* test-data.generated */ = {
+			isa = PBXGroup;
+			children = (
+				BFB494041CE900E500F8D81B /* g_baseFiles.cpp */,
+			);
+			path = "test-data.generated";
+			sourceTree = "<group>";
+		};
+		BFB493F01CE8BBE600F8D81B /* cc7base */ = {
+			isa = PBXGroup;
+			children = (
+				BFB493F71CE8D22300F8D81B /* json-complex.json */,
+				BFB493F11CE8BBE600F8D81B /* json-simple.json */,
+			);
+			path = cc7base;
+			sourceTree = "<group>";
+		};
+		BFB493F21CE8BBE600F8D81B /* cc7crypto */ = {
+			isa = PBXGroup;
+			children = (
+				BFB493F31CE8BBE600F8D81B /* EMPTY */,
+			);
+			path = cc7crypto;
+			sourceTree = "<group>";
+		};
+		BFB493F41CE8BBE600F8D81B /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				BFB493F51CE8BBE600F8D81B /* EMPTY */,
+			);
+			path = openssl;
 			sourceTree = "<group>";
 		};
 		BFC525471CDB9C03002E653C /* detail */ = {
@@ -734,17 +798,21 @@
 				BFC5254B1CDBC887002E653C /* PerformanceTimer.cpp in Sources */,
 				BF3068581CC95503002FD3BC /* TestLog.cpp in Sources */,
 				BF498ABA1CDD065B00D7E904 /* tt7Testception.cpp in Sources */,
+				BFB493FF1CE8E74600F8D81B /* TestFile.cpp in Sources */,
 				BFB493D91CE7769500F8D81B /* tt7JSONReaderTests.cpp in Sources */,
+				BFB494031CE8E7C600F8D81B /* TestResource.cpp in Sources */,
 				BF9FFBCC1CE3C172006CAA74 /* cc7HexStringTests.cpp in Sources */,
 				BFB493D71CE75C7F00F8D81B /* JSONValue.cpp in Sources */,
 				BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */,
 				BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */,
 				BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */,
+				BFB494071CE900E500F8D81B /* g_baseFiles.cpp in Sources */,
 				BF1C7BBF1CE0CE9300C4399E /* cc7PlatformTests.cpp in Sources */,
 				BF498ACA1CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp in Sources */,
 				BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */,
 				BF3068551CC91EE4002FD3BC /* UnitTest.cpp in Sources */,
 				BF498ACD1CDDDABE00D7E904 /* cc7ByteRangeTests.cpp in Sources */,
+				BFB494011CE8E79400F8D81B /* TestDirectory.cpp in Sources */,
 				BFB493D41CE750EC00F8D81B /* JSONReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

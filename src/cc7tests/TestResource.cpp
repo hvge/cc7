@@ -14,10 +14,19 @@
  * limitations under the License.
  */
 
-#pragma once
+#include <cc7tests/TestResource.h>
 
-#include <cc7tests/TestManager.h>
-#include <cc7tests/TestAssertions.h>
-#include <cc7tests/TestRegistrationMacros.h>
-#include <cc7tests/TestDirectory.h>
-#include <cc7tests/TestUtils.h>
+
+namespace cc7
+{
+namespace tests
+{
+	TestResource::TestResource(const cc7::byte * data, size_t size, const char * name) :
+		_data(data),
+		_size(size),
+		_name(name)
+	{
+	}
+	
+} // cc7::tests
+} // cc7

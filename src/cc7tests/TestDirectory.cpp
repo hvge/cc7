@@ -14,10 +14,39 @@
  * limitations under the License.
  */
 
-#pragma once
-
-#include <cc7tests/TestManager.h>
-#include <cc7tests/TestAssertions.h>
-#include <cc7tests/TestRegistrationMacros.h>
 #include <cc7tests/TestDirectory.h>
-#include <cc7tests/TestUtils.h>
+#include <cc7tests/TestResource.h>
+
+namespace cc7
+{
+namespace tests
+{
+
+	TestDirectory::TestDirectory(std::initializer_list<TResource> il) :
+		_resources(il)
+	{
+	}
+	
+	TestDirectory::~TestDirectory()
+	{
+	}
+	
+	TestFile TestDirectory::findFile(const std::string &path) const
+	{
+		for (auto&& resource : _resources) {
+			if (path == resource->name()) {
+				return TestFile(resource);
+			}
+		}
+		throw std::invalid_argument("File '" + path + "' not found.");
+	}
+	
+	const TestDirectory::TResourceList & TestDirectory::allResources() const
+	{
+		return _resources;
+	}
+	
+	
+
+} // cc7::tests
+} // cc7

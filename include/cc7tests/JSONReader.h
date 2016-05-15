@@ -25,8 +25,14 @@ namespace tests
 	// Yet another JSON parser :)
 	//
 	
+	class TestFile;
+	class TestDirectory;
+	
 	bool JSON_ParseString(const std::string & str, JSONValue & out_value, std::string * out_error = nullptr);
 	
+	bool JSON_ParseData(const ByteRange & range, JSONValue & out_value, std::string * out_error = nullptr);
+	
+	JSONValue JSON_ParseFile(const TestDirectory & dir, const std::string & file_name);
 	
 } // cc7::tests
 } // cc7

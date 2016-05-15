@@ -16,11 +16,14 @@
 
 #include <cc7tests/CC7Tests.h>
 #include <cc7tests/JSONReader.h>
+#include <cc7tests/TestDirectory.h>
 
 namespace cc7
 {
 namespace tests
 {
+	extern TestDirectory g_baseFiles;
+	
 	class tt7JSONReaderTests : public UnitTest
 	{
 	public:
@@ -28,7 +31,9 @@ namespace tests
 		
 		tt7JSONReaderTests()
 		{
-			CC7_REGISTER_TEST_METHOD(testSimpleJson)
+			CC7_REGISTER_TEST_METHOD(testSimpleJsonString)
+			CC7_REGISTER_TEST_METHOD(testSimpleJsonFile)
+			CC7_REGISTER_TEST_METHOD(testComplexJson)
 			
 			loadJsonData();
 		}
@@ -63,7 +68,7 @@ namespace tests
 		
 		// UNIT TESTS
 		
-		void testSimpleJson()
+		void testSimpleJsonString()
 		{
 			JSONValue root;
 			std::string error;
@@ -72,7 +77,17 @@ namespace tests
 				ccstFailure("Parser failed with error: %s", error.c_str());
 				return;
 			}
-			
+			simpleJsonValidation(root);
+		}
+		
+		void testSimpleJsonFile()
+		{
+			JSONValue root = JSON_ParseFile(g_baseFiles, "test-data/cc7base/json-simple.json");
+			simpleJsonValidation(root);
+		}
+		
+		void simpleJsonValidation(const JSONValue & root)
+		{
 			ccstAssertEqual(root.valueAtPath("key1").asString(), "value1");
 			ccstAssertEqual(root.booleanAtPath("true"), true);
 			ccstAssertEqual(root.booleanAtPath("false"), false);
@@ -111,7 +126,13 @@ namespace tests
 			ccstAssertEqual(array4[1].asDouble(), -1.1);
 			ccstAssertEqual(array4[2].asDouble(), 1e3);
 			ccstAssertEqual(array4[3].asDouble(), 3.2e-1);
+		}
 
+		
+		void testComplexJson()
+		{
+			JSONValue complex = JSON_ParseFile(g_baseFiles, "test-data/cc7base/json-complex.json");
+			ccstAssertTrue(complex.isType(JSONValue::Object));
 		}
 
 	};
