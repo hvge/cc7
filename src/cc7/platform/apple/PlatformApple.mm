@@ -33,7 +33,7 @@ void CC7LogImpl(const char * fmt, ...)
 	buffer[1024 - 1] = 0;
 	va_end(args);
 	
-	NSLog(@"CC7: %s", buffer);
+	NSLog(@"CC7: %@", [NSString stringWithUTF8String:buffer]);
 }
 
 #endif //ENABLE_CC7_LOG
@@ -49,7 +49,7 @@ namespace error
 {
 	static void private_objcDumpToLog(void * foo, const char * file, int line, const char * message)
 	{
-		NSLog(@"%s", message);
+		NSLog(@"%@", [NSString stringWithUTF8String:message]);
 		//
 		// Break execution with using software breakpoint.
 		//

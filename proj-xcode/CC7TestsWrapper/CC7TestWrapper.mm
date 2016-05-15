@@ -38,9 +38,9 @@ using namespace cc7;
 	tests::TestManager::releaseManager(manager);
 	
 	if (!result) {
-		NSLog(@"Incidents:\n%s", log_data.incidents.c_str());
+		NSLog(@"Incidents:\n%@", [NSString stringWithUTF8String:log_data.incidents.c_str()]);
 	}
-	NSLog(@"Full test log:\n%s", log_data.log.c_str());
+	NSLog(@"Full test log:\n%@", [NSString stringWithUTF8String:log_data.log.c_str()]);
 	
 	// Finally, report result to Xcode
 	XCTAssertTrue(result, @"Test failed. Check debug log for details.");
