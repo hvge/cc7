@@ -122,13 +122,15 @@
 		BFB493D51CE75C1B00F8D81B /* JSONValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONValue.h; sourceTree = "<group>"; };
 		BFB493D61CE75C7F00F8D81B /* JSONValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONValue.cpp; sourceTree = "<group>"; };
 		BFB493D81CE7769500F8D81B /* tt7JSONReaderTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tt7JSONReaderTests.cpp; sourceTree = "<group>"; };
-		BFC3F44F1CD3D15F00883E91 /* invalid-conf-01.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-01.conf"; sourceTree = "<group>"; };
-		BFC3F4501CD3D15F00883E91 /* invalid-conf-02.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-02.conf"; sourceTree = "<group>"; };
-		BFC3F4511CD3D15F00883E91 /* invalid-conf-03.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-03.conf"; sourceTree = "<group>"; };
-		BFC3F4521CD3D15F00883E91 /* invalid-conf-04.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-04.conf"; sourceTree = "<group>"; };
-		BFC3F4531CD3D15F00883E91 /* invalid-conf-05.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "invalid-conf-05.conf"; sourceTree = "<group>"; };
-		BFC3F4541CD3D15F00883E91 /* run-tests.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
-		BFC3F4551CD3F01100883E91 /* valid-conf-01.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "valid-conf-01.conf"; sourceTree = "<group>"; };
+		BFB493DE1CE8B29500F8D81B /* data-converter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "data-converter.cpp"; sourceTree = "<group>"; };
+		BFB493DF1CE8B29500F8D81B /* data-converter.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "data-converter.sh"; sourceTree = "<group>"; };
+		BFB493E11CE8B29500F8D81B /* invalid-conf-01.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "invalid-conf-01.conf"; sourceTree = "<group>"; };
+		BFB493E21CE8B29500F8D81B /* invalid-conf-02.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "invalid-conf-02.conf"; sourceTree = "<group>"; };
+		BFB493E31CE8B29500F8D81B /* invalid-conf-03.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "invalid-conf-03.conf"; sourceTree = "<group>"; };
+		BFB493E41CE8B29500F8D81B /* invalid-conf-04.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "invalid-conf-04.conf"; sourceTree = "<group>"; };
+		BFB493E51CE8B29500F8D81B /* invalid-conf-05.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "invalid-conf-05.conf"; sourceTree = "<group>"; };
+		BFB493E61CE8B29500F8D81B /* run-tests.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
+		BFB493E71CE8B29500F8D81B /* valid-conf-01.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "valid-conf-01.conf"; sourceTree = "<group>"; };
 		BFC525481CDB9C13002E653C /* TestTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTypes.h; sourceTree = "<group>"; };
 		BFC525491CDBC79F002E653C /* PerformanceTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerformanceTimer.h; sourceTree = "<group>"; };
 		BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceTimer.cpp; sourceTree = "<group>"; };
@@ -218,9 +220,6 @@
 		BFE174091CCCE4C900039466 /* TestFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFile.h; sourceTree = "<group>"; };
 		BFE1740A1CCCE53E00039466 /* TestResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestResource.h; sourceTree = "<group>"; };
 		BFE1740B1CCCE59200039466 /* TestDirectory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestDirectory.h; sourceTree = "<group>"; };
-		BFE1740D1CCCEC1600039466 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		BFE1740F1CCCEC1600039466 /* data-converter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "data-converter.cpp"; sourceTree = "<group>"; };
-		BFE174101CCCEC1600039466 /* data-converter.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "data-converter.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +329,7 @@
 			children = (
 				BF4B4A841CB5977200BF2C9D /* cc7 */,
 				BF4B4A851CB5977200BF2C9D /* cc7tests */,
+				BFB493DA1CE8B29500F8D81B /* tools */,
 			);
 			name = src;
 			path = ../src;
@@ -355,7 +355,6 @@
 				BF498AB01CDCC22500D7E904 /* tests */,
 				BF498A981CDBD4E200D7E904 /* detail */,
 				BFC5254C1CDBC945002E653C /* platform */,
-				BFE1740C1CCCEC1600039466 /* conv-tool */,
 				BF3068511CC91E56002FD3BC /* TestManager.cpp */,
 				BF3068541CC91EE4002FD3BC /* UnitTest.cpp */,
 				BF3068571CC95503002FD3BC /* TestLog.cpp */,
@@ -438,16 +437,34 @@
 			path = cc7tests;
 			sourceTree = "<group>";
 		};
-		BFC3F44E1CD3D0ED00883E91 /* unit-tests */ = {
+		BFB493DA1CE8B29500F8D81B /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				BFC3F4551CD3F01100883E91 /* valid-conf-01.conf */,
-				BFC3F44F1CD3D15F00883E91 /* invalid-conf-01.conf */,
-				BFC3F4501CD3D15F00883E91 /* invalid-conf-02.conf */,
-				BFC3F4511CD3D15F00883E91 /* invalid-conf-03.conf */,
-				BFC3F4521CD3D15F00883E91 /* invalid-conf-04.conf */,
-				BFC3F4531CD3D15F00883E91 /* invalid-conf-05.conf */,
-				BFC3F4541CD3D15F00883E91 /* run-tests.sh */,
+				BFB493DB1CE8B29500F8D81B /* conv-tool */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+		BFB493DB1CE8B29500F8D81B /* conv-tool */ = {
+			isa = PBXGroup;
+			children = (
+				BFB493E01CE8B29500F8D81B /* unit-tests */,
+				BFB493DE1CE8B29500F8D81B /* data-converter.cpp */,
+				BFB493DF1CE8B29500F8D81B /* data-converter.sh */,
+			);
+			path = "conv-tool";
+			sourceTree = "<group>";
+		};
+		BFB493E01CE8B29500F8D81B /* unit-tests */ = {
+			isa = PBXGroup;
+			children = (
+				BFB493E11CE8B29500F8D81B /* invalid-conf-01.conf */,
+				BFB493E21CE8B29500F8D81B /* invalid-conf-02.conf */,
+				BFB493E31CE8B29500F8D81B /* invalid-conf-03.conf */,
+				BFB493E41CE8B29500F8D81B /* invalid-conf-04.conf */,
+				BFB493E51CE8B29500F8D81B /* invalid-conf-05.conf */,
+				BFB493E71CE8B29500F8D81B /* valid-conf-01.conf */,
+				BFB493E61CE8B29500F8D81B /* run-tests.sh */,
 			);
 			path = "unit-tests";
 			sourceTree = "<group>";
@@ -603,17 +620,6 @@
 				BF0D67EF1CE63DF90070D853 /* PrefixCC7.pch */,
 			);
 			path = apple;
-			sourceTree = "<group>";
-		};
-		BFE1740C1CCCEC1600039466 /* conv-tool */ = {
-			isa = PBXGroup;
-			children = (
-				BFC3F44E1CD3D0ED00883E91 /* unit-tests */,
-				BFE1740D1CCCEC1600039466 /* .gitignore */,
-				BFE1740F1CCCEC1600039466 /* data-converter.cpp */,
-				BFE174101CCCEC1600039466 /* data-converter.sh */,
-			);
-			path = "conv-tool";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
