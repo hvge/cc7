@@ -29,7 +29,7 @@ namespace tests
 			throw std::invalid_argument("The provided path is wrong or empty.");
 		}
 		if (!isType(Object)) {
-			throw std::invalid_argument("JSONValue is not an Object. Key: this");
+			throw std::invalid_argument("JSONValue is not an Object. Key: *this*");
 		}
 		const JSONValue * selected_obj = this;
 		for (auto&& key : path_components) {
@@ -45,7 +45,7 @@ namespace tests
 		}
 		if (expected_type != NaT) {
 			if (!selected_obj->isType(expected_type)) {
-				throw std::invalid_argument("JSONValue has unexpected type.");
+				throw std::invalid_argument("The selected JSONValue has unexpected type.");
 			}
 		}
 		return *selected_obj;

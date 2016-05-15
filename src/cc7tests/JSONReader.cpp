@@ -24,7 +24,7 @@ namespace tests
 {
 	struct JSONParserContext
 	{
-		const char * ptr;		// Pointer to the input string
+		const cc7::byte * ptr;		// Pointer to the input string
 		size_t	offset;
 		size_t	length;
 		size_t	line;
@@ -32,16 +32,15 @@ namespace tests
 		
 		int		stack;
 		int		stackLimit;
-		
 		int		options;
 		
-		bool	unexpectedEndOfStream;
-		char	consumedSeparator;
+		bool		unexpectedEndOfStream;
+		cc7::byte	consumedSeparator;
 		
 		std::string error;
 		
 		JSONParserContext(const std::string & str) :
-			ptr(str.c_str()),
+			ptr(reinterpret_cast<const cc7::byte*>(str.c_str())),
 			offset(0),
 			length(str.length()),
 			line(0),
@@ -78,15 +77,33 @@ namespace tests
 		return (ctx->offset >= ctx->length) || !ctx->error.empty();
 	}
 	
-	static inline const char * _Ptr(JSONParserContext * ctx)
+	static inline const cc7::byte * _Ptr(JSONParserContext * ctx)
 	{
 		return ctx->ptr + ctx->offset;
 	}
-	
-	static inline const char * _ShouldReadPtr(JSONParserContext * ctx, size_t requiredSize)
+
+	static inline const char * _CharPtr(JSONParserContext * ctx, size_t offset)
 	{
+		return reinterpret_cast<const char*>(ctx->ptr) + offset;
+	}
+
+	
+	static inline cc7::byte _GetChar(JSONParserContext * ctx)
+	{
+		CC7_ASSERT(!_IsEnd(ctx), "End reached or error occured");
+		return ctx->ptr[ctx->offset++];
+	}
+	
+	
+	static inline const cc7::byte * _ShouldReadPtr(JSONParserContext * ctx, size_t requiredSize)
+	{
+		CC7_ASSERT(requiredSize > 0, "Required size must be greater than 0");
 		if ((ctx->length - ctx->offset) >= requiredSize) {
-			return _Ptr(ctx);
+			// If following check fails then there's a problem in some upper loop.
+			// The loop doesn't validate length & offset properly
+			if (CC7_CHECK(ctx->length > ctx->offset, "Offset is out of range")) {
+				return _Ptr(ctx);
+			}
 		}
 		ctx->unexpectedEndOfStream = true;
 		return nullptr;
@@ -97,14 +114,14 @@ namespace tests
 		ctx->offset += count;
 	}
 	
-	static char _SkipWhitespace(JSONParserContext * ctx)
+	static cc7::byte _SkipWhitespace(JSONParserContext * ctx)
 	{
 		if (_IsEnd(ctx)) {
 			return 0;
 		}
 		
 		do {
-			char uc = ctx->ptr[ctx->offset++];
+			cc7::byte uc = ctx->ptr[ctx->offset++];
 			if (!isspace(uc)) {
 				return uc;
 			}
@@ -143,7 +160,7 @@ namespace tests
 	
 	// MARK: Forward declarations -
 	
-	static JSONValue _ParseValue  (JSONParserContext * ctx, const char * allowedSeparators);
+	static JSONValue _ParseValue  (JSONParserContext * ctx, const cc7::byte * allowedSeparators);
 	static JSONValue _ParseObject (JSONParserContext * ctx);
 	static JSONValue _ParseNumber (JSONParserContext * ctx);
 	static JSONValue _ParseArray  (JSONParserContext * ctx);
@@ -156,11 +173,11 @@ namespace tests
 	// Parse value
 	//
 	
-	static JSONValue _ParseValue(JSONParserContext * ctx, const char * allowedSeparators)
+	static JSONValue _ParseValue(JSONParserContext * ctx, const cc7::byte * allowedSeparators)
 	{
 		ctx->consumedSeparator = 0;
 		
-		char uc = _SkipWhitespace(ctx);
+		cc7::byte uc = _SkipWhitespace(ctx);
 		if (!uc) {
 			// regular end
 			return JSONValue();
@@ -193,7 +210,7 @@ namespace tests
 			//
 			// true
 			//
-			const char * ptr = _ShouldReadPtr(ctx, 3);
+			const cc7::byte * ptr = _ShouldReadPtr(ctx, 3);
 			if (ptr && ptr[0] == 'r' && ptr[1] == 'u' && ptr[2] == 'e') {
 				_SkipCount(ctx, 3);
 				return JSONValue(true);
@@ -205,7 +222,7 @@ namespace tests
 			//
 			// false
 			//
-			const char * ptr = _ShouldReadPtr(ctx, 4);
+			const cc7::byte * ptr = _ShouldReadPtr(ctx, 4);
 			if (ptr && ptr[0] == 'a' && ptr[1] == 'l' && ptr[2] == 's' && ptr[3] == 'e') {
 				_SkipCount(ctx, 4);
 				return JSONValue(false);
@@ -216,7 +233,7 @@ namespace tests
 			//
 			// null
 			//
-			const char * ptr = _ShouldReadPtr(ctx, 3);
+			const cc7::byte * ptr = _ShouldReadPtr(ctx, 3);
 			if (ptr && ptr[0] == 'u' && ptr[1] == 'l' && ptr[2] == 'l') {
 				_SkipCount(ctx, 3);
 				return JSONValue(JSONValue::Null);
@@ -225,7 +242,7 @@ namespace tests
 			}
 		} else {
 			if (allowedSeparators) {
-				const char * separatorPtr = allowedSeparators;
+				const cc7::byte * separatorPtr = allowedSeparators;
 				while (*separatorPtr) {
 					if (*separatorPtr++ == uc) {
 						// returns NaT but without error
@@ -256,8 +273,8 @@ namespace tests
 		auto & result = array.asMutableArray();
 		
 		// Process values in array
-		static const char separator[3] = { ',', ']', 0 };
-		char uc;
+		static const cc7::byte separator[3] = { ',', ']', 0 };
+		cc7::byte uc;
 		while (1)
 		{
 			JSONValue value = _ParseValue(ctx, separator + 1);
@@ -313,7 +330,7 @@ namespace tests
 		JSONValue object(JSONValue::Object);
 		auto & result = object.asMutableObject();
 		
-		char uc;
+		cc7::byte uc;
 		while (1)
 		{
 			uc = _SkipWhitespace(ctx);
@@ -393,12 +410,12 @@ namespace tests
 		JSONValue result(JSONValue::String);
 		auto & result_str = result.asMutableString();
 		
-		char uc;
+		cc7::byte uc;
 		size_t range_location = ctx->offset;
 		size_t range_length   = 0;
-		while (ctx->offset < ctx->length)
+		while (!_IsEnd(ctx))
 		{
-			uc = ctx->ptr[ctx->offset++];
+			uc = _GetChar(ctx);
 			
 			if (uc == '"') {
 				//
@@ -406,7 +423,7 @@ namespace tests
 				//
 				if (range_length > 0) {
 					// flush previously captured string fragment
-					result_str.append(ctx->ptr + range_location, range_length);
+					result_str.append(_CharPtr(ctx, range_location), range_length);
 					range_length = 0;
 				}
 				break;
@@ -417,7 +434,7 @@ namespace tests
 				//
 				if (range_length > 0) {
 					// flush previously captured string fragment
-					result_str.append(ctx->ptr + range_location, range_length);
+					result_str.append(_CharPtr(ctx, range_location), range_length);
 					range_length = 0;
 				}
 				error = _ParseEscapedCharacter(ctx, result_str);
@@ -451,24 +468,24 @@ namespace tests
 		return JSONValue();
 	}
 	
-	static inline bool _Hex2Char(const char * p, char & out)
+	static inline bool _Hex2Char(const cc7::byte * p, cc7::byte & out)
 	{
 		int b1, b2;
 		if (p[0] >= '0' && p[0] <= '9') {
 			b1 = p[0] - '0';
 		} else if (p[0] >= 'A' && p[0] <= 'F') {
-			b1 = p[0] - 'A' + 16;
+			b1 = p[0] - 'A' + 10;
 		} else if (p[0] >= 'a' && p[0] <= 'f') {
-			b1 = p[0] - 'a' + 16;
+			b1 = p[0] - 'a' + 10;
 		} else {
 			return false;
 		}
 		if (p[1] >= '0' && p[1] <= '9') {
 			b2 = p[1] - '0';
 		} else if (p[1] >= 'A' && p[1] <= 'F') {
-			b2 = p[1] - 'A' + 16;
+			b2 = p[1] - 'A' + 10;
 		} else if (p[1] >= 'a' && p[1] <= 'f') {
-			b2 = p[1] - 'a' + 16;
+			b2 = p[1] - 'a' + 10;
 		} else {
 			return false;
 		}
@@ -476,27 +493,33 @@ namespace tests
 		return true;
 	}
 	
-	static bool _UTF8Encode(int codepoint, std::string & out)
+	static bool _UTF8Encode(cc7::U32 codepoint, std::string & out)
 	{
-		char buffer[4];
+		union
+		{
+			cc7::byte buffer[4];
+			char char_buffer[4];
+		};
+		
 		if(codepoint < 0x80) {
 			buffer[0] = (char)codepoint;
-			out.append(buffer, 1);
+			out.append(reinterpret_cast<const char*>(buffer), 1);
 		} else if(codepoint < 0x800) {
 			buffer[0] = 0xC0 + ((codepoint & 0x7C0) >> 6);
 			buffer[1] = 0x80 + ((codepoint & 0x03F));
-			out.append(buffer, 2);
+			out.append(reinterpret_cast<const char*>(buffer), 2);
 		} else if(codepoint < 0x10000) {
 			buffer[0] = 0xE0 + ((codepoint & 0xF000) >> 12);
 			buffer[1] = 0x80 + ((codepoint & 0x0FC0) >> 6);
 			buffer[2] = 0x80 + ((codepoint & 0x003F));
-			out.append(buffer, 3);
-		} else if(codepoint <= 0x10FFFF) {
-			buffer[0] = 0xF0 + ((codepoint & 0x1C0000) >> 18);
-			buffer[1] = 0x80 + ((codepoint & 0x03F000) >> 12);
-			buffer[2] = 0x80 + ((codepoint & 0x000FC0) >> 6);
-			buffer[3] = 0x80 + ((codepoint & 0x00003F));
-			out.append(buffer, 4);
+			out.append(reinterpret_cast<const char*>(buffer), 3);
+//      codepoints greater than 0xFFFF are not possible in this impl.
+//		} else if(codepoint <= 0x10FFFF) {
+//			buffer[0] = 0xF0 + ((codepoint & 0x1C0000) >> 18);
+//			buffer[1] = 0x80 + ((codepoint & 0x03F000) >> 12);
+//			buffer[2] = 0x80 + ((codepoint & 0x000FC0) >> 6);
+//			buffer[3] = 0x80 + ((codepoint & 0x00003F));
+//			out.append(buffer, 4);
 		} else {
 			return false;
 		}
@@ -508,7 +531,7 @@ namespace tests
 		//
 		// offset points after backslash
 		//
-		const char * ucptr = _ShouldReadPtr(ctx, 1);
+		const cc7::byte * ucptr = _ShouldReadPtr(ctx, 1);
 		if (!ucptr) {
 			_SetParserError(ctx, "Unexpected end of string");
 			return true;
@@ -519,6 +542,8 @@ namespace tests
 			'\n', '\r', '\t', '\b', '\f'
 		};
 		
+		cc7::byte uc_bytes[2];
+		
 		size_t consumed = 1;
 		switch (ucptr[0])
 		{
@@ -526,7 +551,7 @@ namespace tests
 			case '/':
 			case '\\':
 				// quote, slash or backslash
-				result.append(ucptr, 1);
+				result.append(reinterpret_cast<const char*>(ucptr), 1);
 				break;
 			case 'n':
 				// newline
@@ -554,12 +579,11 @@ namespace tests
 					return true;
 				}
 				// read 4 hexadecimal numbers
-				char uc_bytes[2];
 				if (!_Hex2Char(ucptr + 1, uc_bytes[1]) || !_Hex2Char(ucptr + 3, uc_bytes[0])) {
 					_SetParserError(ctx, "Wrong hexadecimal value in escaped unicode character");
 					return true;
 				}
-				if (!_UTF8Encode((int(uc_bytes[1]) << 8) | uc_bytes[0], result)) {
+				if (!_UTF8Encode((cc7::U32(uc_bytes[1]) << 8) | cc7::U32(uc_bytes[0]), result)) {
 					_SetParserError(ctx, "Wrong UTF8 codepoint");
 					return true;
 				}
@@ -580,20 +604,63 @@ namespace tests
 	// Parse number
 	//
 	
-	struct NumberInfo
-	{
-		size_t		begin;
-		size_t		end;
-		size_t		exponent;
-	};
-
-	
 	static JSONValue _ParseNumber(JSONParserContext * ctx)
 	{
-		NumberInfo ninfo;
-		ninfo.begin = ctx->offset;
+		size_t begin = ctx->offset - 1;
 		
-		_SetParserError(ctx, "JSON numbers are not supported yet.");
+		bool has_exponent = false;
+		bool has_decimal_mark = false;
+		bool error = false;
+		
+		while (!_IsEnd(ctx) && !error)
+		{
+			cc7::byte uc = _GetChar(ctx);
+			if (uc >= '0' && uc <= '9') {
+				// regular digit
+				continue;
+			} else if (uc == '.') {
+				// decimal mark
+				if (!has_decimal_mark) {
+					has_decimal_mark = true;
+				} else {
+					// double decimal mark
+					error = true;
+				}
+			} else  if (uc == 'e' || uc == 'E') {
+				// exponent
+				if (!has_exponent && _ShouldReadPtr(ctx, 1)) {
+					// validate if E is foolowed by +/- or digit
+					has_exponent = true;
+					uc = _GetChar(ctx);
+					if ((uc >= '0' && uc <= '9') || uc == '+' || uc == '-') {
+						continue;
+					}
+					error = true;
+				} else {
+					// double exponent symbol or unexpected end
+					error = true;
+				}
+			} else {
+				// unknown character, may be processed later
+				ctx->offset--;
+				break;
+			}
+		}
+		if (!error) {
+			try {
+				std::string number(_CharPtr(ctx, + begin), ctx->offset - begin);
+				if (has_exponent || has_decimal_mark) {
+					return JSONValue(std::stod(number));
+				} else {
+					return JSONValue(std::stoll(number));
+				}
+			} catch (std::exception & exc) {
+				error = true;
+			}
+		}
+		// Set pointer back, at the beginning of the number
+		ctx->offset = begin;
+		_SetParserError(ctx, "Invalid number");
 		return JSONValue();
 	}
 	
