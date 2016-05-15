@@ -18,31 +18,53 @@
 
 #include <cc7/Platform.h>
 
+// Compatibility with non-clang compilers
+#ifndef __has_builtin
+	#define __has_builtin(x) 0
+#endif
+// Clang
+#if defined(__clang__) && __has_builtin(__builtin_bswap16) \
+					   && __has_builtin(__builtin_bswap32) \
+					   && __has_builtin(__builtin_bswap64)
+	#define CC7_BSWAP_16(n)	__builtin_bswap16(n)
+	#define CC7_BSWAP_32(n)	__builtin_bswap32(n)
+	#define CC7_BSWAP_64(n)	__builtin_bswap64(n)
+#endif
+
 namespace cc7
 {
 	//
 	// Endian swap
 	//
-	
 	namespace detail
 	{
-		// TODO: use some std implementations or intrinsics
 		inline cc7::U16 SwapEndian(cc7::U16 n)
 		{
+		#ifdef CC7_BSWAP_16
+			return CC7_BSWAP_16(n);
+		#else
 			return	(n>>8) |
 					(n<<8);
+		#endif
 		}
 		
 		inline cc7::U32 SwapEndian(cc7::U32 n)
 		{
+		#ifdef CC7_BSWAP_32
+			return CC7_BSWAP_32(n);
+		#else
 			return	( n>>24) |
 					((n<<8)  & 0x00FF0000) |
 					((n>>8)  & 0x0000FF00) |
 					( n<<24);
+		#endif
 		}
 		
 		inline cc7::U64 SwapEndian(cc7::U64 n)
 		{
+		#ifdef CC7_BSWAP_64
+			return CC7_BSWAP_64(n);
+		#else
 			return  ( n>>56) |
 					((n<<40) & 0x00FF000000000000LL) |
 					((n<<24) & 0x0000FF0000000000LL) |
@@ -51,6 +73,7 @@ namespace cc7
 					((n>>24) & 0x0000000000FF0000LL) |
 					((n>>40) & 0x000000000000FF00LL) |
 					( n<<56);
+		#endif
 		}
 	}
 

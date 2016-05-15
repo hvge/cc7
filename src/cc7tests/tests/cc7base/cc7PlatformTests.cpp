@@ -31,6 +31,7 @@ namespace tests
 			CC7_REGISTER_TEST_METHOD(testEndian16)
 			CC7_REGISTER_TEST_METHOD(testEndian32)
 			CC7_REGISTER_TEST_METHOD(testEndian64)
+			CC7_REGISTER_TEST_METHOD(testEndianIntrinsics)
 		}
 		
 		void testPlatformBits()
@@ -64,6 +65,20 @@ namespace tests
 #if !defined(DEBUG) && !defined(ENABLE_CC7_ASSERT) && !defined(ENABLE_CC7_LOG)
 			ccstAssertFalse(cc7::error::HasDebugFeaturesTurnedOn());
 #endif
+		}
+		
+		void testEndianIntrinsics()
+		{
+#if !defined(CC7_BSWAP_16)
+			ccstMessage("WARNING: This platform uses default impl. for 16 bit endian swap");
+#endif
+#if !defined(CC7_BSWAP_32)
+			ccstMessage("WARNING: This platform uses default impl. for 32 bit endian swap");
+#endif
+#if !defined(CC7_BSWAP_64)
+			ccstMessage("WARNING: This platform uses default impl. for 64 bit endian swap");
+#endif
+			
 		}
 		
 		void testEndian16()
