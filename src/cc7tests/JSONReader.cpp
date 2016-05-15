@@ -109,10 +109,17 @@ namespace tests
 		return nullptr;
 	}
 	
-	static inline void _SkipCount(JSONParserContext * ctx, int count)
+	static inline void _SkipCount(JSONParserContext * ctx, size_t count)
 	{
 		ctx->offset += count;
 	}
+	
+	static inline void _SkipBackCount(JSONParserContext * ctx, size_t count)
+	{
+		CC7_ASSERT(count <= ctx->offset, "Wrong count");
+		ctx->offset -= count;
+	}
+
 	
 	static cc7::byte _SkipWhitespace(JSONParserContext * ctx)
 	{
@@ -495,12 +502,7 @@ namespace tests
 	
 	static bool _UTF8Encode(cc7::U32 codepoint, std::string & out)
 	{
-		union
-		{
-			cc7::byte buffer[4];
-			char char_buffer[4];
-		};
-		
+		cc7::byte buffer[4];
 		if(codepoint < 0x80) {
 			buffer[0] = (char)codepoint;
 			out.append(reinterpret_cast<const char*>(buffer), 1);
@@ -595,7 +597,7 @@ namespace tests
 				return true;
 		}
 		// success
-		ctx->offset += consumed;
+		_SkipCount(ctx, consumed);
 		return false;
 	}
 	
@@ -642,7 +644,8 @@ namespace tests
 				}
 			} else {
 				// unknown character, may be processed later
-				ctx->offset--;
+				// we have to go back with offset
+				_SkipBackCount(ctx, 1);
 				break;
 			}
 		}

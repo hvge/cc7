@@ -16,7 +16,8 @@
 
 #include <cc7tests/JSONReader.h>
 #include <cc7tests/detail/TestUtilities.h>
-#include <ctype.h>
+#include <cc7/HexString.h>
+#include <cc7/Base64.h>
 
 namespace cc7
 {
@@ -50,6 +51,25 @@ namespace tests
 		}
 		return *selected_obj;
 	}
+	
+	cc7::ByteArray JSONValue::dataFromBase64StringAtPath(const std::string & path) const
+	{
+		ByteArray result;
+		if (!Base64_Decode(stringAtPath(path), 0, result)) {
+			throw std::invalid_argument("The selected string is not a Base64 string.");
+		}
+		return result;
+	}
+	
+	cc7::ByteArray JSONValue::dataFromHexStringAtPath(const std::string & path) const
+	{
+		ByteArray result;
+		if (!HexString_Decode(stringAtPath(path), result)) {
+			throw std::invalid_argument("The selected string is not a hexadecimal string.");
+		}
+		return result;
+	}
+
 	
 } // cc7::tests
 } // cc7

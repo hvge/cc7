@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <cc7/Platform.h>
+#include <cc7/ByteArray.h>
 #include <map>
 #include <vector>
 #include <stdexcept>
@@ -251,6 +251,10 @@ namespace tests
 		{
 			return valueAtPath(path, Double).asDouble();
 		}
+		
+		// byte array
+		cc7::ByteArray dataFromBase64StringAtPath(const std::string & path) const;
+		cc7::ByteArray dataFromHexStringAtPath(const std::string & path) const;
 		
 	private:
 		
