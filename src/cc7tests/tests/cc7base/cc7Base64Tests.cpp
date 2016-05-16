@@ -89,12 +89,12 @@ namespace tests
 			ByteArray out;
 			result = Base64_Decode(str1, 0, out);
 			ccstAssertTrue(result);
-			std::string out_str = to_string(out);
+			std::string out_str = CopyToString(out);
 			ccstAssertEqual(out_str, "Hello world");
 			
 			result = Base64_Decode(str2, 0, out);
 			ccstAssertTrue(result);
-			out_str = to_string(out);
+			out_str = CopyToString(out);
 			ccstAssertEqual(out_str, "Hello word");
 		}
 		
@@ -192,26 +192,26 @@ namespace tests
 			ByteArray output_data;
 			bool result = Base64_Decode(input, 64, output_data);
 			ccstAssertTrue(result);
-			std::string output = to_string(output_data);
+			std::string output = CopyToString(output_data);
 			ccstAssertEqual(expected_output, output);
 			
 			input.insert(0, "\n");
 			input.append("\n");
 			result = Base64_Decode(input, 64, output_data);
 			ccstAssertTrue(result);
-			output = to_string(output_data);
+			output = CopyToString(output_data);
 			ccstAssertEqual(expected_output, output);
 			
 			input = "TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2Np";
 			result = Base64_Decode(input, 64, output_data);
 			ccstAssertTrue(result);
-			output = to_string(output_data);
+			output = CopyToString(output_data);
 			ccstAssertEqual("Lorem ipsum dolor sit amet, consectetur adipisci", output);
 			
 			input = "                            TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2Np                         ";
 			result = Base64_Decode(input, 64, output_data);
 			ccstAssertTrue(result);
-			output = to_string(output_data);
+			output = CopyToString(output_data);
 			ccstAssertEqual("Lorem ipsum dolor sit amet, consectetur adipisci", output);
 			
 			input = "                                    ";

@@ -386,9 +386,9 @@ namespace tests
 			}
 			{
 				ByteArray a1(ByteRange("Hello world"));
-				ccstAssertEqual(to_string(a1), "Hello world");
+				ccstAssertEqual(cc7::CopyToString(a1), "Hello world");
 				ByteArray a2;
-				ccstAssertEqual(to_string(a2), "");
+				ccstAssertEqual(cc7::CopyToString(a2), "");
 			}
 		}
 		

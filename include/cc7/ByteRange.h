@@ -373,7 +373,7 @@ namespace cc7
 	/**
 	 Copy conversion from ByteRange to std::string
 	 */
-	inline std::string to_string(const ByteRange & range)
+	inline std::string CopyToString(const ByteRange & range)
 	{
 		return std::string(reinterpret_cast<const char*>(range.data()), range.size());
 	}

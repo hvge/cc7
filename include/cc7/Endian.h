@@ -77,20 +77,46 @@ namespace cc7
 		}
 	}
 
+	/**
+	 Converts integer |n|, which is in machine's byte order, into big endian representation.
+	 Only cc7::U16, cc7::U32 and cc7::U64, or compatible types, are supported in
+	 the template parameter T.
+	 */
+	template <typename T> T ToBigEndian(T n);
+	
+	/**
+	 Converts integer |n|, which is in machine's byte order, into little endian representation
+	 Only cc7::U16, cc7::U32 and cc7::U64, or compatible types, are supported in
+	 the template parameter T.
+	 */
+	template <typename T> T ToLittleEndian(T n);
+	
+	/**
+	 Converts big endian integer |n|, into machine's byte order representation.
+	 Only cc7::U16, cc7::U32 and cc7::U64, or compatible types, are supported in
+	 the template parameter T.
+	 */
+	template <typename T> T FromBigEndian(T n);
+	/**
+	 Converts little endian integer |n|, into machine's byte order representation.
+	 Only cc7::U16, cc7::U32 and cc7::U64, or compatible types, are supported in
+	 the template parameter T.
+	 */
+	template <typename T> T FromLittleEndian(T n);
 	
 #if defined(CC7_LITTLE_ENDIAN)
 	
-	template <typename T> T ToBigEndian(T n)		{ return detail::SwapEndian(n); }
-	template <typename T> T ToLittleEndian(T n)		{ return n; }
-	template <typename T> T FromBigEndian(T n)		{ return detail::SwapEndian(n); }
-	template <typename T> T FromLittleEndian(T n)	{ return n; }
+	template <typename T> inline T ToBigEndian(T n)      { return detail::SwapEndian(n); }
+	template <typename T> inline T ToLittleEndian(T n)   { return n; }
+	template <typename T> inline T FromBigEndian(T n)    { return detail::SwapEndian(n); }
+	template <typename T> inline T FromLittleEndian(T n) { return n; }
 	
 #elif defined(CC7_BIG_ENDIAN)
 	
-	template <typename T> T ToBigEndian(T n)		{ return n; }
-	template <typename T> T ToLittleEndian(T n)		{ return detail::SwapEndian(n); }
-	template <typename T> T FromBigEndian(T n)		{ return n; }
-	template <typename T> T FromLittleEndian(T n)	{ return detail::SwapEndian(n); }
+	template <typename T> inline T ToBigEndian(T n)      { return n; }
+	template <typename T> inline T ToLittleEndian(T n)   { return detail::SwapEndian(n); }
+	template <typename T> inline T FromBigEndian(T n)    { return n; }
+	template <typename T> inline T FromLittleEndian(T n) { return detail::SwapEndian(n); }
 
 #else
 	#error "Wrong ENDIAN setup in cc7/Platform.h"

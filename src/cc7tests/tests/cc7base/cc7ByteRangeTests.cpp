@@ -121,7 +121,7 @@ namespace tests
 			ccstAssertTrue(memcmp(r1.data(), s1.data(), std::min(r1.size(), s1.size())) == 0);
 			
 			r1.assign(chp1, 5);
-			ccstAssertEqual(to_string(r1), "Hello");
+			ccstAssertEqual(cc7::CopyToString(r1), "Hello");
 			
 			r1.assign(s1);
 			ccstAssertFalse(r1.empty());
@@ -262,25 +262,25 @@ namespace tests
 				std::string s1("Hello world!");
 				ByteRange r1(s1);
 				
-				ccstAssertEqual(to_string(r1.subRangeTo(4)), "Hell");
-				ccstAssertEqual(to_string(r1.subRangeTo(4).subRangeFrom(2)), "ll");
-				ccstAssertEqual(to_string(r1.subRangeTo(0)), "");
-				ccstAssertEqual(to_string(r1.subRangeTo(s1.size())), s1);
-				ccstAssertEqual(to_string(r1.subRangeFrom(6)), "world!");
-				ccstAssertEqual(to_string(r1.subRangeFrom(s1.size())), "");
+				ccstAssertEqual(cc7::CopyToString(r1.subRangeTo(4)), "Hell");
+				ccstAssertEqual(cc7::CopyToString(r1.subRangeTo(4).subRangeFrom(2)), "ll");
+				ccstAssertEqual(cc7::CopyToString(r1.subRangeTo(0)), "");
+				ccstAssertEqual(cc7::CopyToString(r1.subRangeTo(s1.size())), s1);
+				ccstAssertEqual(cc7::CopyToString(r1.subRangeFrom(6)), "world!");
+				ccstAssertEqual(cc7::CopyToString(r1.subRangeFrom(s1.size())), "");
 				
-				ccstAssertEqual(to_string(r1.subRange(2, 5)), "llo w");
-				ccstAssertEqual(to_string(r1.subRange(2, 5)), "llo w");
-				ccstAssertEqual(to_string(r1.subRange(0, 2)), "He");
-				ccstAssertEqual(to_string(r1.subRange(r1.size()-3, 3)), "ld!");
+				ccstAssertEqual(cc7::CopyToString(r1.subRange(2, 5)), "llo w");
+				ccstAssertEqual(cc7::CopyToString(r1.subRange(2, 5)), "llo w");
+				ccstAssertEqual(cc7::CopyToString(r1.subRange(0, 2)), "He");
+				ccstAssertEqual(cc7::CopyToString(r1.subRange(r1.size()-3, 3)), "ld!");
 				
 				r1.removePrefix(1);
-				ccstAssertEqual(to_string(r1), "ello world!");
+				ccstAssertEqual(cc7::CopyToString(r1), "ello world!");
 				r1.removeSuffix(1);
-				ccstAssertEqual(to_string(r1), "ello world");
+				ccstAssertEqual(cc7::CopyToString(r1), "ello world");
 				
 				r1.assign(s1);
-				ccstAssertEqual(to_string(r1.subRange(0, s1.size())), "Hello world!");
+				ccstAssertEqual(cc7::CopyToString(r1.subRange(0, s1.size())), "Hello world!");
 				
 				// Keep s1 alive...
 				ccstAssertEqual(s1, "Hello world!");
@@ -320,9 +320,9 @@ namespace tests
 		{
 			std::string s1("Hello world!");
 			ByteRange r1(s1);
-			ccstAssertEqual(to_string(r1), s1);
+			ccstAssertEqual(cc7::CopyToString(r1), s1);
 			ByteRange r2;
-			ccstAssertEqual(to_string(r2), "");
+			ccstAssertEqual(cc7::CopyToString(r2), "");
 		}
 	};
 	

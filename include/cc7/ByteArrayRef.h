@@ -21,7 +21,11 @@
 namespace cc7
 {
 	//
-	// Temporary, reference implementation of ByteArray.
+	// The ByteArray class is a special version of vector of bytes which
+	// implements secure data cleanup when the object is destroyed.
+	//
+	// This is a reference implementation of ByteArray class, with using
+	// regular std::vector in cooperation with a custom std::allocator.
 	//
 	
 	template <class T> class ByteArrayAllocator : public std::allocator<T>
@@ -167,9 +171,9 @@ namespace cc7
 	};
 	
 	/**
-	 Copy conversion from ByteArray to std::string
+	 Copy conversion, from ByteArray to std::string
 	 */
-	inline std::string to_string(const ByteArray & array)
+	inline std::string CopyToString(const ByteArray & array)
 	{
 		return std::string(reinterpret_cast<const char*>(array.data()), array.size());
 	}

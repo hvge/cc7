@@ -116,28 +116,27 @@ namespace cc7
 									bool & end_marker)
 	{
 		if (sequence_length == 0) {
-			// not a real end marker, but this is an end of processing.
+			// Not a real end marker, but this is an end of processing.
 			end_marker = true;
 			return true;
 		}
 		
 		// Check sequence length.
 		if ((sequence_length & 3) != 0) {
-			// wrong block size.
-			CC7_ASSERT(false, "Internal error. Wrong block size.");
+			// Wrong size of the sequence. No assertion, because we're using
+			// this routine also for non-wrapped strings.
 			return false;
 		}
 		if (sequence_start + sequence_length > str.length()) {
+			// Internal error. The provided sequence is out of the input string's range.
 			CC7_ASSERT(false, "Internal error. Provided block size is too long");
 			return false;
 		}
 		
 		//
-		// Reserve bytes in the byte array
+		// Reserve bytes in the byte array. The produced_size is a worst case
+		// estimation for length of final data.
 		//
-		// The produced_size is a worst case estimation for length of final data.
-		// This value is adjusted later if the sequence is terminated with padding markers.
-		
 		size_t blocks_count  = sequence_length / 4;
 		size_t block_size    = blocks_count * 3;
 		out_data.reserve(out_data.size() + block_size);
@@ -205,8 +204,10 @@ namespace cc7
 				// c3 is correct and last character is padding
 				out_data.push_back((c[1] << 4) | (c[2] >> 2));
 			} else {
-				// This migh never happen.
-				CC7_ASSERT(false, "Internal error. This case must be handled on higher level.");
+				// This migh never happen. The 'end_marker' claims that the sequence
+				// contains padding marker, but the deep inspection is telling something else.
+				// Seems that we somehow processed less or more bytes as was planned.
+				CC7_ASSERT(false, "Internal error.");
 				return false;
 			}
 		}
@@ -262,7 +263,7 @@ namespace cc7
 				}
 				const char * line_end = str_p;
 				size_t line_length = line_end - line_begin;
-				if (line_length) {
+				if (line_length > 0) {
 					// There's some sequence of non-space characters.
 					if (end_marker) {
 						// previous line did end with end-marker. If there's a next line, then this is an error.

@@ -92,7 +92,7 @@ namespace tests
 		
 		size_t indent_before = tl().indentationLevel();
 		
-		for (auto desc : _methods) {
+		for (auto&& desc : _methods) {
 			std::function<void()>	method_ptr;
 			std::string				method_name;
 			tie(method_ptr, method_name) = desc;
