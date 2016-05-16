@@ -52,8 +52,8 @@ namespace tests
 						"	 \"zzz\":{ "
 						"     \"integer\" : 64,"
 						"     \"double\"  : 6.4,"
-						"     \"unicode1\":\"Švárny ščípäk\","
-						"     \"unicode2\":\"\\u0160v\\u00E1rny \\u0161\\u010d\\u00eDp\\u00E4k\""
+						"     \"unicode1\":\"Ľalie poľné\","
+						"     \"unicode2\":\"\\u013dalie po\\u013En\\u00E9\""
 						"   }"
 						" },"
 						" \"array\" :"
@@ -99,8 +99,8 @@ namespace tests
 			ccstAssertEqual(root.booleanAtPath("object.yyy"), false);
 			ccstAssertEqual(root.integerAtPath("object.zzz.integer"), 64);
 			ccstAssertEqual(root.doubleAtPath("object.zzz.double"), 6.4);
-			ccstAssertEqual(root.stringAtPath("object.zzz.unicode1"), u8"Švárny ščípäk");
-			ccstAssertEqual(root.stringAtPath("object.zzz.unicode2"), u8"Švárny ščípäk");
+			ccstAssertEqual(root.stringAtPath("object.zzz.unicode1"), u8"Ľalie poľné");
+			ccstAssertEqual(root.stringAtPath("object.zzz.unicode2"), u8"Ľalie poľné");
 			
 			auto&& array = root.arrayAtPath("array");
 			ccstAssertEqual(array[0].asString(), "a");
@@ -127,14 +127,29 @@ namespace tests
 			ccstAssertEqual(array4[2].asDouble(), 1e3);
 			ccstAssertEqual(array4[3].asDouble(), 3.2e-1);
 		}
-
 		
 		void testComplexJson()
 		{
-			JSONValue complex = JSON_ParseFile(g_baseFiles, "test-data/cc7base/json-complex.json");
-			ccstAssertTrue(complex.isType(JSONValue::Object));
+			//
+			// The complex test file was grabbed from http://json.org/example.html
+			//
+			JSONValue root = JSON_ParseFile(g_baseFiles, "test-data/cc7base/json-complex.json");
+			ccstAssertTrue(root.isType(JSONValue::Object));
+			ccstAssertEqual(root.stringAtPath("web-app.servlet-mapping.cofaxEmail"), "/cofaxutil/aemail/*");
+			ccstAssertEqual(root.stringAtPath("web-app.taglib.taglib-location"), "/WEB-INF/tlds/cofax.tld");
+			
+			std::vector<std::string> servlet_names({
+				"cofaxCDS", "cofaxEmail", "cofaxAdmin", "fileServlet", "cofaxTools"
+			});
+			
+			auto&& servlets = root.arrayAtPath("web-app.servlet");
+			ccstAssertEqual(servlets.size(), servlet_names.size());
+			for (auto i = 0; i < servlets.size(); i++) {
+				auto&& our_name = servlets.at(i).stringAtPath("servlet-name");
+				auto&& exp_name = servlet_names.at(i);
+				ccstAssertEqual(our_name, exp_name);
+			}
 		}
-
 	};
 	
 	CC7_CREATE_UNIT_TEST(tt7JSONReaderTests, "cc7 test")

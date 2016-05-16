@@ -1,6 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
-rm ./test-data.generated/*
-../../tools/conv-tool/data-converter.sh test-data.conf
+DEST_DIR=test-data.generated
+CONVERT=../../tools/conv-tool/data-converter.sh
+
+touch ${DEST_DIR}/foo
+rm    ${DEST_DIR}/*
+${CONVERT} test-data.conf

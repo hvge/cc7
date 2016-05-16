@@ -472,26 +472,32 @@ static int process_configuration(Configuration & conf)
 		for (string & ns : dir.gen_namespaces) {
 			fprintf(DC, "namespace %s\n{\n", ns.c_str());
 			close_namespaces.insert(0, "} // " + ns + "\n");
+			if (!full_namespace.empty()) {
+				full_namespace.append("::");
+			}
 			full_namespace.append(ns);
-			full_namespace.append("::");
 		}
-		full_namespace.append(dir.gen_identifier);
 		
 		std::string help_first_file;
 		if (!dir.files.empty()) {
 			help_first_file = dir.files.front().gen_source_full_path;
 		}
 		fprintf(DC, "/*\n");
-		fprintf(DC, "    Usage:\n");
-		fprintf(DC, "  \n");
+		fprintf(DC, "  Available files:\n\n");
+		for (FileEntry & file : dir.files) {
+			fprintf(DC, "     * %s\n", file.gen_source_full_path.c_str());
+		}	
+		fprintf(DC, "\n");
+		fprintf(DC, "  Usage:\n");
+		fprintf(DC, "\n");
 		fprintf(DC, "    #include <cc7tests/TestDirectory.h>\n");
-		fprintf(DC, "  \n");
-		fprintf(DC, "    using namespace cc7::tests;\n");
-		fprintf(DC, "  \n");
-		fprintf(DC, "    void someTestFunction()\n");
-		fprintf(DC, "    {\n");
-		fprintf(DC, "       extern TestDirectory %s;\n", full_namespace.c_str());
-		fprintf(DC, "       TestFile f = %s.findFile(\"%s\");\n", dir.gen_identifier.c_str(), help_first_file.c_str());
+		fprintf(DC, "\n");
+		fprintf(DC, "    namespace %s {\n", full_namespace.c_str());
+		fprintf(DC, "       extern cc7::tests::TestDirectory %s;\n", dir.gen_identifier.c_str());
+		fprintf(DC, "    }\n");
+		fprintf(DC, "\n");
+		fprintf(DC, "    void someTestFunction() {\n");
+		fprintf(DC, "       cc7::tests::TestFile f = %s.findFile(\"%s\");\n", dir.gen_identifier.c_str(), help_first_file.c_str());
 		fprintf(DC, "       // Do whatever you want with TestFile object\n");
 		fprintf(DC, "       // You don't need to close file or directory\n");
 		fprintf(DC, "    }\n");
@@ -512,7 +518,7 @@ static int process_configuration(Configuration & conf)
 		// Directory instantiation
 		fprintf(DC, "//\ncc7::tests::TestDirectory %s({\n", dir.gen_identifier.c_str());
 		for (FileEntry & file : dir.files) {
-			fprintf(DC, "\t&%s,\t\t// %s\n", file.gen_var_name.c_str(), file.gen_source_full_path.c_str());
+			fprintf(DC, "\t&%s,\n", file.gen_var_name.c_str());
 		}		
 		fprintf(DC, "});\n\n");
 		
@@ -603,18 +609,18 @@ int write_binary(FILE * OUT, FILE * SRC, FileEntry & file, const string & var_by
 	write_line(OUT);
 	fprintf(OUT, "static const cc7::byte %s[] = {", var_bytes.c_str());
 	int number_of_bytes = 0;
-	int row = 0;
+	int column = 0;
 	while (1) {
 		uint8_t byte;
 		if (1 == fread(&byte, sizeof(byte), 1, SRC)) {
 			number_of_bytes++;
-			if (row == 0) {
+			if (column == 0) {
 				fprintf(OUT, "\n0x%02x,", byte);
 			} else {
 				fprintf(OUT, "0x%02x,", byte);
 			}
-			if (++row == 16) {
-				row = 0;
+			if (++column == 16) {
+				column = 0;
 			}
 		} else {
 			if (ferror(SRC)) {

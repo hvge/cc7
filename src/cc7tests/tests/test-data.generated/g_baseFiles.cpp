@@ -9,16 +9,21 @@ namespace cc7
 namespace tests
 {
 /*
-    Usage:
-  
+  Available files:
+
+     * test-data/cc7base/json-simple.json
+     * test-data/cc7base/json-complex.json
+
+  Usage:
+
     #include <cc7tests/TestDirectory.h>
-  
-    using namespace cc7::tests;
-  
-    void someTestFunction()
-    {
-       extern TestDirectory cc7::tests::g_baseFiles;
-       TestFile f = g_baseFiles.findFile("test-data/cc7base/json-simple.json");
+
+    namespace cc7::tests {
+       extern cc7::tests::TestDirectory g_baseFiles;
+    }
+
+    void someTestFunction() {
+       cc7::tests::TestFile f = g_baseFiles.findFile("test-data/cc7base/json-simple.json");
        // Do whatever you want with TestFile object
        // You don't need to close file or directory
     }
@@ -40,23 +45,22 @@ static const cc7::byte json_simple_json_bytes[] = {
 0x69,0x6e,0x74,0x65,0x67,0x65,0x72,0x22,0x20,0x3a,0x0a,0x09,0x09,0x09,0x36,0x34,
 0x2c,0x0a,0x09,0x09,0x20,0x22,0x64,0x6f,0x75,0x62,0x6c,0x65,0x22,0x20,0x20,0x3a,
 0x0a,0x09,0x09,0x09,0x36,0x2e,0x34,0x2c,0x0a,0x09,0x09,0x20,0x22,0x75,0x6e,0x69,
-0x63,0x6f,0x64,0x65,0x31,0x22,0x3a,0x22,0xc5,0xa0,0x76,0xc3,0xa1,0x72,0x6e,0x79,
-0x20,0xc5,0xa1,0xc4,0x8d,0xc3,0xad,0x70,0xc3,0xa4,0x6b,0x22,0x2c,0x0a,0x09,0x09,
-0x20,0x22,0x75,0x6e,0x69,0x63,0x6f,0x64,0x65,0x32,0x22,0x3a,0x22,0x5c,0x75,0x30,
-0x31,0x36,0x30,0x76,0x5c,0x75,0x30,0x30,0x45,0x31,0x72,0x6e,0x79,0x20,0x5c,0x75,
-0x30,0x31,0x36,0x31,0x5c,0x75,0x30,0x31,0x30,0x64,0x5c,0x75,0x30,0x30,0x65,0x44,
-0x70,0x5c,0x75,0x30,0x30,0x45,0x34,0x6b,0x22,0x0a,0x09,0x20,0x7d,0x0a,0x20,0x7d,
-0x2c,0x0a,0x20,0x22,0x61,0x72,0x72,0x61,0x79,0x22,0x20,0x3a,0x0a,0x20,0x5b,0x0a,
-0x09,0x09,0x22,0x61,0x22,0x2c,0x20,0x22,0x62,0x22,0x2c,0x20,0x22,0x63,0x22,0x2c,
-0x20,0x74,0x72,0x75,0x65,0x2c,0x0a,0x09,0x09,0x7b,0x22,0x73,0x75,0x62,0x2d,0x61,
-0x72,0x72,0x61,0x79,0x22,0x3a,0x5b,0x31,0x2c,0x32,0x2c,0x33,0x2c,0x34,0x5d,0x7d,
-0x2c,0x0a,0x09,0x09,0x7b,0x22,0x73,0x75,0x62,0x2d,0x61,0x72,0x72,0x61,0x79,0x22,
-0x3a,0x5b,0x31,0x2e,0x31,0x2c,0x32,0x2e,0x32,0x2c,0x33,0x2e,0x33,0x2c,0x34,0x2e,
-0x34,0x5d,0x7d,0x2c,0x0a,0x09,0x09,0x7b,0x22,0x73,0x75,0x62,0x2d,0x61,0x72,0x72,
-0x61,0x79,0x22,0x3a,0x5b,0x2d,0x31,0x2c,0x20,0x2d,0x31,0x2e,0x31,0x2c,0x20,0x31,
-0x65,0x33,0x0a,0x09,0x09,0x09,0x09,0x09,0x20,0x20,0x2c,0x33,0x2e,0x32,0x65,0x2d,
-0x31,0x5d,0x0a,0x09,0x20,0x20,0x20,0x20,0x7d,0x0a,0x20,0x20,0x5d,0x0a,0x7d,};
-static const size_t json_simple_json_size = 447;
+0x63,0x6f,0x64,0x65,0x31,0x22,0x3a,0x22,0xc4,0xbd,0x61,0x6c,0x69,0x65,0x20,0x70,
+0x6f,0xc4,0xbe,0x6e,0xc3,0xa9,0x22,0x2c,0x0a,0x09,0x09,0x20,0x22,0x75,0x6e,0x69,
+0x63,0x6f,0x64,0x65,0x32,0x22,0x3a,0x22,0x5c,0x75,0x30,0x31,0x33,0x64,0x61,0x6c,
+0x69,0x65,0x20,0x70,0x6f,0x5c,0x75,0x30,0x31,0x33,0x45,0x6e,0x5c,0x75,0x30,0x30,
+0x45,0x39,0x22,0x0a,0x09,0x20,0x7d,0x0a,0x20,0x7d,0x2c,0x0a,0x20,0x22,0x61,0x72,
+0x72,0x61,0x79,0x22,0x20,0x3a,0x0a,0x20,0x5b,0x0a,0x09,0x09,0x22,0x61,0x22,0x2c,
+0x20,0x22,0x62,0x22,0x2c,0x20,0x22,0x63,0x22,0x2c,0x20,0x74,0x72,0x75,0x65,0x2c,
+0x0a,0x09,0x09,0x7b,0x22,0x73,0x75,0x62,0x2d,0x61,0x72,0x72,0x61,0x79,0x22,0x3a,
+0x5b,0x31,0x2c,0x32,0x2c,0x33,0x2c,0x34,0x5d,0x7d,0x2c,0x0a,0x09,0x09,0x7b,0x22,
+0x73,0x75,0x62,0x2d,0x61,0x72,0x72,0x61,0x79,0x22,0x3a,0x5b,0x31,0x2e,0x31,0x2c,
+0x32,0x2e,0x32,0x2c,0x33,0x2e,0x33,0x2c,0x34,0x2e,0x34,0x5d,0x7d,0x2c,0x0a,0x09,
+0x09,0x7b,0x22,0x73,0x75,0x62,0x2d,0x61,0x72,0x72,0x61,0x79,0x22,0x3a,0x5b,0x2d,
+0x31,0x2c,0x20,0x2d,0x31,0x2e,0x31,0x2c,0x20,0x31,0x65,0x33,0x0a,0x09,0x09,0x09,
+0x09,0x09,0x20,0x20,0x2c,0x33,0x2e,0x32,0x65,0x2d,0x31,0x5d,0x0a,0x09,0x20,0x20,
+0x20,0x20,0x7d,0x0a,0x20,0x20,0x5d,0x0a,0x7d,};
+static const size_t json_simple_json_size = 425;
 // -----------------------------------------------------------------------------
 //
 static cc7::tests::TestResource json_simple_json
@@ -69,95 +73,108 @@ static cc7::tests::TestResource json_simple_json
 // -----------------------------------------------------------------------------
 // File: test-data/cc7base/json-complex.json
 // -----------------------------------------------------------------------------
-static const char json_complex_json_bytes[] = R"cc7resourcxx({"web-app": {
-  "servlet": [   
-    {
-      "servlet-name": "cofaxCDS",
-      "servlet-class": "org.cofax.cds.CDSServlet",
-      "init-param": {
-        "configGlossary:installationAt": "Philadelphia, PA",
-        "configGlossary:adminEmail": "ksm@pobox.com",
-        "configGlossary:poweredBy": "Cofax",
-        "configGlossary:poweredByIcon": "/images/cofax.gif",
-        "configGlossary:staticPath": "/content/static",
-        "templateProcessorClass": "org.cofax.WysiwygTemplate",
-        "templateLoaderClass": "org.cofax.FilesTemplateLoader",
-        "templatePath": "templates",
-        "templateOverridePath": "",
-        "defaultListTemplate": "listTemplate.htm",
-        "defaultFileTemplate": "articleTemplate.htm",
-        "useJSP": false,
-        "jspListTemplate": "listTemplate.jsp",
-        "jspFileTemplate": "articleTemplate.jsp",
-        "cachePackageTagsTrack": 200,
-        "cachePackageTagsStore": 200,
-        "cachePackageTagsRefresh": 60,
-        "cacheTemplatesTrack": 100,
-        "cacheTemplatesStore": 50,
-        "cacheTemplatesRefresh": 15,
-        "cachePagesTrack": 200,
-        "cachePagesStore": 100,
-        "cachePagesRefresh": 10,
-        "cachePagesDirtyRead": 10,
-        "searchEngineListTemplate": "forSearchEnginesList.htm",
-        "searchEngineFileTemplate": "forSearchEngines.htm",
-        "searchEngineRobotsDb": "WEB-INF/robots.db",
-        "useDataStore": true,
-        "dataStoreClass": "org.cofax.SqlDataStore",
-        "redirectionClass": "org.cofax.SqlRedirection",
-        "dataStoreName": "cofax",
-        "dataStoreDriver": "com.microsoft.jdbc.sqlserver.SQLServerDriver",
-        "dataStoreUrl": "jdbc:microsoft:sqlserver://LOCALHOST:1433;DatabaseName=goon",
-        "dataStoreUser": "sa",
-        "dataStorePassword": "dataStoreTestQuery",
-        "dataStoreTestQuery": "SET NOCOUNT ON;select test='test';",
-        "dataStoreLogFile": "/usr/local/tomcat/logs/datastore.log",
-        "dataStoreInitConns": 10,
-        "dataStoreMaxConns": 100,
-        "dataStoreConnUsageLimit": 100,
-        "dataStoreLogLevel": "debug",
-        "maxUrlLength": 500}},
-    {
-      "servlet-name": "cofaxEmail",
-      "servlet-class": "org.cofax.cds.EmailServlet",
-      "init-param": {
-      "mailHost": "mail1",
-      "mailHostOverride": "mail2"}},
-    {
-      "servlet-name": "cofaxAdmin",
-      "servlet-class": "org.cofax.cds.AdminServlet"},
- 
-    {
-      "servlet-name": "fileServlet",
-      "servlet-class": "org.cofax.cds.FileServlet"},
-    {
-      "servlet-name": "cofaxTools",
-      "servlet-class": "org.cofax.cms.CofaxToolsServlet",
-      "init-param": {
-        "templatePath": "toolstemplates/",
-        "log": 1,
-        "logLocation": "/usr/local/tomcat/logs/CofaxTools.log",
-        "logMaxSize": "",
-        "dataLog": 1,
-        "dataLogLocation": "/usr/local/tomcat/logs/dataLog.log",
-        "dataLogMaxSize": "",
-        "removePageCache": "/content/admin/remove?cache=pages&id=",
-        "removeTemplateCache": "/content/admin/remove?cache=templates&id=",
-        "fileTransferFolder": "/usr/local/tomcat/webapps/content/fileTransferFolder",
-        "lookInContext": 1,
-        "adminGroupID": 4,
-        "betaServer": true}}],
-  "servlet-mapping": {
-    "cofaxCDS": "/",
-    "cofaxEmail": "/cofaxutil/aemail/*",
-    "cofaxAdmin": "/admin/*",
-    "fileServlet": "/static/*",
-    "cofaxTools": "/tools/*"},
- 
-  "taglib": {
-    "taglib-uri": "cofax.tld",
-    "taglib-location": "/WEB-INF/tlds/cofax.tld"}}})cc7resourcxx";
-static const size_t json_complex_json_size = 3467;
+static const char json_complex_json_bytes[] = R"cc7resourcxx({
+  "web-app": {
+    "servlet-mapping": {
+      "cofaxTools": "/tools/*", 
+      "cofaxCDS": "/", 
+      "fileServlet": "/static/*", 
+      "cofaxAdmin": "/admin/*", 
+      "cofaxEmail": "/cofaxutil/aemail/*"
+    }, 
+    "taglib": {
+      "taglib-location": "/WEB-INF/tlds/cofax.tld", 
+      "taglib-uri": "cofax.tld"
+    }, 
+    "servlet": [
+      {
+        "servlet-name": "cofaxCDS", 
+        "init-param": {
+          "cachePagesStore": 100, 
+          "searchEngineListTemplate": "forSearchEnginesList.htm", 
+          "configGlossary:adminEmail": "ksm@pobox.com", 
+          "maxUrlLength": 500, 
+          "dataStoreTestQuery": "SET NOCOUNT ON;select test='test';", 
+          "defaultFileTemplate": "articleTemplate.htm", 
+          "dataStoreLogFile": "/usr/local/tomcat/logs/datastore.log", 
+          "templateLoaderClass": "org.cofax.FilesTemplateLoader", 
+          "dataStoreClass": "org.cofax.SqlDataStore", 
+          "redirectionClass": "org.cofax.SqlRedirection", 
+          "templateOverridePath": "", 
+          "cacheTemplatesStore": 50, 
+          "dataStoreUrl": "jdbc:microsoft:sqlserver://LOCALHOST:1433;DatabaseName=goon", 
+          "searchEngineFileTemplate": "forSearchEngines.htm", 
+          "cachePagesTrack": 200, 
+          "cachePackageTagsStore": 200, 
+          "dataStoreName": "cofax", 
+          "dataStorePassword": "dataStoreTestQuery", 
+          "useJSP": false, 
+          "defaultListTemplate": "listTemplate.htm", 
+          "configGlossary:poweredBy": "Cofax", 
+          "dataStoreUser": "sa", 
+          "jspListTemplate": "listTemplate.jsp", 
+          "jspFileTemplate": "articleTemplate.jsp", 
+          "dataStoreMaxConns": 100, 
+          "cachePagesDirtyRead": 10, 
+          "cachePagesRefresh": 10, 
+          "cacheTemplatesTrack": 100, 
+          "dataStoreConnUsageLimit": 100, 
+          "configGlossary:installationAt": "Philadelphia, PA", 
+          "searchEngineRobotsDb": "WEB-INF/robots.db", 
+          "templateProcessorClass": "org.cofax.WysiwygTemplate", 
+          "cachePackageTagsRefresh": 60, 
+          "configGlossary:staticPath": "/content/static", 
+          "templatePath": "templates", 
+          "useDataStore": true, 
+          "cacheTemplatesRefresh": 15, 
+          "dataStoreDriver": "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
+          "configGlossary:poweredByIcon": "/images/cofax.gif", 
+          "cachePackageTagsTrack": 200, 
+          "dataStoreLogLevel": "debug", 
+          "dataStoreInitConns": 10
+        }, 
+        "servlet-class": "org.cofax.cds.CDSServlet"
+      }, 
+      {
+        "servlet-name": "cofaxEmail", 
+        "init-param": {
+          "mailHostOverride": "mail2", 
+          "mailHost": "mail1"
+        }, 
+        "servlet-class": "org.cofax.cds.EmailServlet"
+      }, 
+      {
+        "servlet-name": "cofaxAdmin", 
+        "servlet-class": "org.cofax.cds.AdminServlet"
+      }, 
+      {
+        "servlet-name": "fileServlet", 
+        "servlet-class": "org.cofax.cds.FileServlet"
+      }, 
+      {
+        "servlet-name": "cofaxTools", 
+        "init-param": {
+          "logLocation": "/usr/local/tomcat/logs/CofaxTools.log", 
+          "fileTransferFolder": "/usr/local/tomcat/webapps/content/fileTransferFolder", 
+          "log": 1, 
+          "dataLog": 1, 
+          "dataLogLocation": "/usr/local/tomcat/logs/dataLog.log", 
+          "adminGroupID": 4, 
+          "lookInContext": 1, 
+          "removePageCache": "/content/admin/remove?cache=pages&id=", 
+          "removeTemplateCache": "/content/admin/remove?cache=templates&id=", 
+          "logMaxSize": "", 
+          "dataLogMaxSize": "", 
+          "betaServer": true, 
+          "templatePath": "toolstemplates/"
+        }, 
+        "servlet-class": "org.cofax.cms.CofaxToolsServlet"
+      }
+    ]
+  }
+}
+)cc7resourcxx";
+static const size_t json_complex_json_size = 3792;
 // -----------------------------------------------------------------------------
 //
 static cc7::tests::TestResource json_complex_json
@@ -172,8 +189,8 @@ static cc7::tests::TestResource json_complex_json
 // -----------------------------------------------------------------------------
 //
 cc7::tests::TestDirectory g_baseFiles({
-	&json_simple_json,		// test-data/cc7base/json-simple.json
-	&json_complex_json,		// test-data/cc7base/json-complex.json
+	&json_simple_json,
+	&json_complex_json,
 });
 
 } // tests
