@@ -15,7 +15,7 @@
  */
 
 #include <cc7tests/CC7Tests.h>
-#include <cc7tests/detail/TestUtilities.h>
+#include <cc7tests/detail/StringUtils.h>
 
 namespace cc7
 {

@@ -16,9 +16,9 @@
 
 #include <cc7tests/TestManager.h>
 #include <cc7tests/PerformanceTimer.h>
-#include <cc7tests/detail/TestUtilities.h>
+#include <cc7tests/detail/StringUtils.h>
 
-#include <cc7/Assert.h>
+#include <cc7/DebugFeatures.h>
 
 namespace cc7
 {
@@ -30,7 +30,9 @@ namespace tests
 	TestManager::TestManager() :
 		_test_manager_name("CC7"),
 		_assertion_breakpoint_enabled(false),
-		_old_assertion_setup({nullptr, nullptr})
+		_log_capturig_enabled(false),
+		_old_assertion_setup({nullptr, nullptr}),
+		_old_log_setup({nullptr, nullptr})
 	{
 		
 	}
@@ -86,6 +88,16 @@ namespace tests
 		return tl().incidentBreakpointEnabled();
 	}
 	
+	void TestManager::setLogCapturingEnabled(bool enabled)
+	{
+		_log_capturig_enabled = enabled;
+	}
+	
+	bool TestManager::logCapturingEnabled() const
+	{
+		return _log_capturig_enabled;
+	}
+	
 	
 	
 	// ------------------------------------------------------------------------------------
@@ -131,6 +143,7 @@ namespace tests
 	{
 		// Keep current assertion handler and setup ours
 		setupAssertionHandler();
+		setupLogCapturingHandler();
 		
 		// Prepare tags for filtering
 		auto included_tags = detail::SplitString(incl, ' ');
@@ -175,6 +188,7 @@ namespace tests
 										  PerformanceTimer::humanReadableTime(elapsed_time).c_str()));
 		
 		// Set previous assertion handler back
+		restoreLogCapturingHandler();
 		restoreAssertionHandler();
 		return tests_result;
 	}
@@ -341,6 +355,51 @@ namespace tests
 		tl().logMessage(line_begin);
 	}
 	
+	// Log capturing
+	
+	void TestManager::_LogHandler(void * handler_data, const char * message)
+	{
+		TestManager * manager = reinterpret_cast<TestManager*>(handler_data);
+		if (manager && manager->_log_capturig_enabled) {
+			std::string msg;
+			size_t len = strlen(message);
+			msg.reserve(len + 7);
+			msg.assign("> CC7: ");
+			msg.append(message, len);
+			manager->tl().logMessage(msg);
+		}
+	}
+	
+	void TestManager::setupLogCapturingHandler()
+	{
+#ifdef ENABLE_CC7_LOG
+		_old_log_setup = cc7::debug::GetLogHandler();
+		cc7::debug::SetLogHandler({_LogHandler, this});
+#endif
+	}
+	
+	void TestManager::restoreLogCapturingHandler()
+	{
+#ifdef ENABLE_CC7_LOG
+		cc7::debug::SetLogHandler(_old_log_setup);
+		_old_log_setup = {nullptr, nullptr};
+#endif
+	}
+
+	void TestManager::systemLog(const char * message)
+	{
+#ifdef ENABLE_CC7_LOG
+		if (_log_capturig_enabled) {
+			// Log capturing is enabled, we have to put message directly to the
+			// previously used handler
+			if (_old_log_setup.handler_data) {
+				_old_log_setup.handler(_old_log_setup.handler_data, message);
+			}
+		} else {
+			CC7_LOG("%s", message);
+		}
+#endif
+	}
 
 	
 	// ------------------------------------------------------------------------------------
@@ -358,7 +417,7 @@ namespace tests
 	void TestManager::addAssertion(const char * message)
 	{
 		if (_assertion_breakpoint_enabled) {
-			CC7_LOG("%s", message);
+			systemLog(message);
 			CC7_BREAKPOINT();
 		}
 	}
@@ -366,15 +425,15 @@ namespace tests
 	void TestManager::setupAssertionHandler()
 	{
 #ifdef ENABLE_CC7_ASSERT
-		_old_assertion_setup = cc7::error::GetAssertionHandler();
-		cc7::error::SetAssertionHandler({_AssertionHandler, nullptr});
+		_old_assertion_setup = cc7::debug::GetAssertionHandler();
+		cc7::debug::SetAssertionHandler({_AssertionHandler, this});
 #endif
 	}
 	
 	void TestManager::restoreAssertionHandler()
 	{
 #ifdef ENABLE_CC7_ASSERT
-		cc7::error::SetAssertionHandler(_old_assertion_setup);
+		cc7::debug::SetAssertionHandler(_old_assertion_setup);
 		_old_assertion_setup = { nullptr, nullptr };
 #endif
 	}

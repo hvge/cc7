@@ -16,7 +16,7 @@
 
 #include <cc7tests/JSONReader.h>
 #include <cc7tests/TestDirectory.h>
-#include <cc7tests/detail/TestUtilities.h>
+#include <cc7tests/detail/StringUtils.h>
 #include <ctype.h>
 
 namespace cc7

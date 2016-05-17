@@ -14,40 +14,20 @@
  * limitations under the License.
  */
 
-#include <cc7/Assert.h>
+#include <cc7/DebugFeatures.h>
 
 #if !defined(CC7_APPLE)
 #error "This file is for Apple platforms only"
 #endif
 
-#pragma mark - CC7_LOG
-
-#if defined(ENABLE_CC7_LOG)
-
-void CC7LogImpl(const char * fmt, ...)
-{
-	char buffer[1024];
-	va_list args;
-	va_start(args, fmt);
-	vsnprintf(buffer, 1024, fmt, args);
-	buffer[1024 - 1] = 0;
-	va_end(args);
-	
-	NSLog(@"CC7: %@", [NSString stringWithUTF8String:buffer]);
-}
-
-#endif //ENABLE_CC7_LOG
-
-
 #pragma mark - Assertion log
 
 #if defined(ENABLE_CC7_ASSERT)
-
 namespace cc7
 {
-namespace error
+namespace debug
 {
-	static void private_objcDumpToLog(void * foo, const char * file, int line, const char * message)
+	static void private_DumpAssertToLog(void * foo, const char * file, int line, const char * message)
 	{
 		NSLog(@"%@", [NSString stringWithUTF8String:message]);
 		//
@@ -55,13 +35,33 @@ namespace error
 		//
 		CC7_BREAKPOINT();
 	}
-
+	
 	AssertionHandlerSetup Platform_GetDefaultAssertionHandler()
 	{
-		static AssertionHandlerSetup s_default_setup = { private_objcDumpToLog, nullptr };
+		static AssertionHandlerSetup s_default_setup = { private_DumpAssertToLog, nullptr };
 		return s_default_setup;
 	}
-}
-}
+} // cc7::debug
+} // cc7
+#endif
 
-#endif //ENABLE_CC7_ASSERT
+#pragma mark - Debug log
+
+#if defined(ENABLE_CC7_LOG)
+namespace cc7
+{
+namespace debug
+{
+	static void private_LogImpl(void * foo, const char * message)
+	{
+		NSLog(@"CC7: %@", [NSString stringWithUTF8String:message]);
+	}
+	
+	LogHandlerSetup Platform_GetDefaultLogHandler()
+	{
+		static LogHandlerSetup s_default_setup = { private_LogImpl, nullptr };
+		return s_default_setup;
+	}
+} // cc7::debug
+} // cc7
+#endif //ENABLE_CC7_LOG

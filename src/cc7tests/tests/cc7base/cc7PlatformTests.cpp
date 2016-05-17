@@ -53,13 +53,13 @@ namespace tests
 		void testDebugFeatures()
 		{
 #if defined(DEBUG)
-			ccstAssertTrue(cc7::error::HasDebugFeaturesTurnedOn());
+			ccstAssertTrue(cc7::debug::HasDebugFeaturesTurnedOn());
 #endif
 #if defined(ENABLE_CC7_ASSERT)
-			ccstAssertTrue(cc7::error::HasDebugFeaturesTurnedOn());
+			ccstAssertTrue(cc7::debug::HasDebugFeaturesTurnedOn());
 #endif
 #if defined(ENABLE_CC7_LOG)
-			ccstAssertTrue(cc7::error::HasDebugFeaturesTurnedOn());
+			ccstAssertTrue(cc7::debug::HasDebugFeaturesTurnedOn());
 #endif
 			
 #if !defined(DEBUG) && !defined(ENABLE_CC7_ASSERT) && !defined(ENABLE_CC7_LOG)

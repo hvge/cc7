@@ -53,10 +53,10 @@
 
 /**
  The CC7_USE_UNIT_TEST() makes previously created internal structure visible
- in the current context. Note that namespace where's this macro used must match
+ in the current context. Note that the namespace where's this macro used, must match
  the one, where test structure was created.
  
- Normally you don't need to use this macro directly and is used in the
+ Normally you don't need to use this macro directly, because is used in the
  implementation of CC7_ADD_UNIT_TEST().
  */
 #define CC7_USE_UNIT_TEST(TestClassName)										\
@@ -66,14 +66,14 @@
  The CC7_GET_UNIT_TEST() returns pointer to an internal registration structure.
  The structure must be visible in a current context.
  
- Normally you don't need to use this macro directly and is used in the
+ Normally you don't need to use this macro directly, because is used in the
  implementation of CC7_ADD_UNIT_TEST().
  */
 #define CC7_GET_UNIT_TEST(TestClassName)	&_cc7t_cinfo_##TestClassName
 
 
 /**
- The CC7_ADD_UNIT_TEST() macto adds anunit test to the list of tests.
+ The CC7_ADD_UNIT_TEST() macto adds an unit test to the list of tests.
  The |TestClassName| parameter is a name of UnitTest derived class.
  The |list| parameter must be an instance of UnitTestCreationInfoList class.
  

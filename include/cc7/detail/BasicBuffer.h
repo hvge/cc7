@@ -16,7 +16,12 @@
 
 #pragma once
 
-#include <cc7/Assert.h>
+#ifndef CC7_USE_EXPERIMENTAL_BYTEARRAY
+#error Experimental feature, should not be used.
+#endif
+
+
+#include <cc7/detail/ExceptionsWrapper.h>
 #include <cc7/Utilities.h>
 #include <iterator>
 #include <algorithm>

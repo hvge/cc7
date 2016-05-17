@@ -15,7 +15,7 @@
  */
 
 #include <cc7tests/JSONReader.h>
-#include <cc7tests/detail/TestUtilities.h>
+#include <cc7tests/detail/StringUtils.h>
 #include <cc7/HexString.h>
 #include <cc7/Base64.h>
 

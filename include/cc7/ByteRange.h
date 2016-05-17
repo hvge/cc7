@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <cc7/Assert.h>
+#include <cc7/detail/ExceptionsWrapper.h>
 
 namespace cc7
 {	

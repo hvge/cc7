@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <cc7/Platform.h>
+#include <cc7/DebugFeatures.h>
 
 #if !defined(CC7_ANDROID)
 #error "This file is for Android platform only"
@@ -25,31 +25,11 @@
 #include <string.h>
 #include <stdio.h>
 
-#if defined(ENABLE_CC7_LOG)
-//
-// Debug log is enabled, we have to provide CC7LogImpl() function
-//
-void CC7LogImpl(const char * fmt, ...)
-{
-	char buffer[1024];
-	va_list args;
-	va_start(args, fmt);
-	vsnprintf(buffer, 1024, fmt, args);
-	buffer[1024 - 1] = 0;
-	va_end(args);
-	
-	__android_log_write(ANDROID_LOG_INFO, "CC7", buffer);
-}
-
-#endif //ENABLE_CC7_LOG
-
-
 
 #if defined(ENABLE_CC7_ASSERT)
-
 namespace cc7
 {
-namespace error
+namespace debug
 {
 	static void private_androidDumpToLog(void * foo, const char * file, int line, const char * message)
 	{
@@ -63,7 +43,26 @@ namespace error
 		return private_androidDumpToLog;
 	}
 	
-} // cc7::error
+} // cc7::debug
 } // cc7
-
 #endif //ENABLE_CC7_ASSERT
+
+
+#if defined(ENABLE_CC7_LOG)
+namespace cc7
+{
+namespace debug
+{
+	static void private_AndroidLogImpl(void * foo, const char * message)
+	{
+		__android_log_write(ANDROID_LOG_INFO, "CC7", message);
+	}
+	
+	LogHandlerSetup Platform_GetDefaultLogHandler()
+	{
+		static LogHandlerSetup s_default_setup = { private_AndroidLogImpl, nullptr };
+		return s_default_setup;
+	}
+} // cc7::debug
+} // cc7
+#endif //ENABLE_CC7_LOG

@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-#include <cc7/Assert.h>
+#include <cc7/DebugFeatures.h>
 
 namespace cc7
 {
-namespace error
+namespace debug
 {
+	//
 	// Must be always implemented. Doesn't depend on assert.
+	//
 	bool HasDebugFeaturesTurnedOn()
 	{
 #if defined(DEBUG) || defined(ENABLE_CC7_LOG) || defined(ENABLE_CC7_ASSERT)
@@ -29,40 +31,59 @@ namespace error
 		return false;
 #endif
 	}
-} // cc7::error
-} // cc7
-
-
+	
+	
 #if defined(ENABLE_CC7_ASSERT)
-
-namespace cc7
-{
-namespace error
-{
 	//
 	// Assertion handler
 	//
-	
-	static AssertionHandlerSetup s_setup = { nullptr, nullptr };
+	static AssertionHandlerSetup s_assert_setup = { nullptr, nullptr };
 	
 	void SetAssertionHandler(const AssertionHandlerSetup & new_setup)
 	{
 		AssertionHandlerSetup default_setup = Platform_GetDefaultAssertionHandler();
 		if (!new_setup.handler) {
-			s_setup = default_setup;
+			s_assert_setup = default_setup;
+		} else {
+			s_assert_setup = new_setup;
 		}
-		s_setup = new_setup;
 	}
 	
 	AssertionHandlerSetup GetAssertionHandler()
 	{
-		return s_setup;
+		return s_assert_setup;
+	}
+#endif //ENABLE_CC7_ASSERT
+
+	
+#if defined(ENABLE_CC7_LOG)
+	//
+	// Log handler
+	//
+	static LogHandlerSetup s_log_setup = { nullptr, nullptr };
+	
+	void SetLogHandler(const LogHandlerSetup & new_setup)
+	{
+		LogHandlerSetup default_setup = Platform_GetDefaultLogHandler();
+		if (!new_setup.handler) {
+			s_log_setup = default_setup;
+		} else {
+			s_log_setup = new_setup;
+		}
 	}
 	
-} // cc7::error
+	LogHandlerSetup GetLogHandler()
+	{
+		return s_log_setup;
+	}
+#endif //ENABLE_CC7_LOG
+
+
+} // cc7::debug
 } // cc7
 
 
+#if defined(ENABLE_CC7_ASSERT)
 //
 // Real assert implementation, should not be wrapper in any namespace.
 //
@@ -90,17 +111,42 @@ int CC7AssertImpl(const char * file, int line, const char * fmt, ...)
 	message[1024 - 1] = 0;
 	
 	// Pass that message to the assert handler
-	if (!cc7::error::s_setup.handler) {
-		cc7::error::s_setup = cc7::error::Platform_GetDefaultAssertionHandler();
-		if (cc7::error::s_setup.handler) {
-			cc7::error::s_setup.handler(cc7::error::s_setup.handler_data, file_name, line, message);
+	if (!cc7::debug::s_assert_setup.handler) {
+		cc7::debug::s_assert_setup = cc7::debug::Platform_GetDefaultAssertionHandler();
+		if (cc7::debug::s_assert_setup.handler) {
+			cc7::debug::s_assert_setup.handler(cc7::debug::s_assert_setup.handler_data, file_name, line, message);
 		}
 	} else {
-		cc7::error::s_setup.handler(cc7::error::s_setup.handler_data, file_name, line, message);
+		cc7::debug::s_assert_setup.handler(cc7::debug::s_assert_setup.handler_data, file_name, line, message);
 	}
 	
 	// Function must return 0 due to fact, that CC7AssertImpl() is also used in CC7_CHECK() macros.
 	return 0;
 }
-
 #endif //ENABLE_CC7_ASSERT
+
+
+#if defined(ENABLE_CC7_LOG)
+//
+// Real log implementation, should not be wrapper in any namespace.
+//
+void CC7LogImpl(const char * fmt, ...)
+{
+	char message[1024];
+	va_list args;
+	va_start(args, fmt);
+	vsnprintf(message, 1024, fmt, args);
+	message[1024 - 1] = 0;
+	va_end(args);
+	
+	// Pass that message to the assert handler
+	if (!cc7::debug::s_log_setup.handler) {
+		cc7::debug::s_log_setup = cc7::debug::Platform_GetDefaultLogHandler();
+		if (cc7::debug::s_log_setup.handler) {
+			cc7::debug::s_log_setup.handler(cc7::debug::s_log_setup.handler_data, message);
+		}
+	} else {
+		cc7::debug::s_log_setup.handler(cc7::debug::s_log_setup.handler_data, message);
+	}
+}
+#endif //ENABLE_CC7_LOG

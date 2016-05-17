@@ -17,11 +17,10 @@
 #pragma once
 
 #include <cc7/Platform.h>
-#include <cc7/detail/ExceptionsWrapper.h>
 
 namespace cc7
 {
-namespace error
+namespace debug
 {
 	/**
 	 Defines assertion handler function. You can override behavior of the assertion handler
@@ -32,7 +31,7 @@ namespace error
 	
 	/**
 	 The AssertionHandlerSetup structure contains pointer to assertion handler and custom data
-	 for the handler. You can change behavior of CC7_ASSERT() in debug builds of the library.
+	 for the handler.
 	 */
 	struct AssertionHandlerSetup
 	{
@@ -40,6 +39,24 @@ namespace error
 		void *				handler_data;
 	};
 	
+	/**
+	 Defines log handler function. You can override behavior of the CC7_LOG() macto
+	 in DEBUG CC7 library builds and register your own handler. The handler will be 
+	 notified about all logs produced by CC7_LOG() macro.
+	 */
+	typedef void (*LogHandler)(void * handler_data, const char * formatted_string);
+
+	/**
+	 The LogHandlerSetup structure contains pointer to log handler and custom data
+	 for the handler.
+	 */
+	struct LogHandlerSetup
+	{
+		LogHandler	handler;
+		void *		handler_data;
+	};
+
+
 	/**
 	 Returns true if the library was compiled with a debug features turned on.
 	 It is highly recommended to NOT use this kind of build in the production environment.
@@ -73,5 +90,33 @@ namespace error
 	
 #endif // defined(ENABLE_CC7_ASSERT)
 
-} // cc7::error
+	
+#if defined(ENABLE_CC7_LOG)
+	
+	/**
+	 Sets a new setup to internal log handler. This function is available only
+	 when CC7_LOG() macro is enabled and functional.
+	 
+	 Note that the function is not thread-safe. It is recommended to use this feature
+	 only during the unit testing.
+	 */
+	void SetLogHandler(const LogHandlerSetup & new_setup);
+	
+	/**
+	 Returns current log handler's setup.
+	 
+	 Note that the function is not thread-safe. It is recommended to use this feature
+	 only during the unit testing.
+	 */
+	LogHandlerSetup GetLogHandler();
+	
+	/**
+	 Returns default log handler's setup.
+	 Note that each platform supported by CC7 has its own implementation of this function.
+	 */
+	LogHandlerSetup Platform_GetDefaultLogHandler();
+
+#endif // defined(ENABLE_CC7_LOG)
+
+} // cc7::debug
 } // cc7

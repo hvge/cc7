@@ -21,6 +21,10 @@
 
 namespace cc7
 {
+#ifndef CC7_USE_EXPERIMENTAL_BYTEARRAY
+#error Experimental feature, should not be used.
+#endif
+	
 	/**
 	 The ByteArray is a sequence container representing array of bytes that can
 	 change in size. Just like std::vector, ByteArray uses contiguous storage 

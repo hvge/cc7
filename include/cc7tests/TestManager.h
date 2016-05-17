@@ -20,7 +20,7 @@
 #include <cc7tests/TestLog.h>
 #include <cc7tests/detail/TestTypes.h>
 
-#include <cc7/Assert.h>
+#include <cc7/DebugFeatures.h>
 
 namespace cc7
 {
@@ -95,7 +95,17 @@ namespace tests
 		 Returns whether the incident breakpoint is turned on or not.
 		 */
 		bool incidentBreakpointEnabled() const;
-
+		
+		/**
+		 If enabled, then all messages produced by CC7_LOG() macro will be
+		 captured and stored to the test log. By default is disabled.
+		 */
+		void setLogCapturingEnabled(bool enabled);
+		
+		/**
+		 Returns whether the log capturing is enabled or not.
+		 */
+		bool logCapturingEnabled() const;
 		
 		// Tests registration
 		
@@ -158,9 +168,18 @@ namespace tests
 		{
 			return _test_log;
 		}
-				
+		
+		/**
+		 Puts visually identified message into the test log.
+		 */
 		void logHeader(const std::string & message);
+		/**
+		 Puts message into the test log. The method is equivalent to tl().logMessage().
+		 */
 		void logMessage(const std::string & message);
+		/**
+		 Puts dashed line into the test log.
+		 */
 		void logSeparator();
 		
 	private:
@@ -170,15 +189,33 @@ namespace tests
 		TestManager();
 		~TestManager();
 		
-		// Test execution
+		/**
+		 Private execution of selected unit tests.
+		 */
 		bool executeFilteredTests(const std::vector<std::string> & included_tags, const std::vector<std::string> & excluded_tags);
+		/**
+		 Private execution of one particular unit test.
+		 */
 		bool executeTest(UnitTestCreationInfo ti, const std::string & full_test_desc);
 		
 		// Assert handler
+		
+		/**
+		 Assertion point
+		 */
 		static void _AssertionHandler(void * handler_data, const char * file, int line, const char * message);
 		void addAssertion(const char * message);
 		void setupAssertionHandler();
 		void restoreAssertionHandler();
+		
+		/**
+		 Log capturing
+		 */
+		static void _LogHandler(void * handler_data, const char * message);
+		void setupLogCapturingHandler();
+		void restoreLogCapturingHandler();
+		
+		void systemLog(const char * message);
 
 		// Private members
 		
@@ -194,11 +231,14 @@ namespace tests
 		 Test log
 		 */
 		TestLog _test_log;
+		
 		/**
-		 Assertions configuration
+		 Assertions / Log configuration
 		 */
 		bool _assertion_breakpoint_enabled;
-		error::AssertionHandlerSetup _old_assertion_setup;
+		bool _log_capturig_enabled;
+		debug::AssertionHandlerSetup _old_assertion_setup;
+		debug::LogHandlerSetup _old_log_setup;
 		
 	};
 	

@@ -17,8 +17,8 @@
 #pragma once
 
 #include <cc7/Platform.h>
+#include <cc7/DebugFeatures.h>
 #include <cc7/Endian.h>
-#include <cc7/Assert.h>
 #include <cc7/ByteArray.h>
 #include <cc7/Utilities.h>
 #include <cc7/Base64.h>

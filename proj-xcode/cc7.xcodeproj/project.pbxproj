@@ -8,13 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		BF1C7BBF1CE0CE9300C4399E /* cc7PlatformTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF1C7BBE1CE0CE9300C4399E /* cc7PlatformTests.cpp */; };
-		BF30682C1CC8F87E002FD3BC /* BasicBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF30682B1CC8F87E002FD3BC /* BasicBuffer.cpp */; };
 		BF30683A1CC91BA6002FD3BC /* libcc7-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */; };
 		BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3068511CC91E56002FD3BC /* TestManager.cpp */; };
 		BF3068551CC91EE4002FD3BC /* UnitTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3068541CC91EE4002FD3BC /* UnitTest.cpp */; };
 		BF3068581CC95503002FD3BC /* TestLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3068571CC95503002FD3BC /* TestLog.cpp */; };
 		BF388B631CC62CF700DEC1AE /* ByteArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF388B621CC62CF700DEC1AE /* ByteArray.cpp */; };
-		BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498A991CDBD4F600D7E904 /* TestUtilities.cpp */; };
+		BF498A9A1CDBD4F600D7E904 /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498A991CDBD4F600D7E904 /* StringUtils.cpp */; };
 		BF498AA71CDCBE8400D7E904 /* libcc7tests-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF3068371CC91B20002FD3BC /* libcc7tests-ios.a */; };
 		BF498AAE1CDCBEC000D7E904 /* CC7TestWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF498AAD1CDCBEC000D7E904 /* CC7TestWrapper.mm */; };
 		BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AB61CDCC24F00D7E904 /* EmbeddedTestsList.cpp */; };
@@ -37,7 +36,7 @@
 		BFC5254E1CDBC985002E653C /* PerformanceTimerApple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */; };
 		BFE173FD1CC963DE00039466 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE173FC1CC9639B00039466 /* libcrypto.a */; };
 		BFE174041CC9664500039466 /* PlatformApple.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFE174021CC9664500039466 /* PlatformApple.mm */; };
-		BFE174071CC96D3600039466 /* Assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFE174061CC96D3600039466 /* Assert.cpp */; };
+		BFE174071CC96D3600039466 /* DebugFeatures.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFE174061CC96D3600039466 /* DebugFeatures.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +94,7 @@
 		BF388B641CC64BAB00DEC1AE /* BasicBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicBuffer.h; sourceTree = "<group>"; };
 		BF388B841CC68E6500DEC1AE /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		BF388B851CC68FAA00DEC1AE /* Endian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Endian.h; sourceTree = "<group>"; };
-		BF498A991CDBD4F600D7E904 /* TestUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestUtilities.cpp; sourceTree = "<group>"; };
+		BF498A991CDBD4F600D7E904 /* StringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
 		BF498A9B1CDBEE1500D7E904 /* TestAssertions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestAssertions.h; sourceTree = "<group>"; };
 		BF498A9C1CDBF60B00D7E904 /* ByteArrayExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteArrayExp.h; sourceTree = "<group>"; };
 		BF498A9D1CDBF60B00D7E904 /* ByteArrayRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteArrayRef.h; sourceTree = "<group>"; };
@@ -118,7 +117,7 @@
 		BF9FFBC91CE3BF08006CAA74 /* cc7Base64Tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7Base64Tests.cpp; sourceTree = "<group>"; };
 		BF9FFBCB1CE3C172006CAA74 /* cc7HexStringTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7HexStringTests.cpp; sourceTree = "<group>"; };
 		BFB1A6B41CB5937800B2D172 /* libcc7-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BFB1A6C31CB594BF00B2D172 /* Assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assert.h; sourceTree = "<group>"; };
+		BFB1A6C31CB594BF00B2D172 /* DebugFeatures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugFeatures.h; sourceTree = "<group>"; };
 		BFB1A6C51CB594BF00B2D172 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		BFB1A6C61CB594BF00B2D172 /* ByteRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ByteRange.h; sourceTree = "<group>"; };
 		BFB493D11CE750CD00F8D81B /* JSONReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONReader.h; sourceTree = "<group>"; };
@@ -149,7 +148,7 @@
 		BFC525491CDBC79F002E653C /* PerformanceTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerformanceTimer.h; sourceTree = "<group>"; };
 		BFC5254A1CDBC887002E653C /* PerformanceTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceTimer.cpp; sourceTree = "<group>"; };
 		BFC5254D1CDBC985002E653C /* PerformanceTimerApple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerformanceTimerApple.cpp; sourceTree = "<group>"; };
-		BFC5254F1CDBCC48002E653C /* TestUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestUtilities.h; sourceTree = "<group>"; };
+		BFC5254F1CDBCC48002E653C /* StringUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		BFD7D6521CE258D8002382CB /* TestUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestUtils.h; sourceTree = "<group>"; };
 		BFE173B01CC9639B00039466 /* aes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		BFE173B11CC9639B00039466 /* asn1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
@@ -230,7 +229,7 @@
 		BFE174001CC9664500039466 /* PlatformAndroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformAndroid.cpp; sourceTree = "<group>"; };
 		BFE174021CC9664500039466 /* PlatformApple.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlatformApple.mm; sourceTree = "<group>"; };
 		BFE174051CC968FF00039466 /* ExceptionsWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionsWrapper.h; sourceTree = "<group>"; };
-		BFE174061CC96D3600039466 /* Assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Assert.cpp; sourceTree = "<group>"; };
+		BFE174061CC96D3600039466 /* DebugFeatures.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebugFeatures.cpp; sourceTree = "<group>"; };
 		BFE174091CCCE4C900039466 /* TestFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFile.h; sourceTree = "<group>"; };
 		BFE1740A1CCCE53E00039466 /* TestResource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestResource.h; sourceTree = "<group>"; };
 		BFE1740B1CCCE59200039466 /* TestDirectory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestDirectory.h; sourceTree = "<group>"; };
@@ -284,7 +283,7 @@
 		BF498A981CDBD4E200D7E904 /* detail */ = {
 			isa = PBXGroup;
 			children = (
-				BF498A991CDBD4F600D7E904 /* TestUtilities.cpp */,
+				BF498A991CDBD4F600D7E904 /* StringUtils.cpp */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -358,7 +357,7 @@
 			children = (
 				BFE173FE1CC9664500039466 /* platform */,
 				BF30682A1CC8F87E002FD3BC /* detail */,
-				BFE174061CC96D3600039466 /* Assert.cpp */,
+				BFE174061CC96D3600039466 /* DebugFeatures.cpp */,
 				BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */,
 				BF388B621CC62CF700DEC1AE /* ByteArray.cpp */,
 				BF9FFBC41CE3AEFE006CAA74 /* Base64.cpp */,
@@ -424,7 +423,7 @@
 				BF3068291CC8F607002FD3BC /* detail */,
 				BF4B4AB41CC6BF6100BF2C9D /* CC7.h */,
 				BFB1A6C51CB594BF00B2D172 /* Platform.h */,
-				BFB1A6C31CB594BF00B2D172 /* Assert.h */,
+				BFB1A6C31CB594BF00B2D172 /* DebugFeatures.h */,
 				BFB1A6C61CB594BF00B2D172 /* ByteRange.h */,
 				BF498A9C1CDBF60B00D7E904 /* ByteArrayExp.h */,
 				BF498A9D1CDBF60B00D7E904 /* ByteArrayRef.h */,
@@ -537,7 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				BFC525481CDB9C13002E653C /* TestTypes.h */,
-				BFC5254F1CDBCC48002E653C /* TestUtilities.h */,
+				BFC5254F1CDBCC48002E653C /* StringUtils.h */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -803,7 +802,7 @@
 				BFB494031CE8E7C600F8D81B /* TestResource.cpp in Sources */,
 				BF9FFBCC1CE3C172006CAA74 /* cc7HexStringTests.cpp in Sources */,
 				BFB493D71CE75C7F00F8D81B /* JSONValue.cpp in Sources */,
-				BF498A9A1CDBD4F600D7E904 /* TestUtilities.cpp in Sources */,
+				BF498A9A1CDBD4F600D7E904 /* StringUtils.cpp in Sources */,
 				BF498AB71CDCC24F00D7E904 /* EmbeddedTestsList.cpp in Sources */,
 				BF3068521CC91E56002FD3BC /* TestManager.cpp in Sources */,
 				BFB494071CE900E500F8D81B /* g_baseFiles.cpp in Sources */,
@@ -831,10 +830,9 @@
 			files = (
 				BF9FFBC51CE3AEFE006CAA74 /* Base64.cpp in Sources */,
 				BF9FFBC71CE3B94D006CAA74 /* HexString.cpp in Sources */,
-				BF30682C1CC8F87E002FD3BC /* BasicBuffer.cpp in Sources */,
 				BFE174041CC9664500039466 /* PlatformApple.mm in Sources */,
 				BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */,
-				BFE174071CC96D3600039466 /* Assert.cpp in Sources */,
+				BFE174071CC96D3600039466 /* DebugFeatures.cpp in Sources */,
 				BF388B631CC62CF700DEC1AE /* ByteArray.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
