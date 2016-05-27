@@ -63,7 +63,7 @@ namespace tests
 #endif
 			
 #if !defined(DEBUG) && !defined(ENABLE_CC7_ASSERT) && !defined(ENABLE_CC7_LOG)
-			ccstAssertFalse(cc7::error::HasDebugFeaturesTurnedOn());
+			ccstAssertFalse(cc7::debug::HasDebugFeaturesTurnedOn());
 #endif
 		}
 		
