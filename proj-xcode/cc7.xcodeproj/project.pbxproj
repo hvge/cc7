@@ -21,6 +21,7 @@
 		BF498ACA1CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498AC91CDDD7ED00D7E904 /* cc7ByteArrayTests.cpp */; };
 		BF498ACD1CDDDABE00D7E904 /* cc7ByteRangeTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */; };
 		BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */; };
+		BF79F0181D04BFB7004653A1 /* ObjcHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF79F0171D04BFB7004653A1 /* ObjcHelper.mm */; };
 		BF9FFBC51CE3AEFE006CAA74 /* Base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBC41CE3AEFE006CAA74 /* Base64.cpp */; };
 		BF9FFBC71CE3B94D006CAA74 /* HexString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBC61CE3B94D006CAA74 /* HexString.cpp */; };
 		BF9FFBCA1CE3BF08006CAA74 /* cc7Base64Tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9FFBC91CE3BF08006CAA74 /* cc7Base64Tests.cpp */; };
@@ -110,6 +111,8 @@
 		BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7ByteRangeTests.cpp; sourceTree = "<group>"; };
 		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
 		BF4B4AB41CC6BF6100BF2C9D /* CC7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC7.h; sourceTree = "<group>"; };
+		BF79F0161D04BD32004653A1 /* ObjcHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcHelper.h; sourceTree = "<group>"; };
+		BF79F0171D04BFB7004653A1 /* ObjcHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjcHelper.mm; sourceTree = "<group>"; };
 		BF9FFBC31CE3ADB3006CAA74 /* Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		BF9FFBC41CE3AEFE006CAA74 /* Base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Base64.cpp; sourceTree = "<group>"; };
 		BF9FFBC61CE3B94D006CAA74 /* HexString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HexString.cpp; sourceTree = "<group>"; };
@@ -385,6 +388,14 @@
 			path = cc7tests;
 			sourceTree = "<group>";
 		};
+		BF79F0111D04BBDC004653A1 /* objc */ = {
+			isa = PBXGroup;
+			children = (
+				BF79F0161D04BD32004653A1 /* ObjcHelper.h */,
+			);
+			path = objc;
+			sourceTree = "<group>";
+		};
 		BFB1A6AB1CB5937800B2D172 = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +431,7 @@
 		BFB1A6C21CB594BF00B2D172 /* cc7 */ = {
 			isa = PBXGroup;
 			children = (
+				BF79F0111D04BBDC004653A1 /* objc */,
 				BF3068291CC8F607002FD3BC /* detail */,
 				BF4B4AB41CC6BF6100BF2C9D /* CC7.h */,
 				BFB1A6C51CB594BF00B2D172 /* Platform.h */,
@@ -680,6 +692,7 @@
 			isa = PBXGroup;
 			children = (
 				BFE174021CC9664500039466 /* PlatformApple.mm */,
+				BF79F0171D04BFB7004653A1 /* ObjcHelper.mm */,
 				BF0D67EF1CE63DF90070D853 /* PrefixCC7.pch */,
 			);
 			path = apple;
@@ -832,6 +845,7 @@
 				BF9FFBC71CE3B94D006CAA74 /* HexString.cpp in Sources */,
 				BFE174041CC9664500039466 /* PlatformApple.mm in Sources */,
 				BF4B4A881CB93B8B00BF2C9D /* ByteRange.cpp in Sources */,
+				BF79F0181D04BFB7004653A1 /* ObjcHelper.mm in Sources */,
 				BFE174071CC96D3600039466 /* DebugFeatures.cpp in Sources */,
 				BF388B631CC62CF700DEC1AE /* ByteArray.cpp in Sources */,
 			);
