@@ -378,4 +378,21 @@ namespace cc7
 		return std::string(reinterpret_cast<const char*>(range.data()), range.size());
 	}
 	
+	inline ByteRange MakeRange(const std::string & str)
+	{
+		return ByteRange(str);
+	}
+	
+	inline ByteRange MakeRange(const char * str)
+	{
+		return ByteRange(str);
+	}
+		
+	template <typename POD>
+	ByteRange MakeRange(const POD & value)
+	{
+		static_assert(std::is_pod<POD>::value, "POD type is expected");
+		return ByteRange(&value, sizeof(value));
+	}
+	
 } // cc7
