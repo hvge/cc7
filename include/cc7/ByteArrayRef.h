@@ -177,6 +177,20 @@ namespace cc7
 	{
 		return std::string(reinterpret_cast<const char*>(array.data()), array.size());
 	}
+	
+	/**
+	 Creates a new ByteRange object from given ByteArray. The method
+	 is here just for convenience and for increasing code readability in 
+	 some specific situations. 
+	 
+	 You can use automatic casting, ByteArray::byteRange() method or
+	 this conversion function. It's up to you, which form of conversion
+	 between the array and the range is more familiar with your coding style.
+	 */
+	inline ByteRange MakeRange(const ByteArray & array)
+	{
+		return array.byteRange();
+	}
 
 	
 } // cc7

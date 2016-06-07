@@ -371,23 +371,37 @@ namespace cc7
 	}
 		
 	/**
-	 Copy conversion from ByteRange to std::string
+	 Copy conversion from ByteRange to the std::string object.
 	 */
 	inline std::string CopyToString(const ByteRange & range)
 	{
 		return std::string(reinterpret_cast<const char*>(range.data()), range.size());
 	}
 	
+	/**
+	 Creates a new ByteRange object from given string. All characters
+	 from the string object excepts the NUL terminator, are captured
+	 in the returned range.
+	 */
 	inline ByteRange MakeRange(const std::string & str)
 	{
 		return ByteRange(str);
 	}
-	
+
+	/**
+	 Creates a new ByteRange object from given string. All characters
+	 from the string pointer up to first NUL terminator, are captured
+	 in the returned range.
+	 */
 	inline ByteRange MakeRange(const char * str)
 	{
 		return ByteRange(str);
 	}
 		
+	/**
+	 The template function captures any fundamental data type, or POD 
+	 structure in the returned ByteRange object.
+	 */
 	template <typename POD>
 	ByteRange MakeRange(const POD & value)
 	{

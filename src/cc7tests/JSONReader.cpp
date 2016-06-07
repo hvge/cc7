@@ -675,7 +675,7 @@ namespace tests
 	
 	bool JSON_ParseString(const std::string & str, JSONValue & out_value, std::string * out_error)
 	{
-		return JSON_ParseData(cc7::ByteRange(str), out_value, out_error);
+		return JSON_ParseData(cc7::MakeRange(str), out_value, out_error);
 	}
 	
 	
