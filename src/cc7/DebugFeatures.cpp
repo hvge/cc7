@@ -87,8 +87,13 @@ namespace debug
 //
 // Real assert implementation, should not be wrapper in any namespace.
 //
-int CC7AssertImpl(const char * file, int line, const char * fmt, ...)
+int CC7AssertImpl(int condition, const char * file, int line, const char * fmt, ...)
 {
+	if (condition) {
+		// assertion did not fail, just return positive value
+		return 1;
+	}
+	
 	// Format input string
 	char buffer[1024];
 	va_list args;
@@ -121,7 +126,7 @@ int CC7AssertImpl(const char * file, int line, const char * fmt, ...)
 	}
 	
 	// Function must return 0 due to fact, that CC7AssertImpl() is also used in CC7_CHECK() macros.
-	return 0;
+	return condition;
 }
 #endif //ENABLE_CC7_ASSERT
 

@@ -161,7 +161,7 @@
 	//
 	// CC7_ASSERT is enabled
 	//
-	CC7_EXTERN_C int CC7AssertImpl(const char * file, int line, const char * format, ...);
+	CC7_EXTERN_C int CC7AssertImpl(int condition, const char * file, int line, const char * format, ...);
 
 	#ifdef CC7_IOS
 		#if	TARGET_CPU_ARM == 1
@@ -198,10 +198,10 @@
 
 	#define CC7_ASSERT(cond, ...)												\
 		if (!(cond)) {															\
-			CC7AssertImpl(__FILE__, __LINE__, "" __VA_ARGS__);					\
+			CC7AssertImpl(0, __FILE__, __LINE__, "" __VA_ARGS__);				\
 		}
 	#define CC7_CHECK(cond, ...)												\
-		(((!(cond)) && CC7AssertImpl(__FILE__, __LINE__, "" __VA_ARGS__)), cond)
+		CC7AssertImpl(cond, __FILE__, __LINE__, "" __VA_ARGS__)
 
 #else
 	//
