@@ -82,6 +82,10 @@
 		BF0D67EF1CE63DF90070D853 /* PrefixCC7.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixCC7.pch; sourceTree = "<group>"; };
 		BF0D67F01CE63EDA0070D853 /* PrefixCC7Tests.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixCC7Tests.pch; sourceTree = "<group>"; };
 		BF1C7BBE1CE0CE9300C4399E /* cc7PlatformTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7PlatformTests.cpp; sourceTree = "<group>"; };
+		BF2723621D340ED700020395 /* JniHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JniHelper.h; sourceTree = "<group>"; };
+		BF2723631D34137B00020395 /* JniHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JniHelper.cpp; sourceTree = "<group>"; };
+		BF2723651D35470300020395 /* JniHelperMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JniHelperMacros.h; sourceTree = "<group>"; };
+		BF2723751D35486600020395 /* JniModule.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = JniModule.inl; sourceTree = "<group>"; };
 		BF30682B1CC8F87E002FD3BC /* BasicBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicBuffer.cpp; sourceTree = "<group>"; };
 		BF3068371CC91B20002FD3BC /* libcc7tests-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcc7tests-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3068501CC91DA4002FD3BC /* TestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestManager.h; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 		BF498ACB1CDDD80700D7E904 /* cc7ByteRangeTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cc7ByteRangeTests.cpp; sourceTree = "<group>"; };
 		BF4B4A861CB93B8B00BF2C9D /* ByteRange.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ByteRange.cpp; sourceTree = "<group>"; };
 		BF4B4AB41CC6BF6100BF2C9D /* CC7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CC7.h; sourceTree = "<group>"; };
+		BF71B3E31D5AB5D800ABE831 /* README.jni.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.jni.txt; sourceTree = "<group>"; };
+		BF71B3E41D5AB95700ABE831 /* Android.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Android.mk; sourceTree = "<group>"; };
 		BF79F0161D04BD32004653A1 /* ObjcHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcHelper.h; sourceTree = "<group>"; };
 		BF79F0171D04BFB7004653A1 /* ObjcHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjcHelper.mm; sourceTree = "<group>"; };
 		BF9FFBC31CE3ADB3006CAA74 /* Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
@@ -266,6 +272,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF2723611D340E7900020395 /* jni */ = {
+			isa = PBXGroup;
+			children = (
+				BF2723621D340ED700020395 /* JniHelper.h */,
+				BF2723651D35470300020395 /* JniHelperMacros.h */,
+				BF2723751D35486600020395 /* JniModule.inl */,
+			);
+			path = jni;
+			sourceTree = "<group>";
+		};
 		BF3068291CC8F607002FD3BC /* detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +366,7 @@
 				BF4B4A841CB5977200BF2C9D /* cc7 */,
 				BF4B4A851CB5977200BF2C9D /* cc7tests */,
 				BFB493DA1CE8B29500F8D81B /* tools */,
+				BF71B3E41D5AB95700ABE831 /* Android.mk */,
 			);
 			name = src;
 			path = ../src;
@@ -431,6 +448,7 @@
 		BFB1A6C21CB594BF00B2D172 /* cc7 */ = {
 			isa = PBXGroup;
 			children = (
+				BF2723611D340E7900020395 /* jni */,
 				BF79F0111D04BBDC004653A1 /* objc */,
 				BF3068291CC8F607002FD3BC /* detail */,
 				BF4B4AB41CC6BF6100BF2C9D /* CC7.h */,
@@ -684,6 +702,8 @@
 			isa = PBXGroup;
 			children = (
 				BFE174001CC9664500039466 /* PlatformAndroid.cpp */,
+				BF2723631D34137B00020395 /* JniHelper.cpp */,
+				BF71B3E31D5AB5D800ABE831 /* README.jni.txt */,
 			);
 			path = android;
 			sourceTree = "<group>";
