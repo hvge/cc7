@@ -28,24 +28,25 @@ NDK_TOOLCHAIN_VERSION := clang
 LOCAL_MODULE			:= libcc7
 LOCAL_CFLAGS			:= $(EXTERN_CFLAGS)
 LOCAL_CPPFLAGS			:= $(EXTERN_CFLAGS) -std=c++11
+LOCAL_CPP_FEATURES		+= exceptions
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../include \
 	$(LOCAL_PATH)/../openssl/android/include \
 	$(LOCAL_PATH)/cc7
 
-# Android specific sources
-LOCAL_SRC_FILES := \
-	cc7/platform/android/PlatformAndroid.cpp \
-	cc7/platform/android/JniHelper.cpp
-
 # Multiplatform sources
-LOCAL_SRC_FILES += \
+LOCAL_SRC_FILES := \
 	cc7/DebugFeatures.cpp \
 	cc7/ByteRange.cpp \
 	cc7/ByteArray.cpp \
 	cc7/Base64.cpp \
 	cc7/HexString.cpp
+
+# Android specific sources
+LOCAL_SRC_FILES += \
+	cc7/platform/android/PlatformAndroid.cpp \
+	cc7/platform/android/JniHelper.cpp
 
 include $(BUILD_STATIC_LIBRARY)
 

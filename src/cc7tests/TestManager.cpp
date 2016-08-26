@@ -19,6 +19,7 @@
 #include <cc7tests/detail/StringUtils.h>
 
 #include <cc7/DebugFeatures.h>
+#include <algorithm>
 
 namespace cc7
 {

@@ -25,7 +25,6 @@
 #include <string.h>
 #include <stdio.h>
 
-
 #if defined(ENABLE_CC7_ASSERT)
 namespace cc7
 {
@@ -38,9 +37,10 @@ namespace debug
 		// ...unlike ios, android has no SW breakpoint defined.
 	}
 	
-	AssertionHandler Platform_GetDefaultAssertionHandler()
+	AssertionHandlerSetup Platform_GetDefaultAssertionHandler()
 	{
-		return private_androidDumpToLog;
+		static AssertionHandlerSetup s_default_setup = { private_androidDumpToLog, nullptr };
+		return s_default_setup;
 	}
 	
 } // cc7::debug
@@ -63,6 +63,7 @@ namespace debug
 		static LogHandlerSetup s_default_setup = { private_AndroidLogImpl, nullptr };
 		return s_default_setup;
 	}
+	
 } // cc7::debug
 } // cc7
 #endif //ENABLE_CC7_LOG

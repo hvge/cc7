@@ -15,6 +15,9 @@
  */
 
 #include <cc7tests/TestLog.h>
+#include <cc7tests/detail/StringUtils.h>
+#include <memory>
+#include <string>
 
 namespace cc7
 {
@@ -145,7 +148,7 @@ namespace tests
 			// Look for already reported location
 			std::string file_location_key(full_path);
 			file_location_key.append(":");
-			file_location_key.append(std::to_string(line));
+			file_location_key.append(cc7::tests::detail::to_string(line));
 			
 			if (_incident_locations_set.find(file_location_key) == _incident_locations_set.end()) {
 				// New incident, store key to locations set
@@ -357,7 +360,7 @@ namespace tests
 		}
 		if (offset < str.length()) {
 			dest_string.append(indentation);
-			dest_string.append(str, offset);
+			dest_string.append(str, offset, dest_string.npos);
 			dest_string.append(newline);
 		}
 	}
