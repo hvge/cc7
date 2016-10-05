@@ -52,6 +52,19 @@ namespace jni
 		}
 		return result;
 	}
+	
+	cc7::ByteArray CopyFromJavaStringToByteArray(JNIEnv * env, jstring str)
+	{
+		cc7::ByteArray result;
+		if (str && env) {
+			const char * str_ptr = env->GetStringUTFChars(str, 0);
+			if (str_ptr) {
+				result.assign(cc7::MakeRange(str_ptr));
+				env->ReleaseStringUTFChars(str, str_ptr);
+			}
+		}
+		return result;		
+	}
 
 	
 	// Byte array

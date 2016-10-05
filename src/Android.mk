@@ -17,6 +17,15 @@
 LOCAL_PATH:= $(call my-dir)
 
 # -------------------------------------------------------------------------
+# Prebuilt OpenSSL crypto library
+# -------------------------------------------------------------------------
+include $(CLEAR_VARS)
+LOCAL_MODULE          	:= openssl_crypto
+LOCAL_SRC_FILES			:= ../openssl/android/lib/$(TARGET_ARCH_ABI)/libcrypto.a
+LOCAL_EXPORT_C_INCLUDES	:= ../openssl/android/include
+include $(PREBUILT_STATIC_LIBRARY)
+
+# -------------------------------------------------------------------------
 # CC7 library
 # -------------------------------------------------------------------------
 
@@ -29,6 +38,7 @@ LOCAL_MODULE			:= libcc7
 LOCAL_CFLAGS			:= $(EXTERN_CFLAGS)
 LOCAL_CPPFLAGS			:= $(EXTERN_CFLAGS) -std=c++11
 LOCAL_CPP_FEATURES		+= exceptions
+LOCAL_STATIC_LIBRARIES	:= openssl_crypto
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../include \

@@ -47,5 +47,15 @@ namespace objc
 	 */
 	std::string CopyFromNSString(NSString * string);
 	
+	/**
+	 Function creates a new ByteArray object with bytes copied
+	 from given NSString. The UTF8 encoding is used for conversion.
+	 The function is very similar to 'CopyFromNSString' but the
+	 destination C++ object is byte array instead of std::string. 
+	 It's recommended to use this function for conversion from 
+	 strings which contains sensitive information, like passphrases.
+	 */	
+	ByteArray CopyFromNSStringToByteArray(NSString * string);
+	
 } // cc7::objc
 } // cc7

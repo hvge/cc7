@@ -48,5 +48,14 @@ namespace objc
 		return result;
 	}
 	
+	ByteArray CopyFromNSStringToByteArray(NSString * string)
+	{
+		ByteArray result;
+		if (string) {
+			result.assign(cc7::MakeRange(string.UTF8String));
+		}
+		return result;
+	}
+	
 } // cc7::objc
 } // cc7

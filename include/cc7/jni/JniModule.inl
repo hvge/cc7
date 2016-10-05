@@ -68,9 +68,15 @@
 #define CC7_JNI_MODULE_CLASS_PATH(object_name)			CC7_JNI_CLASS_PATH "/" object_name
 
 /**
- Returns jclass object for given object name. The object name is
+ The result of this macro is full class signature for given object name. 
+ For example, CC7_JNI_MODULE_CLASS_PATH("YourJavaClass") creates "Lorg/example/package/path/YourJavaClass" string.
  */
-#define CC7_JNI_MODULE_CLASS_FOR_OBJECT(object_name)	env->FindClass(CC7_JNI_MODULE_CLASS_PATH(object_name))
+#define CC7_JNI_MODULE_CLASS_SIGNATURE(object_name)		"L" CC7_JNI_CLASS_PATH "/" object_name
+
+/**
+ Returns jclass object for given object name. The object name is valid name from current package.
+ */
+#define CC7_JNI_MODULE_FIND_CLASS(object_name)			env->FindClass(CC7_JNI_MODULE_CLASS_PATH(object_name))
 
 /**
  CC7_JNI_CLASS_BEGIN wraps subsequent code into the extern "C" block and creates a
@@ -84,7 +90,7 @@
 	{																								\
 		static jfieldID s_HandleFieldID = 0;														\
 		if (s_HandleFieldID == 0) {																	\
-			jclass clazz = CC7_JNI_MODULE_CLASS_FOR_OBJECT(__CC7_JNI_STRINGIFY(CC7_JNI_JAVA_CLASS));\
+			jclass clazz = CC7_JNI_MODULE_FIND_CLASS(__CC7_JNI_STRINGIFY(CC7_JNI_JAVA_CLASS));		\
 			s_HandleFieldID = CC7_JNI_FIELD_LONG(clazz, CC7_JNI_POINTER_FIELD);						\
 		}																							\
 		return s_HandleFieldID;																		\
