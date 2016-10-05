@@ -17,6 +17,15 @@
 LOCAL_PATH:= $(call my-dir)
 
 # -------------------------------------------------------------------------
+# Prebuilt OpenSSL crypto library
+# -------------------------------------------------------------------------
+include $(CLEAR_VARS)
+LOCAL_MODULE          	:= openssl_crypto
+LOCAL_SRC_FILES			:= ../openssl/android/lib/$(TARGET_ARCH_ABI)/libcrypto.a
+LOCAL_EXPORT_C_INCLUDES	:= ../openssl/android/include
+include $(PREBUILT_STATIC_LIBRARY)
+
+# -------------------------------------------------------------------------
 # CC7 library
 # -------------------------------------------------------------------------
 
@@ -28,24 +37,26 @@ NDK_TOOLCHAIN_VERSION := clang
 LOCAL_MODULE			:= libcc7
 LOCAL_CFLAGS			:= $(EXTERN_CFLAGS)
 LOCAL_CPPFLAGS			:= $(EXTERN_CFLAGS) -std=c++11
+LOCAL_CPP_FEATURES		+= exceptions
+LOCAL_STATIC_LIBRARIES	:= openssl_crypto
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../include \
 	$(LOCAL_PATH)/../openssl/android/include \
 	$(LOCAL_PATH)/cc7
 
-# Android specific sources
-LOCAL_SRC_FILES := \
-	cc7/platform/android/PlatformAndroid.cpp \
-	cc7/platform/android/JniHelper.cpp
-
 # Multiplatform sources
-LOCAL_SRC_FILES += \
+LOCAL_SRC_FILES := \
 	cc7/DebugFeatures.cpp \
 	cc7/ByteRange.cpp \
 	cc7/ByteArray.cpp \
 	cc7/Base64.cpp \
 	cc7/HexString.cpp
+
+# Android specific sources
+LOCAL_SRC_FILES += \
+	cc7/platform/android/PlatformAndroid.cpp \
+	cc7/platform/android/JniHelper.cpp
 
 include $(BUILD_STATIC_LIBRARY)
 

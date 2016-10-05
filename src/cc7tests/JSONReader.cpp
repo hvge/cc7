@@ -654,9 +654,9 @@ namespace tests
 			try {
 				std::string number(_CharPtr(ctx, + begin), ctx->offset - begin);
 				if (has_exponent || has_decimal_mark) {
-					return JSONValue(std::stod(number));
+					return JSONValue(cc7::tests::detail::to_double(number));
 				} else {
-					return JSONValue(std::stoll(number));
+					return JSONValue(cc7::tests::detail::to_longint(number));
 				}
 			} catch (std::exception & exc) {
 				error = true;

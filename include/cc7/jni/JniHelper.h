@@ -45,6 +45,15 @@ namespace jni
 	std::string CopyFromJavaString(JNIEnv * env, jstring string);
 	
 	/**
+	 Function creates a new instance of cc7::ByteArray, initialized with characters
+	 from given java string. The UTF8 encoding is used for the conversion.
+	 The function is very similar to 'CopyFromJavaString' but the destination C++
+	 object is byte array instead of std::string. It's recommended to use this function 
+	 for conversion from strings which contains sensitive information, like passphrases.
+	 */
+	cc7::ByteArray CopyFromJavaStringToByteArray(JNIEnv * env, jstring string);
+	
+	/**
 	 Function creates a new instance of java byte array object with bytes copied from
 	 given range of bytes.
 	 */

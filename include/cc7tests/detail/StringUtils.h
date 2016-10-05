@@ -39,6 +39,14 @@ namespace detail
 	 Returns a vector containing substrings from the input string that have been divided by a given delimiter.
 	 */
 	std::vector<std::string>   SplitString(const std::string & str, char delimiter);
+	
+	/**
+	 Workarounds for missing STL conversion routines on Android/GNU-STL.
+	 */
+	std::string to_string(int value);
+	double to_double(const std::string & str);
+	int64_t to_longint(const std::string & str);
+	
 
 	
 } // cc7::tests::detail

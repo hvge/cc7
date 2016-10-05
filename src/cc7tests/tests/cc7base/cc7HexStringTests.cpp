@@ -16,6 +16,7 @@
 
 #include <cc7tests/CC7Tests.h>
 #include <cc7/CC7.h>
+#include <algorithm>
 
 namespace cc7
 {
