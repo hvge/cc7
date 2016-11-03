@@ -71,7 +71,7 @@
  The result of this macro is full class signature for given object name. 
  For example, CC7_JNI_MODULE_CLASS_PATH("YourJavaClass") creates "Lorg/example/package/path/YourJavaClass" string.
  */
-#define CC7_JNI_MODULE_CLASS_SIGNATURE(object_name)		"L" CC7_JNI_CLASS_PATH "/" object_name
+#define CC7_JNI_MODULE_CLASS_SIGNATURE(object_name)		"L" CC7_JNI_CLASS_PATH "/" object_name ";"
 
 /**
  Returns jclass object for given object name. The object name is valid name from current package.
