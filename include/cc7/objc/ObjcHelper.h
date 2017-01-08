@@ -36,6 +36,20 @@ namespace objc
 	NSString * CopyToNSString(const std::string & string);
 	
 	/**
+	 Function creates a new NSData object with bytes copied from
+	 given range of bytes. If provided range is empty (the size
+	 is equal to 0), then returns nil.
+	 */
+	NSData * CopyToNullableNSData(const cc7::ByteRange & range);
+	
+	/**
+	 Function creates a new NSString object with UTF8 string
+	 copied from given string. If the length of provided string
+	 is equal to 0, then returns nil.
+	 */
+	NSString * CopyToNullableNSString(const std::string & string);
+	
+	/**
 	 Function creates a new ByteArray object with bytes copied
 	 from given NSData object
 	 */

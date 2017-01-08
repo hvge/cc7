@@ -30,6 +30,22 @@ namespace objc
 		return [[NSString alloc] initWithUTF8String:string.c_str()];
 	}
 	
+	NSData * CopyToNullableNSData(const cc7::ByteRange & range)
+	{
+		if (!range.empty()) {
+			return [[NSData alloc] initWithBytes:range.data() length:range.size()];
+		}
+		return nil;
+	}
+	
+	NSString * CopyToNullableNSString(const std::string & string)
+	{
+		if (!string.empty()) {
+			return [[NSString alloc] initWithUTF8String:string.c_str()];
+		}
+		return nil;
+	}
+	
 	ByteArray CopyFromNSData(NSData * data)
 	{
 		ByteArray result;
