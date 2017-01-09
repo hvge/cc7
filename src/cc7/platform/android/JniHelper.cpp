@@ -31,11 +31,29 @@ namespace jni
 		return env->NewStringUTF(str.c_str());
 	}
 	
-	
 	jstring CopyToJavaString(JNIEnv * env, const char * str)
 	{
 		if (!str) {
 			str = "";
+		}
+		return env->NewStringUTF(str);
+	}
+	
+	jstring CopyToNullableJavaString(JNIEnv * env, const std::string & str)
+	{
+		if (!str.empty()) {
+			return env->NewStringUTF(str.c_str());
+		}
+		return NULL;
+	}
+	
+	jstring CopyToNullableJavaString(JNIEnv * env, const char * str)
+	{
+		if (!str) {
+			return NULL;
+		}
+		if (0 == strlen(str)) {
+			return NULL;
 		}
 		return env->NewStringUTF(str);
 	}
@@ -76,6 +94,15 @@ namespace jni
 		return array;
 	}
 	
+	jbyteArray CopyToNullableJavaByteArray(JNIEnv * env, const cc7::ByteRange & range)
+	{
+		if (range.empty()) {
+			return NULL;
+		}
+		jbyteArray array = env->NewByteArray(range.size());
+		env->SetByteArrayRegion (array, 0, range.size(), (const jbyte*)range.data());
+		return array;
+	}
 	
 	cc7::ByteArray CopyFromJavaByteArray(JNIEnv * env, jbyteArray array)
 	{
@@ -118,5 +145,6 @@ namespace jni
 		va_end(args);
 		return result_object;
 	}
-}
-}
+
+} // cc7::jni
+} // cc7

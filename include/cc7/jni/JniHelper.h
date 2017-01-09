@@ -39,6 +39,21 @@ namespace jni
 	jstring CopyToJavaString(JNIEnv * env, const char * str);
 	
 	/**
+	 Function creates a new instance of jstring object with characters copied 
+	 from given string object. The UTF8 encoding is expected on the input.
+	 If the provided string has zero length then returns NULL.
+	 */
+	jstring CopyToNullableJavaString(JNIEnv * env, const std::string & str);
+	
+	/**
+	 Function creates a new instance of jstring object with characters copied 
+	 from given char pointer. The UTF8 encoding is expected on the input.
+	 If the provided char pointer is NULL or if string has zero length,
+	 then returns NULL. 
+	 */
+	jstring CopyToNullableJavaString(JNIEnv * env, const char * str);
+	
+	/**
 	 Function creates a new instance of std::string with characters copied
 	 from given java string. The UTF8 encoding is used for the conversion.
 	 */
@@ -58,6 +73,12 @@ namespace jni
 	 given range of bytes.
 	 */
 	jbyteArray CopyToJavaByteArray(JNIEnv * env, const cc7::ByteRange & range);
+	
+	/**
+	 Function creates a new instance of java byte array object with bytes copied from
+	 given range of bytes. If the provided range has zero length, then returns NULL.
+	 */	
+	jbyteArray CopyToNullableJavaByteArray(JNIEnv * env, const cc7::ByteRange & range);
 	
 	/**
 	 Function creates a new instance of cc7::ByteArray object with bytes copied
