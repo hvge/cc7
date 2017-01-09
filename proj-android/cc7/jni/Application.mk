@@ -15,21 +15,11 @@
 #
 
 #
-# Unfortunately, cc7 has to be linked against GNUs' STL libraries, 
-# because support for preferred libc++ is still experimental in NDK.
-# Check {NDK}/sources/cxx-stl/llvm-libc++/README.NDK for details.
+# cc7 is using LLVM's STL libraries to be compatible with Apple's clang
 #
-# This is of course weird, but fact is, that r12b still doesn't support
-# some features, required by cc7. I'll try to find workaround as soon
-# as possible, but until then, the libstdc++ must be used.
+APP_STL := c++_static
 #
-APP_STL := gnustl_static
-
+# List of supported ABIs. Note that if you change this, then you should
+# probably also validate platforms, supported by the OpenSSL build system.
 #
-# This is so lame :) I can't use "all", because it still has
-# profile for a "thumb" architecture, which is now considered as
-# deprecated and basically doesn't work for any STL library.
-#
-# That makes sense of course :)
-#
-APP_ABI := armeabi-v7a arm64-v8a x86 x86_64 mips mips64
+APP_ABI := armeabi-v7a arm64-v8a x86 x86_64

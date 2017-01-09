@@ -65,36 +65,6 @@ namespace detail
 		SplitString(str, delimiter, elements);
 		return elements;
 	}
-	
-	std::string to_string(int value)
-	{
-#if defined(CC7_ANDROID)
-		char buffer[64];
-		sprintf(buffer, "%d", value);
-		return std::string(buffer);
-#else
-		return std::to_string(value);
-#endif
-	}
-	
-	double to_double(const std::string & str)
-	{
-#if defined(CC7_ANDROID)
-		return strtod(str.c_str(), NULL);
-#else
-		return std::stod(str);
-#endif
-	}
-	
-	int64_t to_longint(const std::string & str)
-	{
-#if defined(CC7_ANDROID)
-		return strtoull(str.c_str(), NULL, 10);
-#else
-		return (int64_t)std::stoll(str);
-#endif
-	}
-
 
 	
 } // cc7::tests::detail

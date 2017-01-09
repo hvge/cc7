@@ -148,7 +148,7 @@ namespace tests
 			// Look for already reported location
 			std::string file_location_key(full_path);
 			file_location_key.append(":");
-			file_location_key.append(cc7::tests::detail::to_string(line));
+			file_location_key.append(std::to_string(line));
 			
 			if (_incident_locations_set.find(file_location_key) == _incident_locations_set.end()) {
 				// New incident, store key to locations set
