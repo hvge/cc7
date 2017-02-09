@@ -213,8 +213,33 @@ namespace tests
 			ccstAssertTrue(result);
 			output = CopyToString(output_data);
 			ccstAssertEqual("Lorem ipsum dolor sit amet, consectetur adipisci", output);
+
+			input = "\n\n  \nTG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2Np\n\n  \n\n\n";
+			result = Base64_Decode(input, 64, output_data);
+			ccstAssertTrue(result);
+			output = CopyToString(output_data);
+			ccstAssertEqual("Lorem ipsum dolor sit amet, consectetur adipisci", output);
 			
+			input = "\nTG9y\nZW0g\naXBz\ndW0g\nZG9s\nb3Ig\nc2l0\nIGFt\nZXQs\nIGNv\nbnNl\nY3Rl\ndHVy\nIGFk\naXBp\nc2Np\n\n";
+			result = Base64_Decode(input, 64, output_data);
+			ccstAssertTrue(result);
+			output = CopyToString(output_data);
+			ccstAssertEqual("Lorem ipsum dolor sit amet, consectetur adipisci", output);
+			
+			// various non empty strings leading to empty data
 			input = "                                    ";
+			result = Base64_Decode(input, 64, output_data);
+			ccstAssertTrue(result);
+			ccstAssertEqual(output_data.size(), 0);
+			input = " ";
+			result = Base64_Decode(input, 64, output_data);
+			ccstAssertTrue(result);
+			ccstAssertEqual(output_data.size(), 0);
+			input = "  ";
+			result = Base64_Decode(input, 64, output_data);
+			ccstAssertTrue(result);
+			ccstAssertEqual(output_data.size(), 0);
+			input = "";
 			result = Base64_Decode(input, 64, output_data);
 			ccstAssertTrue(result);
 			ccstAssertEqual(output_data.size(), 0);

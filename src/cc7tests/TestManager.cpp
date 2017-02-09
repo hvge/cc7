@@ -109,13 +109,15 @@ namespace tests
 		bool valid_info = test_info != nullptr &&
 						  test_info->factory != nullptr &&
 						  test_info->name != nullptr;
-		if (CC7_CHECK(valid_info, "test_info is NULL or contains invalid information")) {
+		if (valid_info) {
 			if (std::find(_registered_tests.begin(), _registered_tests.end(), test_info) == _registered_tests.end()) {
 				// Not added yet
 				_registered_tests.push_back(test_info);
 			} else {
 				CC7_LOG("TestManager: '%s' is already registered in this manager.", test_info->name);
 			}
+		} else {
+			CC7_ASSERT(false, "test_info is NULL or contains invalid information");
 		}
 	}
 	
@@ -275,7 +277,7 @@ namespace tests
 		detail::UnitTestFactoryFunction test_factory = ti->factory;
 		UnitTest * unit_test = test_factory ? test_factory() : nullptr;
 		
-		if (CC7_CHECK(unit_test != nullptr, "Unable to create test '%s'", unit_test)) {
+		if (unit_test != nullptr) {
 			std::string begin_message = full_test_desc + " ::: START";
 			logMessage(begin_message);
 			
@@ -311,6 +313,8 @@ namespace tests
 			
 			// destroy unit test object
 			delete unit_test;
+		} else {
+			CC7_ASSERT(false, "Unable to create '%s'", full_test_desc.c_str());
 		}
 		
 		return test_result;
