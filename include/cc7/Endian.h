@@ -18,11 +18,7 @@
 
 #include <cc7/Platform.h>
 
-// Compatibility with non-clang compilers
-#ifndef __has_builtin
-	#define __has_builtin(x) 0
-#endif
-// Clang
+// Check for clang builtin byte swap functions
 #if defined(__clang__) && __has_builtin(__builtin_bswap16) \
 					   && __has_builtin(__builtin_bswap32) \
 					   && __has_builtin(__builtin_bswap64)
