@@ -69,11 +69,15 @@
 		#include <string.h>
 	#endif
 	#include "TargetConditionals.h"
-	// Switch between iOS & OSX
-	#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED)
+	// Switch between iOS & OSX & Others...
+	#if TARGET_OS_IPHONE == 1 && TARGET_OS_IOS == 1
 		#define CC7_IOS
-	#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+	#elif TARGET_OS_OSX == 1
 		#define CC7_OSX
+	#elif TARGET_OS_WATCH == 1
+		#define CC7_APPLE_WATCH
+	#elif TARGET_OS_TV == 1
+		#define CC7_APPLE_TV
 	#endif
 	// Common defines for Apple platforms
 	#define CC7_APPLE
@@ -148,9 +152,13 @@
 // =======================================================================
 
 #if defined (DEBUG)
-	// DEBUG builds have CC7_LOG and CC7_ASSERT macros turned on
-	#define ENABLE_CC7_LOG
-	#define ENABLE_CC7_ASSERT
+	// DEBUG builds have CC7_LOG and CC7_ASSERT macros turned on by default
+	#ifndef ENABLE_CC7_LOG
+		#define ENABLE_CC7_LOG
+	#endif
+	#ifndef ENABLE_CC7_ASSERT
+		#define ENABLE_CC7_ASSERT
+	#endif
 #endif
 
 // =======================================================================
