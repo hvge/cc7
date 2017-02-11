@@ -125,6 +125,7 @@
 		BFB1A6C31CB594BF00B2D172 /* DebugFeatures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugFeatures.h; sourceTree = "<group>"; };
 		BFB1A6C51CB594BF00B2D172 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		BFB1A6C61CB594BF00B2D172 /* ByteRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ByteRange.h; sourceTree = "<group>"; };
+		BFB3124E1E4E203F00C6FE7E /* CleanupAllocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CleanupAllocator.h; sourceTree = "<group>"; };
 		BFB493D11CE750CD00F8D81B /* JSONReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONReader.h; sourceTree = "<group>"; };
 		BFB493D21CE750EC00F8D81B /* JSONReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONReader.cpp; sourceTree = "<group>"; };
 		BFB493D51CE75C1B00F8D81B /* JSONValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONValue.h; sourceTree = "<group>"; };
@@ -282,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				BFE174051CC968FF00039466 /* ExceptionsWrapper.h */,
+				BFB3124E1E4E203F00C6FE7E /* CleanupAllocator.h */,
 			);
 			path = detail;
 			sourceTree = "<group>";

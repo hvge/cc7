@@ -17,6 +17,7 @@
 #pragma once
 
 #include <cc7/ByteRange.h>
+#include <cc7/detail/CleanupAllocator.h>
 
 namespace cc7
 {
@@ -28,40 +29,11 @@ namespace cc7
 	// regular std::vector in cooperation with a custom std::allocator.
 	//
 	
-	template <class T> class ByteArrayAllocator : public std::allocator<T>
-	{
-	public :
-		
-		template <class U>  struct rebind
-		{
-			typedef  ByteArrayAllocator <U> other;
-		};
-		
-		ByteArrayAllocator() throw()
-		{
-		}
-		
-		ByteArrayAllocator(const ByteArrayAllocator &) throw()
-		{
-		}
-		
-		template <class U> ByteArrayAllocator(const ByteArrayAllocator <U> &) throw()
-		{
-		}
-
-		void deallocate(T * p,  size_t n)
-		{
-			CC7_SecureClean(p, n * sizeof(T));
-			std::allocator <T>::deallocate(p, n);
-		}
-	};
-	
-	
-	class ByteArray : public std::vector<cc7::byte, ByteArrayAllocator<cc7::byte>>
+	class ByteArray : public std::vector<cc7::byte, detail::CleanupAllocator<cc7::byte>>
 	{
 	public:
 		
-		typedef std::vector<cc7::byte, ByteArrayAllocator<cc7::byte>> parent_class;
+		typedef std::vector<cc7::byte, detail::CleanupAllocator<cc7::byte>> parent_class;
 		
 		using parent_class::parent_class;
 		using parent_class::assign;
