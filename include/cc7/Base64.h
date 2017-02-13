@@ -21,20 +21,25 @@
 namespace cc7
 {
 	/**
-	 Converts input byte range into Base64 encoded string. The function returns false
-	 only if you provide an invalid |wrap_size| parameter.
+	 Converts |in_data| range of bytes into Base64 encoded string returned as |out_string| reference.
+	 If the |wrap_size| parameter is greater than 0, then the multiline string is returned with
+	 each line wrapped to desired number of characters. 
+	 The |wrap_size| value must be divisible by 4. So, the function returns false only if you 
+	 provide an invalid value to |wrap_size| parameter.
 	 */
 	bool Base64_Encode(const ByteRange & in_data, size_t wrap_size, std::string & out_string);
 	
 	/**
-	 Converts Base64 encoded string into ByteArray. If the |wrap_size| parameter is greater than 0
-	 then the multiline input string is expected. In this case, the size of wrapping is just a hint
-	 and the decoder can process strings with a different size of lines.
+	 Converts a Base64 encoded |in_string| string into array of bytes, returned as |out_data| reference. 
+	 If the |wrap_size| parameter is greater than 0 then the multiline input string is expected. 
+	 In this case, the size of wrapping is just a hint and the decoder can process strings with a 
+	 different size of lines.
 	 
 	 Returns false if the string is not a valid Base64 string.
 	 
-	 Note that unlike the other Base64 implementations, this decoder treats invalid characters in the string
-	 as an error. Other implementations usually stops processing at first invalid character.
+	 Note that unlike the other Base64 implementations, this decoder treats invalid characters 
+	 in the string as an error. Other implementations usually stops processing at first invalid
+	 character.
 	 */
 	bool Base64_Decode(const std::string & in_string, size_t wrap_size, ByteArray & out_data);
 	
@@ -51,7 +56,7 @@ namespace cc7
 	}
 	
 	/**
-	 Converts Base64 encoded string into ByteArray. This variant of decoding function may be
+	 Converts a Base64 encoded string into ByteArray. This variant of decoding function may be
 	 easier to use, but unlike the Base64_Decode(), you are not able to determine whether
 	 the error occured or not.
 	 */

@@ -21,19 +21,19 @@
 namespace cc7
 {
 	/**
-	 Converts input byte range into hexadecimal upper, or lowercase string. 
+	 Converts an input byte range into hexadecimal upper, or lowercase string.
 	 The function always returns true.
 	 */
 	bool HexString_Encode(const ByteRange & in_data, bool use_lowercase, std::string & out_string);
 	
 	/**
-	 Converts hexadecimal encoded string into ByteArray. Returns false if the
+	 Converts a hexadecimal encoded string into ByteArray. Returns false if the
 	 input string is not a valid hexadecimal string.
 	 */
 	bool HexString_Decode(const std::string & in_string, ByteArray & out_data);
 	
 	/**
-	 Converts input byte range into hexadecimal upper, or lowercase string. 
+	 Converts an input byte range into hexadecimal upper, or lowercase string.
 	 This variant of encoding function may be easier to use, but unlike 
 	 the HexString_Encode(), you are not able to determine whether the error
 	 occured or not.
@@ -46,7 +46,7 @@ namespace cc7
 	}
 	
 	/**
-	 Converts hexadecimal encoded string into ByteArray. This variant of decoding
+	 Converts a hexadecimal encoded string into ByteArray. This variant of decoding
 	 function may be easier to use, but unlike the HexString_Decode(), you are not
 	 able to determine whether the error occured or not.
 	 */

@@ -89,7 +89,7 @@ namespace cc7
 	
 	/*
 	 Decoder table contains conversion from arbitrary 8 bit character to radix value.
-	 If the traslated value is equal to 0xff then the original character is invalid.
+	 If the translated value is equal to 0xff then the input character is invalid.
 	 */
 	static const byte s_dec_table[256] =
 	{
@@ -116,7 +116,7 @@ namespace cc7
 									bool & end_marker)
 	{
 		if (sequence_length == 0) {
-			// Not a real end marker, but this is an end of processing.
+			// Not a real end marker, but this is the end of processing.
 			end_marker = true;
 			return true;
 		}
@@ -129,7 +129,7 @@ namespace cc7
 		}
 		if (sequence_start + sequence_length > str.length()) {
 			// Internal error. The provided sequence is out of the input string's range.
-			CC7_ASSERT(false, "Internal error. Provided block size is too long");
+			CC7_ASSERT(false, "Internal error. Provided block for decoding is too long");
 			return false;
 		}
 		

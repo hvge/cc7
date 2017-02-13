@@ -22,6 +22,12 @@ namespace cc7
 {
 namespace utilities
 {
+	/**
+	 Aligns |value| to required alignment, specified by the template parameter |Align|.
+	 The returned value is higher or equal to |value|. If the |value| is zero then 
+	 returns |Align|. The template parameter must be power of 2, otherwise the compilation
+	 error is produced.
+	 */
 	template<size_t Align> size_t AlignValue(size_t value)
 	{
 		static_assert(Align > 0, "Align must be greater than 0");

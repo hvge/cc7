@@ -18,7 +18,9 @@
 
 #include <cc7/Platform.h>
 
-// Check for clang builtin byte swap functions
+//
+// Check whether clang is used and the bswap is supported
+//
 #if defined(__clang__) && __has_builtin(__builtin_bswap16) \
 					   && __has_builtin(__builtin_bswap32) \
 					   && __has_builtin(__builtin_bswap64)
@@ -29,11 +31,11 @@
 
 namespace cc7
 {
-	//
-	// Endian swap
-	//
 	namespace detail
 	{
+		/**
+		 Returns 16 bit |x| with the order of the bytes reversed.
+		 */
 		inline cc7::U16 SwapEndian(cc7::U16 n)
 		{
 		#ifdef CC7_BSWAP_16
@@ -43,7 +45,10 @@ namespace cc7
 					(n<<8);
 		#endif
 		}
-		
+
+		/**
+		 Returns 32 bit |x| with the order of the bytes reversed.
+		 */
 		inline cc7::U32 SwapEndian(cc7::U32 n)
 		{
 		#ifdef CC7_BSWAP_32
@@ -55,7 +60,10 @@ namespace cc7
 					( n<<24);
 		#endif
 		}
-		
+
+		/**
+		 Returns 64 bit |x| with the order of the bytes reversed.
+		 */
 		inline cc7::U64 SwapEndian(cc7::U64 n)
 		{
 		#ifdef CC7_BSWAP_64

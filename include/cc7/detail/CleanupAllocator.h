@@ -23,8 +23,22 @@ namespace cc7
 namespace detail
 {
 	/**
-	 The CleanupAllocator is a special std::allocator, which only purpose
-	 is to secure clean the allocated memory, before the deallocation.
+	 The CleanupAllocator is a special type of std::allocator, which only purpose
+	 is to wipeout the content of the allocated memory before the deallocation.
+	 
+	 Important security notice
+	 
+	 Note that this allocator doesn't always guarantee the secure data cleanup on
+	 all platforms. For example, if the container implements SBO (Small Buffer 
+	 Optimization), then the internal buffer is typically not always allocated with
+	 using the std::allocator. This behavior depends between the STL, so if you're going
+	 to add support for a new platform, then you have to be very sure, how the containers
+	 on that plaform behave for a small amounts of allocated memory.
+	 
+	 This is actually the main reason, why the cc7 developers prefers compiling
+	 the library against LLVM's libc++, instead of another STL implementations. 
+	 With minimizing the number of officially supported compilers & system libraries,
+	 we can keep the library as simple as possible.
 	 */
 	template <class T> class CleanupAllocator : public std::allocator<T>
 	{

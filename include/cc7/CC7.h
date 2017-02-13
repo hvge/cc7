@@ -16,7 +16,14 @@
 
 #pragma once
 
-#include <cc7/Platform.h>
+/**
+ cc7/CC7.h
+ 
+ This is a top level header. You can include this file from your project,
+ whenever you need include everything from cc7 library at once. This is
+ typically useful for precompiled headers to speedup the whole build.
+ */
+
 #include <cc7/DebugFeatures.h>
 #include <cc7/Endian.h>
 #include <cc7/ByteArray.h>

@@ -16,6 +16,130 @@
 
 #pragma once
 
+/**
+ cc7/Platform.h
+ 
+ The purpose of Platform.h header is to clear several per-platform differences and set up
+ a basic framework for muptiplatform development. Including this header you can count
+ on a small set of default features, like debug logging, assertions, some important C/C++ 
+ ssytem libraries, available on each supported platform.
+ 
+ If your platform supports precompiled headers, then it's recommended include this header
+ from PH. You can also include <cc7/CC7.7> if you want to make available ALL cc7's public
+ interfaces.
+ 
+ It is also recommended to include this header at first position from all your public 
+ headers, or include any other header which includes Platform.h at first position. 
+ This "Platform.h first" principle is mandatory for all cc7 library developers.
+ 
+ 
+ Defined macros
+ -----------------
+ 
+ CC7_EXTERN_C, 
+ CC7_EXTERN_C_BEGIN, 
+ CC7_EXTERN_C_END
+	- Defining extern "C" for C & C++ codes
+ 
+ CC7_APPLE
+	- Defined, if compiled on supported Apple platform in general (iOS, watchOS, OSX...)
+ 
+ CC7_IOS
+ CC7_OSX
+ CC7_APPLE_WATCH
+ CC7_APPLE_TV
+	- Defined on specific Apple platform
+
+ CC7_ANDROID
+	- Defined, if compiled on Android platform
+ 
+ CC7_PLATFORM32
+ CC7_PLATFORM64
+	- Defines whether the platform has 32 or 64 bits long word
+ 
+ CC7_LITTLE_ENDIAN
+ CC7_BIG_ENDIAN
+	- Defines endianness on the platform
+ 
+ CC7_SecureClean(void*, size_t size)
+	- Defines secure memory cleanup function. The compiler doesn't omit
+	  call to the function during its code optimization pass. You should
+	  prefer this macro over the memset() to be sure that the memory cleanup
+	  is really executed. The macro is using memset_s() if available, or
+	  OPENSSL_cleanse() as an fallback implementation.
+ 
+ CC7_BREAKPOINT()
+	- A software breakpoint instruction, defined for DEBUG builds.
+	- The sw breakpoint is supported only on some platforms, where
+	  the native code debugging is well supported in the toolchains.
+ 
+ CC7_LOG(format_string, args...)
+	- Defines debug logging macro. The statement is removed for non DEBUG builds
+ 
+ CC7_ASSERT(condition, format_string, args...)
+	- Triggers assertion when condition is false and prints formatted message
+	  about that to the debug console. If the software breakpoint is supported
+	  on the platform, then breaks code execution in the assertion handling
+	  routine.
+	- For non DEBUG builds does nothing (e.g. whole statement is removed)
+ 
+ CC7_CHECK(condition, format_string, args...)
+	- Works just like CC7_ASSERT(), but can be used in conditional statements.
+	  The result from the condition is used as the result of the macro.
+	- For non DEBUG builds only the condition is expanded
+    - For example:
+	
+		if (CC7_CHECK(can_process, "Can't process")) { 
+			doSomething();
+		}
+	  
+	  The Code will trigger assertion on DEBUG build if can_process is false,
+	  but will execute doSomething() if can_process is true. For non-DEBUG
+	  builds, the macro is expanded to:
+ 
+		if (can_process) {
+			doSomething();
+		}
+ 
+ 
+ Primitive types
+ -----------------
+ 
+ Following primitive types are defined for C++ code:
+ 
+	cc7::byte, cc7:U8	as one usigned byte (8 bits)
+	cc7::U16,			as 16 bit unsigned type
+	cc7::U32			as 32 bit unsigned type
+	cc7::U64			as 64 bit unsigned type
+ 
+ 
+ Includes
+ -----------------
+ 
+ You can also count on that following headers (or similar replacement available on platform)
+ are automatically included from Platform.h:
+ 
+ c,c++
+	<stdlib.h>
+	<string.h>
+ c++
+	<string>
+	<vector>
+ 
+ 
+ Footnotes
+ -----------------
+ 
+ If you start digging into this header (or into the cc7 library in general), then you'll 
+ see that some constructs are quite "clang centric". This is by purpose, becase we believe
+ that the LLVM & clang is the future of native development. You can probably compile & use 
+ the library with using other compilers (like GCC) with no problems, but clang is really
+ our first choice.
+ 
+ */
+
+
+
 // =======================================================================
 // Common macros
 // =======================================================================
@@ -167,14 +291,14 @@
 
 #if defined(ENABLE_CC7_LOG)
 	//
-	// CC7Log is enabled
+	// CC7_LOG is enabled
 	//
 	CC7_EXTERN_C void CC7LogImpl(const char * fmt, ...);
 	#define CC7_LOG(...) CC7LogImpl(__VA_ARGS__)
 
 #else
 	//
-	// CC7Log is disabled
+	// CC7_LOG is disabled
 	//
 	#define CC7_LOG(...)
 
